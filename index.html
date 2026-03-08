@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yeattozunn — Freelancer</title>
+  <meta name="description" content="Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarıyla dijital projeler oluşturan freelancer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+```
+:root {
+  --bg: #080808; --surface: #111; --border: rgba(255,255,255,0.07);
+  --text: #f0f0f0; --muted: #666; --glow: rgba(255,255,255,0.04);
+}
+[data-theme="light"] {
+  --bg: #f8f8f6; --surface: #efefed; --border: rgba(0,0,0,0.08);
+  --text: #111; --muted: #888; --glow: rgba(0,0,0,0.02);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6;
+  overflow-x: hidden; cursor: none;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* LOADER */
+#loader {
+  position: fixed; inset: 0; background: #080808; z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 48px;
+  transition: opacity 0.8s, visibility 0.8s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-text {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(28px, 6vw, 68px);
+  font-weight: 300; letter-spacing: 0.12em; color: #f0f0f0;
+}
+.loader-text span {
+  opacity: 0; display: inline-block; transform: translateY(16px);
+  transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.23,1,0.32,1);
+}
+.loader-text span.show { opacity: 1; transform: translateY(0); }
+.loader-line {
+  width: 200px; height: 1px; background: rgba(255,255,255,0.1); overflow: hidden;
+}
+.loader-fill {
+  height: 100%; background: #f0f0f0; width: 0%;
+  transition: width 2.2s cubic-bezier(0.23,1,0.32,1);
+}
+
+/* STARS */
+#stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.star { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.55); }
+[data-theme="light"] .star { background: rgba(0,0,0,0.12); }
+
+/* NOISE */
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* CURSOR */
+.cursor { position: fixed; width: 8px; height: 8px; background: var(--text); border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
+.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.35); border-radius: 50%; pointer-events: none; z-index: 9998; transition: width 0.3s, height 0.3s, opacity 0.3s; }
+[data-theme="light"] .cursor-ring { border-color: rgba(0,0,0,0.25); }
+.cursor-ring.hovering { width: 54px; height: 54px; opacity: 0.5; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 22px 48px; display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent; transition: border-color 0.3s;
+}
+nav.scrolled { border-bottom-color: var(--border); }
+.nav-logo { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 300; letter-spacing: 0.05em; color: var(--text); text-decoration: none; }
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text); }
+.nav-controls { display: flex; gap: 8px; }
+.ctrl-btn {
+  background: none; border: 1px solid var(--border); color: var(--muted);
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+  padding: 5px 12px; border-radius: 100px; cursor: none;
+  transition: color 0.3s, border-color 0.3s;
+}
+.ctrl-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+[data-theme="light"] .ctrl-btn:hover { border-color: rgba(0,0,0,0.25); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 0 48px; position: relative; z-index: 1; overflow: hidden;
+}
+.orb { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; }
+.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle,rgba(255,255,255,0.025) 0%,transparent 70%); top:-200px; right:-100px; animation: orb1 14s ease-in-out infinite; }
+.orb-2 { width: 400px; height: 400px; background: radial-gradient(circle,rgba(160,160,255,0.04) 0%,transparent 70%); bottom:0; left:-100px; animation: orb2 17s ease-in-out infinite; }
+@keyframes orb1 { 0%,100%{transform:translate(0,0)scale(1)}50%{transform:translate(-40px,60px)scale(1.1)} }
+@keyframes orb2 { 0%,100%{transform:translate(0,0)scale(1)}50%{transform:translate(60px,-40px)scale(0.9)} }
+
+.hero-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; margin-bottom:32px; opacity:0; animation:slideUp 1s 0.2s cubic-bezier(0.23,1,0.32,1) forwards; }
+.hero-title { font-size:clamp(60px,10vw,136px); font-weight:300; line-height:0.95; letter-spacing:-0.03em; margin-bottom:48px; opacity:0; animation:slideUp 1s 0.4s cubic-bezier(0.23,1,0.32,1) forwards; }
+.hero-title em { font-style:italic; color:var(--muted); }
+#typewriter { border-right:2px solid var(--muted); padding-right:3px; }
+.hero-desc { max-width:460px; font-size:16px; color:var(--muted); line-height:1.85; margin-bottom:56px; opacity:0; animation:slideUp 1s 0.6s cubic-bezier(0.23,1,0.32,1) forwards; }
+.hero-cta { display:flex; gap:16px; align-items:center; opacity:0; animation:slideUp 1s 0.8s cubic-bezier(0.23,1,0.32,1) forwards; }
+
+.btn-primary { display:inline-flex; align-items:center; gap:10px; padding:14px 28px; background:var(--text); color:var(--bg); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; letter-spacing:0.03em; text-decoration:none; border-radius:100px; transition:transform 0.3s cubic-bezier(0.23,1,0.32,1); }
+.btn-primary:hover { transform:scale(1.04); }
+.btn-secondary { font-size:13px; color:var(--muted); text-decoration:none; letter-spacing:0.03em; transition:color 0.3s; display:flex; align-items:center; gap:6px; }
+.btn-secondary:hover { color:var(--text); }
+.btn-secondary::after { content:'→'; transition:transform 0.3s; }
+.btn-secondary:hover::after { transform:translateX(4px); }
+
+.scroll-indicator { position:absolute; bottom:48px; left:48px; display:flex; align-items:center; gap:12px; opacity:0; animation:fadeIn 1s 1.5s forwards; }
+.scroll-line { width:40px; height:1px; background:var(--muted); transform-origin:left; animation:expandLine 1.5s 1.7s cubic-bezier(0.23,1,0.32,1) forwards; transform:scaleX(0); }
+@keyframes expandLine { to{transform:scaleX(1)} }
+.scroll-text { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; }
+
+/* STATS */
+.stats { padding:72px 48px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border-top:1px solid var(--border); border-bottom:1px solid var(--border); position:relative; z-index:1; }
+.stat { background:var(--bg); padding:48px 40px; transition:background 0.3s; }
+.stat:hover { background:var(--surface); }
+.stat-num { font-size:clamp(44px,5vw,72px); font-weight:300; letter-spacing:-0.04em; line-height:1; margin-bottom:12px; }
+.stat-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase; }
+
+/* SERVICES */
+.services { padding:160px 48px; position:relative; z-index:1; }
+.section-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; margin-bottom:80px; display:flex; align-items:center; gap:16px; }
+.section-label::before { content:''; width:32px; height:1px; background:var(--muted); }
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+.service-card { background:var(--bg); padding:48px 40px; transition:background 0.4s; }
+.service-card:hover { background:var(--surface); }
+.service-num { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.1em; margin-bottom:32px; }
+.service-title { font-size:22px; font-weight:400; letter-spacing:-0.02em; margin-bottom:16px; line-height:1.3; }
+.service-desc { font-size:14px; color:var(--muted); line-height:1.8; }
+
+/* ABOUT */
+.about { padding:160px 48px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; position:relative; z-index:1; }
+.big-text { font-size:clamp(36px,4vw,56px); font-weight:300; letter-spacing:-0.03em; line-height:1.2; }
+.big-text em { font-style:italic; color:var(--muted); }
+.about-right p { font-size:16px; color:var(--muted); line-height:1.9; margin-bottom:24px; }
+.about-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:40px; }
+.tag { padding:6px 16px; border:1px solid var(--border); border-radius:100px; font-size:12px; font-family:'DM Mono',monospace; color:var(--muted); letter-spacing:0.05em; transition:border-color 0.3s,color 0.3s; }
+.tag:hover { border-color:rgba(255,255,255,0.3); color:var(--text); }
+[data-theme="light"] .tag:hover { border-color:rgba(0,0,0,0.3); }
+
+/* TESTIMONIALS */
+.testimonials { padding:160px 48px; position:relative; z-index:1; }
+.testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.tcard { border:1px solid var(--border); padding:40px; border-radius:4px; transition:border-color 0.3s,background 0.3s; }
+.tcard:hover { border-color:rgba(255,255,255,0.2); background:var(--surface); }
+[data-theme="light"] .tcard:hover { border-color:rgba(0,0,0,0.2); }
+.tcard-quote { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:32px; font-style:italic; }
+.tcard-quote::before { content:'"'; font-size:32px; line-height:0; vertical-align:-12px; margin-right:4px; opacity:0.3; }
+.tcard-author { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; }
+.tcard-role { font-size:12px; color:var(--muted); opacity:0.6; margin-top:4px; }
+
+/* BLOG */
+.blog { padding:160px 48px; position:relative; z-index:1; }
+.blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+.blog-card { background:var(--bg); padding:40px; transition:background 0.3s; }
+.blog-card:hover { background:var(--surface); }
+.blog-date { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-bottom:20px; }
+.blog-title { font-size:18px; font-weight:400; letter-spacing:-0.02em; line-height:1.4; margin-bottom:16px; }
+.blog-excerpt { font-size:14px; color:var(--muted); line-height:1.8; }
+.blog-read { display:inline-flex; align-items:center; gap:6px; margin-top:24px; font-size:12px; font-family:'DM Mono',monospace; letter-spacing:0.08em; color:var(--muted); transition:color 0.3s; }
+.blog-card:hover .blog-read { color:var(--text); }
+
+/* CONTACT */
+.contact { padding:160px 48px; text-align:center; position:relative; z-index:1; }
+.contact-title { font-size:clamp(48px,8vw,108px); font-weight:300; letter-spacing:-0.04em; line-height:1; margin-bottom:48px; }
+.contact-title em { font-style:italic; color:var(--muted); }
+.contact-email { display:inline-flex; align-items:center; gap:12px; font-size:18px; color:var(--muted); text-decoration:none; padding:20px 40px; border:1px solid var(--border); border-radius:100px; transition:color 0.3s,border-color 0.3s; }
+.contact-email:hover { color:var(--text); border-color:rgba(255,255,255,0.2); }
+[data-theme="light"] .contact-email:hover { border-color:rgba(0,0,0,0.2); }
+
+/* FOOTER */
+footer { padding:40px 48px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
+footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.05em; }
+
+.divider { height:1px; background:var(--border); margin:0 48px; position:relative; z-index:1; }
+
+/* WHATSAPP */
+.whatsapp-btn { position:fixed; bottom:32px; right:32px; z-index:600; width:52px; height:52px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 8px 32px rgba(37,211,102,0.3); transition:transform 0.3s cubic-bezier(0.23,1,0.32,1),box-shadow 0.3s; opacity:0; animation:fadeIn 0.6s 2.6s forwards; }
+.whatsapp-btn:hover { transform:scale(1.1); box-shadow:0 12px 40px rgba(37,211,102,0.45); }
+.whatsapp-btn svg { width:26px; height:26px; }
+
+/* MUSIC */
+.music-btn { position:fixed; bottom:32px; right:96px; z-index:600; width:52px; height:52px; background:var(--surface); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:none; transition:transform 0.3s,background 0.3s,border-color 0.3s; opacity:0; animation:fadeIn 0.6s 2.7s forwards; }
+.music-btn:hover { transform:scale(1.1); }
+.music-btn.playing { background:var(--text); border-color:var(--text); }
+.music-bars { display:flex; gap:2px; align-items:flex-end; height:16px; }
+.music-bar { width:3px; background:var(--muted); border-radius:2px; transition:background 0.3s; }
+.music-btn.playing .music-bar { background:var(--bg); animation:mbar 0.8s ease-in-out infinite alternate; }
+.music-bar:nth-child(1){height:6px;animation-delay:0s}
+.music-bar:nth-child(2){height:12px;animation-delay:0.15s}
+.music-bar:nth-child(3){height:8px;animation-delay:0.3s}
+.music-bar:nth-child(4){height:14px;animation-delay:0.1s}
+@keyframes mbar { from{transform:scaleY(0.4)}to{transform:scaleY(1.2)} }
+
+/* ANIMATIONS */
+@keyframes fadeIn { to{opacity:1} }
+@keyframes slideUp { from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)} }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.9s cubic-bezier(0.23,1,0.32,1),transform 0.9s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:18px 20px}
+  .nav-links{display:none}
+  .hero{padding:0 20px}
+  .hero-title{font-size:clamp(44px,13vw,72px)}
+  .stats{padding:48px 20px;grid-template-columns:1fr}
+  .services,.about,.testimonials,.blog,.contact{padding:80px 20px}
+  .services-grid,.testimonials-grid,.blog-grid{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;gap:40px}
+  .contact-title{font-size:clamp(36px,11vw,60px)}
+  footer{padding:28px 20px;flex-direction:column;gap:10px;text-align:center}
+  .divider{margin:0 20px}
+  .scroll-indicator{left:20px;bottom:28px}
+  body{cursor:auto}
+  .cursor,.cursor-ring{display:none}
+  .whatsapp-btn{bottom:24px;right:24px}
+  .music-btn{bottom:24px;right:84px}
+}
+```
+
+  </style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-text" id="loaderText"></div>
+  <div class="loader-line"><div class="loader-fill" id="loaderFill"></div></div>
+</div>
+
+<div id="stars"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">yeattozunn</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services" data-tr="hizmetler" data-en="services">hizmetler</a></li>
+      <li><a href="#about" data-tr="hakkında" data-en="about">hakkında</a></li>
+      <li><a href="#blog" data-tr="blog" data-en="blog">blog</a></li>
+      <li><a href="#contact" data-tr="iletişim" data-en="contact">iletişim</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="ctrl-btn" id="langBtn">EN</button>
+      <button class="ctrl-btn" id="themeBtn">☀</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <p class="hero-eyebrow" data-tr="freelancer · dijital çözümler" data-en="freelancer · digital solutions">freelancer · dijital çözümler</p>
+  <h1 class="hero-title">
+    yeattozunn<br/>
+    <em><span id="typewriter"></span></em>
+  </h1>
+  <p class="hero-desc" data-tr="Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarıyla markaları dijital ortamda güçlendiren freelancer." data-en="A freelancer building brands in the digital world through web development, social media management, and AI-powered tools.">
+    Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarıyla markaları dijital ortamda güçlendiren freelancer.
+  </p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary" data-tr="Projeyi Konuşalım" data-en="Let's Talk">Projeyi Konuşalım</a>
+    <a href="#services" class="btn-secondary" data-tr="Hizmetleri Gör" data-en="See Services">Hizmetleri Gör</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text" data-tr="aşağı kaydır" data-en="scroll down">aşağı kaydır</span>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">2025</div>
+    <div class="stat-label" data-tr="yılından beri" data-en="since">yılından beri</div>
+  </div>
+  <div class="stat reveal" style="transition-delay:0.1s">
+    <div class="stat-num">Yeni</div>
+    <div class="stat-label" data-tr="— büyüme yolculuğu başlıyor" data-en="— the journey begins">— büyüme yolculuğu başlıyor</div>
+  </div>
+  <div class="stat reveal" style="transition-delay:0.2s">
+    <div class="stat-num">3</div>
+    <div class="stat-label" data-tr="hizmet alanı" data-en="service areas">hizmet alanı</div>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <p class="section-label reveal" data-tr="hizmetler" data-en="services">hizmetler</p>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <p class="service-num">01</p>
+      <h3 class="service-title">Web Sitesi<br/>Geliştirme</h3>
+      <p class="service-desc" data-tr="Hızlı, modern ve kullanıcı odaklı web siteleri. Markanı yansıtan, dönüşüm sağlayan tasarımlar." data-en="Fast, modern and user-focused websites. Designs that reflect your brand and drive conversions.">Hızlı, modern ve kullanıcı odaklı web siteleri. Markanı yansıtan, dönüşüm sağlayan tasarımlar.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <p class="service-num">02</p>
+      <h3 class="service-title">Sosyal Medya<br/>Yönetimi</h3>
+      <p class="service-desc" data-tr="İçerik stratejisi, planlama ve yönetim. Platformlarda güçlü ve tutarlı bir varlık oluşturma." data-en="Content strategy, planning and management. Building a strong and consistent presence across platforms.">İçerik stratejisi, planlama ve yönetim. Platformlarda güçlü ve tutarlı bir varlık oluşturma.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <p class="service-num">03</p>
+      <h3 class="service-title">Yapay Zeka<br/>Entegrasyonu</h3>
+      <p class="service-desc" data-tr="Güncel AI araçlarıyla projelere değer katma. Verimli, akıllı ve yaratıcı dijital çözümler." data-en="Adding value to projects with cutting-edge AI tools. Efficient, intelligent and creative digital solutions.">Güncel AI araçlarıyla projelere değer katma. Verimli, akıllı ve yaratıcı dijital çözümler.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="about" id="about">
+  <div class="about-left reveal">
+    <p class="big-text">Dijitalde<br/>güçlü olmak<br/><em>bir seçim.</em></p>
+  </div>
+  <div class="about-right reveal" style="transition-delay:0.15s">
+    <p data-tr="Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarını kullanarak dijital projeler oluşturan bir freelancerım." data-en="I'm a freelancer building digital projects using web development, social media management, and AI tools.">
+      Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarını kullanarak dijital projeler oluşturan bir freelancerım.
+    </p>
+    <p data-tr="Markaların ve bireylerin dijital ortamda daha güçlü görünmesine yardımcı olacak modern, hızlı ve kullanıcı odaklı çözümler üretirim." data-en="I create modern, fast and user-focused solutions that help brands and individuals appear stronger in the digital space.">
+      Markaların ve bireylerin dijital ortamda daha güçlü görünmesine yardımcı olacak modern, hızlı ve kullanıcı odaklı çözümler üretirim.
+    </p>
+    <p data-tr="Verimli çalışma, yaratıcı fikirler ve güncel teknolojilerle projelere değer katmayı hedeflerim." data-en="I aim to add value to projects through efficient work, creative ideas, and up-to-date technologies.">
+      Verimli çalışma, yaratıcı fikirler ve güncel teknolojilerle projelere değer katmayı hedeflerim.
+    </p>
+    <div class="about-tags">
+      <span class="tag">web geliştirme</span>
+      <span class="tag">sosyal medya</span>
+      <span class="tag">yapay zeka</span>
+      <span class="tag">ui/ux</span>
+      <span class="tag">freelance</span>
+      <span class="tag">dijital strateji</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="testimonials" id="testimonials">
+  <p class="section-label reveal" data-tr="müşteri yorumları" data-en="testimonials">müşteri yorumları</p>
+  <div class="testimonials-grid">
+    <div class="tcard reveal">
+      <p class="tcard-quote" data-tr="Henüz çok yeni ama şimdiden etkileyici işler çıkarıyor. Sosyal medya içeriklerimiz hiç bu kadar düzenli olmamıştı." data-en="Very new but already delivering impressive work. Our social media content has never been this consistent.">Henüz çok yeni ama şimdiden etkileyici işler çıkarıyor. Sosyal medya içeriklerimiz hiç bu kadar düzenli olmamıştı.</p>
+      <p class="tcard-author">Ahmet K.</p>
+      <p class="tcard-role" data-tr="Küçük İşletme Sahibi" data-en="Small Business Owner">Küçük İşletme Sahibi</p>
+    </div>
+    <div class="tcard reveal" style="transition-delay:0.1s">
+      <p class="tcard-quote" data-tr="Beklentilerimin üzerinde bir sonuç aldım. Hem hızlı hem de kaliteli çalışıyor, kesinlikle tavsiye ederim." data-en="Got a result above my expectations. Works both fast and with quality, I definitely recommend.">Beklentilerimin üzerinde bir sonuç aldım. Hem hızlı hem de kaliteli çalışıyor, kesinlikle tavsiye ederim.</p>
+      <p class="tcard-author">Zeynep M.</p>
+      <p class="tcard-role" data-tr="İçerik Üreticisi" data-en="Content Creator">İçerik Üreticisi</p>
+    </div>
+    <div class="tcard reveal" style="transition-delay:0.2s">
+      <p class="tcard-quote" data-tr="Web sitem tam istediğim gibi oldu. Yapay zeka araçlarını da işe katması gerçekten fark yaratıyor." data-en="My website turned out exactly as I wanted. Incorporating AI tools into the work really makes a difference.">Web sitem tam istediğim gibi oldu. Yapay zeka araçlarını da işe katması gerçekten fark yaratıyor.</p>
+      <p class="tcard-author">Can T.</p>
+      <p class="tcard-role" data-tr="Girişimci" data-en="Entrepreneur">Girişimci</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="blog" id="blog">
+  <p class="section-label reveal" data-tr="son yazılar" data-en="latest posts">son yazılar</p>
+  <div class="blog-grid">
+    <div class="blog-card reveal">
+      <p class="blog-date">Mart 2025</p>
+      <h3 class="blog-title" data-tr="Yapay Zeka Web Tasarımını Nasıl Değiştiriyor?" data-en="How AI is Changing Web Design?">Yapay Zeka Web Tasarımını Nasıl Değiştiriyor?</h3>
+      <p class="blog-excerpt" data-tr="AI araçları artık sadece kod yazmakla kalmıyor; tasarım kararlarını da etkiliyor. Peki bu freelancerlar için ne anlama geliyor?" data-en="AI tools are no longer just writing code — they're influencing design decisions too. What does this mean for freelancers?">AI araçları artık sadece kod yazmakla kalmıyor; tasarım kararlarını da etkiliyor. Peki bu freelancerlar için ne anlama geliyor?</p>
+      <span class="blog-read" data-tr="okumaya devam et →" data-en="keep reading →">okumaya devam et →</span>
+    </div>
+    <div class="blog-card reveal" style="transition-delay:0.1s">
+      <p class="blog-date">Şubat 2025</p>
+      <h3 class="blog-title" data-tr="Sosyal Medyada Tutarlılık Neden Önemli?" data-en="Why Consistency on Social Media Matters?">Sosyal Medyada Tutarlılık Neden Önemli?</h3>
+      <p class="blog-excerpt" data-tr="Haftada bir paylaşım yapıp takipçi kazanmayı beklemek artık işe yaramıyor. İşte tutarlı içerik üretmenin sırları." data-en="Posting once a week and expecting followers doesn't work anymore. Here are the secrets of consistent content.">Haftada bir paylaşım yapıp takipçi kazanmayı beklemek artık işe yaramıyor. İşte tutarlı içerik üretmenin sırları.</p>
+      <span class="blog-read" data-tr="okumaya devam et →" data-en="keep reading →">okumaya devam et →</span>
+    </div>
+    <div class="blog-card reveal" style="transition-delay:0.2s">
+      <p class="blog-date">Ocak 2025</p>
+      <h3 class="blog-title" data-tr="Freelancer Olarak Başlamak: İlk Adımlar" data-en="Starting as a Freelancer: First Steps">Freelancer Olarak Başlamak: İlk Adımlar</h3>
+      <p class="blog-excerpt" data-tr="2025'te freelance kariyerime başladım. Bu süreçte öğrendiklerimi ve yaptığım hataları dürüstçe paylaşıyorum." data-en="I started my freelance career in 2025. I honestly share what I learned and the mistakes I made along the way.">2025'te freelance kariyerime başladım. Bu süreçte öğrendiklerimi ve yaptığım hataları dürüstçe paylaşıyorum.</p>
+      <span class="blog-read" data-tr="okumaya devam et →" data-en="keep reading →">okumaya devam et →</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="contact" id="contact">
+  <h2 class="contact-title reveal">
+    <span data-tr="Bir fikrin" data-en="Got an">Bir fikrin</span><br/>
+    <em><span data-tr="mi var?" data-en="idea?">mi var?</span></em>
+  </h2>
+  <a href="mailto:yeattozunn@gmail.com" class="contact-email reveal" style="transition-delay:0.2s">
+    <span>✉</span> yeattozunn@gmail.com
+  </a>
+</section>
+
+<footer>
+  <p>© 2025 yeattozunn</p>
+  <p data-tr="tüm hakları saklıdır" data-en="all rights reserved">tüm hakları saklıdır</p>
+</footer>
+
+<a href="https://wa.me/905000000000" target="_blank" class="whatsapp-btn" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<button class="music-btn" id="musicBtn" title="Müzik aç/kapat">
+  <div class="music-bars">
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+  </div>
+</button>
+
+<script>
+  // LOADER
+  const loaderEl = document.getElementById('loader');
+  const loaderText = document.getElementById('loaderText');
+  const loaderFill = document.getElementById('loaderFill');
+  'yeattozunn'.split('').forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.textContent = ch;
+    loaderText.appendChild(s);
+    setTimeout(() => s.classList.add('show'), 80 + i * 110);
+  });
+  setTimeout(() => loaderFill.style.width = '100%', 100);
+  setTimeout(() => loaderEl.classList.add('hidden'), 2500);
+
+  // STARS + PARALLAX
+  const starsEl = document.getElementById('stars');
+  const starData = [];
+  for (let i = 0; i < 130; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2 + 0.4;
+    const x = Math.random() * 100;
+    const y = Math.random() * 300;
+    const spd = Math.random() * 0.25 + 0.04;
+    s.style.cssText = `width:${sz}px;height:${sz}px;left:${x}vw;top:${y}vh;opacity:${Math.random()*0.5+0.1}`;
+    starsEl.appendChild(s);
+    starData.push({ el: s, spd });
+  }
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    starData.forEach(({ el, spd }) => el.style.transform = `translateY(${sy * spd}px)`);
+    nav.classList.toggle('scrolled', sy > 20);
+  });
+
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx-4+'px'; cursor.style.top = my-4+'px';
+  });
+  (function loop() {
+    rx += (mx-rx-18)*0.1; ry += (my-ry-18)*0.1;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,.service-card,.tag,.tcard,.blog-card').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+  });
+
+  // NAV
+  const nav = document.getElementById('nav');
+
+  // REVEAL
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // TYPEWRITER
+  const phrases = {
+    tr: ['dijital dünyada iz bırakır.', 'web siteleri tasarlar.', 'markanı güçlendirir.', 'yapay zeka kullanır.'],
+    en: ['leaves a mark digitally.', 'designs websites.', 'strengthens your brand.', 'uses AI tools.']
+  };
+  let lang = 'tr', twIdx = 0, twChar = 0, twDel = false;
+  const twEl = document.getElementById('typewriter');
+  function typeStep() {
+    const word = phrases[lang][twIdx];
+    if (!twDel) {
+      twChar++; twEl.textContent = word.slice(0, twChar);
+      if (twChar === word.length) { twDel = true; setTimeout(typeStep, 2200); return; }
+      setTimeout(typeStep, 65);
+    } else {
+      twChar--; twEl.textContent = word.slice(0, twChar);
+      if (twChar === 0) { twDel = false; twIdx = (twIdx+1) % phrases[lang].length; setTimeout(typeStep, 400); return; }
+      setTimeout(typeStep, 32);
+    }
+  }
+  setTimeout(typeStep, 2800);
+
+  // THEME
+  document.getElementById('themeBtn').addEventListener('click', function() {
+    const d = document.documentElement;
+    const dark = d.getAttribute('data-theme') === 'dark';
+    d.setAttribute('data-theme', dark ? 'light' : 'dark');
+    this.textContent = dark ? '☾' : '☀';
+  });
+
+  // LANGUAGE
+  document.getElementById('langBtn').addEventListener('click', function() {
+    lang = lang === 'tr' ? 'en' : 'tr';
+    this.textContent = lang === 'tr' ? 'EN' : 'TR';
+    document.querySelectorAll('[data-tr]').forEach(el => {
+      const v = el.getAttribute('data-' + lang);
+      if (v) el.innerHTML = v;
+    });
+    twIdx = 0; twChar = 0; twDel = false;
+  });
+
+  // MUSIC (Web Audio ambient)
+  let actx = null, gn = null, playing = false;
+  const musicBtn = document.getElementById('musicBtn');
+  function startAudio() {
+    actx = new (window.AudioContext || window.webkitAudioContext)();
+    gn = actx.createGain();
+    gn.gain.setValueAtTime(0, actx.currentTime);
+    gn.gain.linearRampToValueAtTime(0.05, actx.currentTime + 2);
+    gn.connect(actx.destination);
+    [55, 82.4, 110, 164.8, 220].forEach((f, i) => {
+      const o = actx.createOscillator();
+      const g = actx.createGain();
+      o.type = ['sine','sine','triangle','sine','triangle'][i];
+      o.frequency.value = f;
+      g.gain.value = 0.6 / (i + 1);
+      o.connect(g); g.connect(gn); o.start();
+    });
+  }
+  musicBtn.addEventListener('click', () => {
+    if (!playing) {
+      if (!actx) startAudio();
+      else { gn.gain.cancelScheduledValues(actx.currentTime); gn.gain.linearRampToValueAtTime(0.05, actx.currentTime+1); }
+      playing = true; musicBtn.classList.add('playing');
+    } else {
+      gn.gain.linearRampToValueAtTime(0, actx.currentTime+1);
+      playing = false; musicBtn.classList.remove('playing');
+    }
+  });
+</script>
+
+</body>
+</html>
