@@ -259,7 +259,7 @@ footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); 
     </ul>
     <div class="nav-controls">
       <button class="ctrl-btn" id="langBtn">EN</button>
-      <button class="ctrl-btn" id="themeBtn">☀</button>
+      <button class="ctrl-btn" id="themeBtn">☾</button>
     </div>
   </div>
 </nav>
@@ -305,17 +305,17 @@ footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); 
   <div class="services-grid">
     <div class="service-card reveal">
       <p class="service-num">01</p>
-      <h3 class="service-title">Web Sitesi<br/>Geliştirme</h3>
+      <h3 class="service-title" data-tr="Web Sitesi<br/>Geliştirme" data-en="Web<br/>Development">Web Sitesi<br/>Geliştirme</h3>
       <p class="service-desc" data-tr="Hızlı, modern ve kullanıcı odaklı web siteleri. Markanı yansıtan, dönüşüm sağlayan tasarımlar." data-en="Fast, modern and user-focused websites. Designs that reflect your brand and drive conversions.">Hızlı, modern ve kullanıcı odaklı web siteleri. Markanı yansıtan, dönüşüm sağlayan tasarımlar.</p>
     </div>
     <div class="service-card reveal" style="transition-delay:0.1s">
       <p class="service-num">02</p>
-      <h3 class="service-title">Sosyal Medya<br/>Yönetimi</h3>
+      <h3 class="service-title" data-tr="Sosyal Medya<br/>Yönetimi" data-en="Social Media<br/>Management">Sosyal Medya<br/>Yönetimi</h3>
       <p class="service-desc" data-tr="İçerik stratejisi, planlama ve yönetim. Platformlarda güçlü ve tutarlı bir varlık oluşturma." data-en="Content strategy, planning and management. Building a strong and consistent presence across platforms.">İçerik stratejisi, planlama ve yönetim. Platformlarda güçlü ve tutarlı bir varlık oluşturma.</p>
     </div>
     <div class="service-card reveal" style="transition-delay:0.2s">
       <p class="service-num">03</p>
-      <h3 class="service-title">Yapay Zeka<br/>Entegrasyonu</h3>
+      <h3 class="service-title" data-tr="Yapay Zeka<br/>Entegrasyonu" data-en="AI<br/>Integration">Yapay Zeka<br/>Entegrasyonu</h3>
       <p class="service-desc" data-tr="Güncel AI araçlarıyla projelere değer katma. Verimli, akıllı ve yaratıcı dijital çözümler." data-en="Adding value to projects with cutting-edge AI tools. Efficient, intelligent and creative digital solutions.">Güncel AI araçlarıyla projelere değer katma. Verimli, akıllı ve yaratıcı dijital çözümler.</p>
     </div>
   </div>
@@ -325,7 +325,7 @@ footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); 
 
 <section class="about" id="about">
   <div class="about-left reveal">
-    <p class="big-text">Dijitalde<br/>güçlü olmak<br/><em>bir seçim.</em></p>
+    <p class="big-text" data-tr="Dijitalde<br/>güçlü olmak<br/><em>bir seçim.</em>" data-en="Being strong<br/>digitally<br/><em>is a choice.</em>">Dijitalde<br/>güçlü olmak<br/><em>bir seçim.</em></p>
   </div>
   <div class="about-right reveal" style="transition-delay:0.15s">
     <p data-tr="Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarını kullanarak dijital projeler oluşturan bir freelancerım." data-en="I'm a freelancer building digital projects using web development, social media management, and AI tools.">
@@ -376,19 +376,19 @@ footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); 
 <section class="blog" id="blog">
   <p class="section-label reveal" data-tr="son yazılar" data-en="latest posts">son yazılar</p>
   <div class="blog-grid">
-    <div class="blog-card reveal">
+    <div class="blog-card reveal" onclick="openBlog(0)">
       <p class="blog-date">Mart 2025</p>
       <h3 class="blog-title" data-tr="Yapay Zeka Web Tasarımını Nasıl Değiştiriyor?" data-en="How AI is Changing Web Design?">Yapay Zeka Web Tasarımını Nasıl Değiştiriyor?</h3>
       <p class="blog-excerpt" data-tr="AI araçları artık sadece kod yazmakla kalmıyor; tasarım kararlarını da etkiliyor. Peki bu freelancerlar için ne anlama geliyor?" data-en="AI tools are no longer just writing code — they're influencing design decisions too. What does this mean for freelancers?">AI araçları artık sadece kod yazmakla kalmıyor; tasarım kararlarını da etkiliyor. Peki bu freelancerlar için ne anlama geliyor?</p>
       <span class="blog-read" data-tr="okumaya devam et →" data-en="keep reading →">okumaya devam et →</span>
     </div>
-    <div class="blog-card reveal" style="transition-delay:0.1s">
+    <div class="blog-card reveal" style="transition-delay:0.1s" onclick="openBlog(1)">
       <p class="blog-date">Şubat 2025</p>
       <h3 class="blog-title" data-tr="Sosyal Medyada Tutarlılık Neden Önemli?" data-en="Why Consistency on Social Media Matters?">Sosyal Medyada Tutarlılık Neden Önemli?</h3>
       <p class="blog-excerpt" data-tr="Haftada bir paylaşım yapıp takipçi kazanmayı beklemek artık işe yaramıyor. İşte tutarlı içerik üretmenin sırları." data-en="Posting once a week and expecting followers doesn't work anymore. Here are the secrets of consistent content.">Haftada bir paylaşım yapıp takipçi kazanmayı beklemek artık işe yaramıyor. İşte tutarlı içerik üretmenin sırları.</p>
       <span class="blog-read" data-tr="okumaya devam et →" data-en="keep reading →">okumaya devam et →</span>
     </div>
-    <div class="blog-card reveal" style="transition-delay:0.2s">
+    <div class="blog-card reveal" style="transition-delay:0.2s" onclick="openBlog(2)">
       <p class="blog-date">Ocak 2025</p>
       <h3 class="blog-title" data-tr="Freelancer Olarak Başlamak: İlk Adımlar" data-en="Starting as a Freelancer: First Steps">Freelancer Olarak Başlamak: İlk Adımlar</h3>
       <p class="blog-excerpt" data-tr="2025'te freelance kariyerime başladım. Bu süreçte öğrendiklerimi ve yaptığım hataları dürüstçe paylaşıyorum." data-en="I started my freelance career in 2025. I honestly share what I learned and the mistakes I made along the way.">2025'te freelance kariyerime başladım. Bu süreçte öğrendiklerimi ve yaptığım hataları dürüstçe paylaşıyorum.</p>
@@ -404,8 +404,8 @@ footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); 
     <span data-tr="Bir fikrin" data-en="Got an">Bir fikrin</span><br/>
     <em><span data-tr="mi var?" data-en="idea?">mi var?</span></em>
   </h2>
-  <a href="mailto:yeattozunn@gmail.com" class="contact-email reveal" style="transition-delay:0.2s">
-    <span>✉</span> yeattozunn@gmail.com
+  <a href="/cdn-cgi/l/email-protection#1a637f7b6e6e75606f74745a7d777b737634797577" class="contact-email reveal" style="transition-delay:0.2s">
+    <span>✉</span> <span class="__cf_email__" data-cfemail="4e372b2f3a3a21343b20200e29232f2722602d2123">[email&#160;protected]</span>
   </a>
 </section>
 
@@ -414,7 +414,7 @@ footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); 
   <p data-tr="tüm hakları saklıdır" data-en="all rights reserved">tüm hakları saklıdır</p>
 </footer>
 
-<a href="https://wa.me/905000000000" target="_blank" class="whatsapp-btn" title="WhatsApp">
+<a href="https://wa.me/905524373745" target="_blank" class="whatsapp-btn" title="WhatsApp">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -427,134 +427,125 @@ footer p { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); 
   </div>
 </button>
 
-<script>
-  // LOADER
-  const loaderEl = document.getElementById('loader');
-  const loaderText = document.getElementById('loaderText');
-  const loaderFill = document.getElementById('loaderFill');
-  'yeattozunn'.split('').forEach((ch, i) => {
-    const s = document.createElement('span');
-    s.textContent = ch;
-    loaderText.appendChild(s);
-    setTimeout(() => s.classList.add('show'), 80 + i * 110);
-  });
-  setTimeout(() => loaderFill.style.width = '100%', 100);
-  setTimeout(() => loaderEl.classList.add('hidden'), 2500);
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
-  // STARS + PARALLAX
-  const starsEl = document.getElementById('stars');
-  const starData = [];
-  for (let i = 0; i < 130; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const sz = Math.random() * 2 + 0.4;
-    const x = Math.random() * 100;
-    const y = Math.random() * 300;
-    const spd = Math.random() * 0.25 + 0.04;
-    s.style.cssText = `width:${sz}px;height:${sz}px;left:${x}vw;top:${y}vh;opacity:${Math.random()*0.5+0.1}`;
-    starsEl.appendChild(s);
-    starData.push({ el: s, spd });
-  }
-  window.addEventListener('scroll', () => {
-    const sy = window.scrollY;
-    starData.forEach(({ el, spd }) => el.style.transform = `translateY(${sy * spd}px)`);
-    nav.classList.toggle('scrolled', sy > 20);
-  });
+// LOADER
+const loaderEl = document.getElementById(‘loader’);
+const loaderText = document.getElementById(‘loaderText’);
+const loaderFill = document.getElementById(‘loaderFill’);
+‘yeattozunn’.split(’’).forEach((ch, i) => {
+const s = document.createElement(‘span’);
+s.textContent = ch;
+loaderText.appendChild(s);
+setTimeout(() => s.classList.add(‘show’), 80 + i * 110);
+});
+setTimeout(() => loaderFill.style.width = ‘100%’, 100);
+setTimeout(() => loaderEl.classList.add(‘hidden’), 2500);
 
-  // CURSOR
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx=0, my=0, rx=0, ry=0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx-4+'px'; cursor.style.top = my-4+'px';
-  });
-  (function loop() {
-    rx += (mx-rx-18)*0.1; ry += (my-ry-18)*0.1;
-    ring.style.left = rx+'px'; ring.style.top = ry+'px';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a,button,.service-card,.tag,.tcard,.blog-card').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
-  });
+// STARS + PARALLAX
+const starsEl = document.getElementById(‘stars’);
+const starData = [];
+for (let i = 0; i < 130; i++) {
+const s = document.createElement(‘div’);
+s.className = ‘star’;
+const sz = Math.random() * 2 + 0.4;
+const x = Math.random() * 100;
+const y = Math.random() * 300;
+const spd = Math.random() * 0.25 + 0.04;
+s.style.cssText = `width:${sz}px;height:${sz}px;left:${x}vw;top:${y}vh;opacity:${Math.random()*0.5+0.1}`;
+starsEl.appendChild(s);
+starData.push({ el: s, spd });
+}
+window.addEventListener(‘scroll’, () => {
+const sy = window.scrollY;
+starData.forEach(({ el, spd }) => el.style.transform = `translateY(${sy * spd}px)`);
+nav.classList.toggle(‘scrolled’, sy > 20);
+});
 
-  // NAV
-  const nav = document.getElementById('nav');
+// CURSOR
+const cursor = document.getElementById(‘cursor’);
+const ring = document.getElementById(‘cursorRing’);
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener(‘mousemove’, e => {
+mx = e.clientX; my = e.clientY;
+cursor.style.left = mx-4+‘px’; cursor.style.top = my-4+‘px’;
+});
+(function loop() {
+rx += (mx-rx-18)*0.1; ry += (my-ry-18)*0.1;
+ring.style.left = rx+‘px’; ring.style.top = ry+‘px’;
+requestAnimationFrame(loop);
+})();
+document.querySelectorAll(‘a,button,.service-card,.tag,.tcard,.blog-card’).forEach(el => {
+el.addEventListener(‘mouseenter’, () => ring.classList.add(‘hovering’));
+el.addEventListener(‘mouseleave’, () => ring.classList.remove(‘hovering’));
+});
 
-  // REVEAL
-  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// NAV
+const nav = document.getElementById(‘nav’);
 
-  // TYPEWRITER
-  const phrases = {
-    tr: ['dijital dünyada iz bırakır.', 'web siteleri tasarlar.', 'markanı güçlendirir.', 'yapay zeka kullanır.'],
-    en: ['leaves a mark digitally.', 'designs websites.', 'strengthens your brand.', 'uses AI tools.']
-  };
-  let lang = 'tr', twIdx = 0, twChar = 0, twDel = false;
-  const twEl = document.getElementById('typewriter');
-  function typeStep() {
-    const word = phrases[lang][twIdx];
-    if (!twDel) {
-      twChar++; twEl.textContent = word.slice(0, twChar);
-      if (twChar === word.length) { twDel = true; setTimeout(typeStep, 2200); return; }
-      setTimeout(typeStep, 65);
-    } else {
-      twChar--; twEl.textContent = word.slice(0, twChar);
-      if (twChar === 0) { twDel = false; twIdx = (twIdx+1) % phrases[lang].length; setTimeout(typeStep, 400); return; }
-      setTimeout(typeStep, 32);
-    }
-  }
-  setTimeout(typeStep, 2800);
+// REVEAL
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add(‘visible’); }), { threshold: 0.1 });
+document.querySelectorAll(’.reveal’).forEach(el => obs.observe(el));
 
-  // THEME
-  document.getElementById('themeBtn').addEventListener('click', function() {
-    const d = document.documentElement;
-    const dark = d.getAttribute('data-theme') === 'dark';
-    d.setAttribute('data-theme', dark ? 'light' : 'dark');
-    this.textContent = dark ? '☾' : '☀';
-  });
+// TYPEWRITER
+const phrases = {
+tr: [‘dijital dünyada iz bırakır.’, ‘web siteleri tasarlar.’, ‘markanı güçlendirir.’, ‘yapay zeka kullanır.’],
+en: [‘leaves a mark digitally.’, ‘designs websites.’, ‘strengthens your brand.’, ‘uses AI tools.’]
+};
+let lang = ‘tr’, twIdx = 0, twChar = 0, twDel = false;
+const twEl = document.getElementById(‘typewriter’);
+function typeStep() {
+const word = phrases[lang][twIdx];
+if (!twDel) {
+twChar++; twEl.textContent = word.slice(0, twChar);
+if (twChar === word.length) { twDel = true; setTimeout(typeStep, 2200); return; }
+setTimeout(typeStep, 65);
+} else {
+twChar–; twEl.textContent = word.slice(0, twChar);
+if (twChar === 0) { twDel = false; twIdx = (twIdx+1) % phrases[lang].length; setTimeout(typeStep, 400); return; }
+setTimeout(typeStep, 32);
+}
+}
+setTimeout(typeStep, 2800);
 
-  // LANGUAGE
-  document.getElementById('langBtn').addEventListener('click', function() {
-    lang = lang === 'tr' ? 'en' : 'tr';
-    this.textContent = lang === 'tr' ? 'EN' : 'TR';
-    document.querySelectorAll('[data-tr]').forEach(el => {
-      const v = el.getAttribute('data-' + lang);
-      if (v) el.innerHTML = v;
-    });
-    twIdx = 0; twChar = 0; twDel = false;
-  });
+// THEME
+document.getElementById(‘themeBtn’).addEventListener(‘click’, function() {
+const d = document.documentElement;
+const dark = d.getAttribute(‘data-theme’) === ‘dark’;
+d.setAttribute(‘data-theme’, dark ? ‘light’ : ‘dark’);
+this.textContent = dark ? ‘☀’ : ‘☾’;
+});
 
-  // MUSIC (Web Audio ambient)
-  let actx = null, gn = null, playing = false;
-  const musicBtn = document.getElementById('musicBtn');
-  function startAudio() {
-    actx = new (window.AudioContext || window.webkitAudioContext)();
-    gn = actx.createGain();
-    gn.gain.setValueAtTime(0, actx.currentTime);
-    gn.gain.linearRampToValueAtTime(0.05, actx.currentTime + 2);
-    gn.connect(actx.destination);
-    [55, 82.4, 110, 164.8, 220].forEach((f, i) => {
-      const o = actx.createOscillator();
-      const g = actx.createGain();
-      o.type = ['sine','sine','triangle','sine','triangle'][i];
-      o.frequency.value = f;
-      g.gain.value = 0.6 / (i + 1);
-      o.connect(g); g.connect(gn); o.start();
-    });
-  }
-  musicBtn.addEventListener('click', () => {
-    if (!playing) {
-      if (!actx) startAudio();
-      else { gn.gain.cancelScheduledValues(actx.currentTime); gn.gain.linearRampToValueAtTime(0.05, actx.currentTime+1); }
-      playing = true; musicBtn.classList.add('playing');
-    } else {
-      gn.gain.linearRampToValueAtTime(0, actx.currentTime+1);
-      playing = false; musicBtn.classList.remove('playing');
-    }
-  });
-</script>
+// LANGUAGE
+document.getElementById(‘langBtn’).addEventListener(‘click’, function() {
+lang = lang === ‘tr’ ? ‘en’ : ‘tr’;
+this.textContent = lang === ‘tr’ ? ‘EN’ : ‘TR’;
+document.querySelectorAll(’[data-tr]’).forEach(el => {
+const v = el.getAttribute(‘data-’ + lang);
+if (v) el.innerHTML = v;
+});
+twIdx = 0; twChar = 0; twDel = false;
+});
 
-</body>
-</html>
+// MUSIC (Web Audio ambient)
+let actx = null, gn = null, playing = false;
+const musicBtn = document.getElementById(‘musicBtn’);
+function startAudio() {
+actx = new (window.AudioContext || window.webkitAudioContext)();
+gn = actx.createGain();
+gn.gain.setValueAtTime(0, actx.currentTime);
+gn.gain.linearRampToValueAtTime(0.05, actx.currentTime + 2);
+gn.connect(actx.destination);
+[55, 82.4, 110, 164.8, 220].forEach((f, i) => {
+const o = actx.createOscillator();
+const g = actx.createGain();
+o.type = [‘sine’,‘sine’,‘triangle’,‘sine’,‘triangle’][i];
+o.frequency.value = f;
+g.gain.value = 0.6 / (i + 1);
+o.connect(g); g.connect(gn); o.start();
+});
+}
+musicBtn.addEventListener(‘click’, () => {
+if (!playing) {
+if (!actx) startAudio();
+else { gn.gain.cancelScheduledValues(actx.currentTime); gn.gain.linearRampToValueAtTime(0.05, actx.curr
