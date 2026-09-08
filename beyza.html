@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Beyza için</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg1:#2a0a1a; --bg2:#4a0e2a; --pink:#ff5e8e; --pink-soft:#ffb3c6; --red:#ff2d55;
+    --text:#fff0f4; --muted:#e8a8bc;
+  }
+  html,body{height:100%;}
+  body{
+    background:radial-gradient(ellipse at top, var(--bg2), var(--bg1));
+    color:var(--text); font-family:'DM Sans',sans-serif; overflow:hidden;
+    min-height:100vh; position:relative;
+  }
+
+  /* Floating hearts background */
+  #hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .heart{position:absolute;bottom:-10vh;font-size:20px;opacity:0.35;animation:floatUp linear infinite;user-select:none;}
+  @keyframes floatUp{
+    0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}
+    10%{opacity:0.4;}
+    90%{opacity:0.4;}
+    100%{transform:translateY(-115vh) translateX(var(--drift,20px)) rotate(360deg);opacity:0;}
+  }
+
+  #game{
+    position:relative; z-index:1; min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+  }
+
+  /* Progress bar */
+  #progress{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.1);z-index:20;}
+  #progressFill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink),var(--red));transition:width 0.6s cubic-bezier(.23,1,.32,1);}
+
+  .scene{
+    max-width:560px; width:100%; text-align:center;
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border-radius:24px; padding:56px 40px;
+    opacity:0; transform:translateY(24px) scale(0.98);
+    animation:sceneIn 0.7s cubic-bezier(.23,1,.32,1) forwards;
+    box-shadow:0 20px 60px rgba(255,45,85,0.15);
+  }
+  @keyframes sceneIn{to{opacity:1;transform:translateY(0) scale(1);}}
+  .scene.hidden{display:none;}
+
+  .emoji-big{font-size:56px;margin-bottom:20px;display:block;animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+
+  .eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+  h1{font-size:clamp(26px,5vw,38px);font-weight:500;line-height:1.3;margin-bottom:18px;letter-spacing:-0.01em;}
+  h1 em{font-style:italic;color:var(--pink-soft);}
+  p.body{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:32px;}
+
+  .choices{display:flex;flex-direction:column;gap:12px;}
+  .choices.row{flex-direction:row;justify-content:center;flex-wrap:wrap;}
+  button.opt{
+    font-family:'DM Sans',sans-serif; font-size:15px; font-weight:500;
+    padding:16px 24px; border-radius:100px; border:1px solid rgba(255,255,255,0.18);
+    background:rgba(255,255,255,0.06); color:var(--text); cursor:pointer;
+    transition:transform 0.25s cubic-bezier(.23,1,.32,1), background 0.25s, border-color 0.25s;
+  }
+  button.opt:hover{background:rgba(255,94,142,0.18);border-color:var(--pink);transform:translateY(-2px);}
+  button.primary{
+    background:linear-gradient(135deg,var(--pink),var(--red)); border:none;
+    box-shadow:0 10px 30px rgba(255,45,85,0.35);
+  }
+  button.primary:hover{transform:translateY(-2px) scale(1.03);}
+
+  /* No/yes chase button game */
+  #noBtnWrap{position:relative;height:64px;margin-top:4px;}
+  #noBtn{position:relative;transition:left 0.25s ease, top 0.25s ease;}
+  .yn-row{display:flex;gap:16px;justify-content:center;align-items:flex-start;flex-wrap:wrap;position:relative;}
+
+  /* Memory match */
+  #memGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
+  .card{
+    aspect-ratio:1; border-radius:12px; background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15); display:flex;align-items:center;justify-content:center;
+    font-size:26px; cursor:pointer; user-select:none; transition:transform 0.2s, background 0.2s;
+  }
+  .card:hover{transform:translateY(-2px);}
+  .card.flipped{background:linear-gradient(135deg,var(--pink),var(--red));}
+  .card.matched{background:rgba(255,94,142,0.25);opacity:0.7;cursor:default;}
+  #memStatus{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.08em;margin-bottom:16px;}
+
+  /* Final screen */
+  .letter{text-align:left;font-size:16px;line-height:2;color:var(--text);margin-bottom:32px;}
+  .letter .sign{text-align:right;font-style:italic;color:var(--pink-soft);margin-top:16px;}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden;}
+  .confetti-piece{position:absolute;top:-5vh;border-radius:2px;animation:confettiFall linear forwards;}
+  @keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);}}
+
+  .skip{position:fixed;bottom:20px;right:20px;z-index:20;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--muted);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:8px 16px;border-radius:100px;cursor:pointer;}
+
+  @media(max-width:600px){
+    .scene{padding:40px 24px;}
+    #memGrid{grid-template-columns:repeat(3,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div id="hearts"></div>
+<div id="progress"><div id="progressFill"></div></div>
+<div id="confetti"></div>
+
+<div id="game">
+
+  <!-- Scene 0: Intro -->
+  <div class="scene" data-scene="0">
+    <span class="emoji-big">💌</span>
+    <p class="eyebrow">bir sürpriz seni bekliyor</p>
+    <h1>Merhaba <em>Beyza</em>,<br/>senin için küçük bir oyun hazırladım.</h1>
+    <p class="body">Birkaç adım var. Her adımda küçük bir şey öğreneceksin, sonunda da sana bir şey söylemek istiyorum. Hazır mısın?</p>
+    <div class="choices">
+      <button class="opt primary" onclick="goto(1)">Hazırım, başlayalım →</button>
+    </div>
+  </div>
+
+  <!-- Scene 1: Choice -->
+  <div class="scene hidden" data-scene="1">
+    <span class="emoji-big">🌸</span>
+    <p class="eyebrow">1. durak</p>
+    <h1>Seninle ilgili en sevdiğim şey ne, bil bakalım?</h1>
+    <p class="body">Hangisini denemek istersin?</p>
+    <div class="choices">
+      <button class="opt" onclick="pick1(this,'Gülüşün')">Gülüşün</button>
+      <button class="opt" onclick="pick1(this,'Enerjin')">Enerjin</button>
+      <button class="opt" onclick="pick1(this,'Kalbin')">Kalbin</button>
+    </div>
+  </div>
+
+  <!-- Scene 1 result -->
+  <div class="scene hidden" data-scene="1r">
+    <span class="emoji-big">✨</span>
+    <p class="eyebrow">cevap</p>
+    <h1 id="pick1Result">—</h1>
+    <p class="body">Aslında gerçek cevap: hepsi. Ama devam edelim, sırada küçük bir oyun var.</p>
+    <div class="choices">
+      <button class="opt primary" onclick="goto(2)">Devam →</button>
+    </div>
+  </div>
+
+  <!-- Scene 2: Memory match -->
+  <div class="scene hidden" data-scene="2">
+    <span class="emoji-big">🧠</span>
+    <p class="eyebrow">2. durak — hafıza oyunu</p>
+    <h1>Kalpleri eşleştir</h1>
+    <p id="memStatus">0 / 8 çift bulundu</p>
+    <div id="memGrid"></div>
+    <p class="body" id="memDone" style="display:none;">Harika, hepsini buldun! 🎉</p>
+    <div class="choices" id="memNext" style="display:none;">
+      <button class="opt primary" onclick="goto(3)">Devam →</button>
+    </div>
+  </div>
+
+  <!-- Scene 3: the question -->
+  <div class="scene hidden" data-scene="3">
+    <span class="emoji-big">❤️</span>
+    <p class="eyebrow">son durak</p>
+    <h1>Beyza, beni gülümsetmeye devam eder misin?</h1>
+    <div class="yn-row">
+      <button class="opt primary" onclick="goto(4)">Evet ❤️</button>
+      <div id="noBtnWrap">
+        <button class="opt" id="noBtn" onmouseover="dodgeNo()" ontouchstart="dodgeNo()">Hayır</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: Final -->
+  <div class="scene hidden" data-scene="4">
+    <span class="emoji-big">💖</span>
+    <p class="eyebrow">sana bir mesajım var</p>
+    <h1>Biliyordum. <em>Teşekkür ederim.</em></h1>
+    <div class="letter">
+      <p>Beyza,</p>
+      <p>Bu küçük oyunu senin için hazırladım çünkü seni gülümsetmek her zaman aklımdaki ilk şey. Yanımda olduğun için, her günü daha güzel yaptığın için teşekkür ederim.</p>
+      <p>Seninle geçirdiğim her an değerli, ve önümüzdeki tüm anları da sabırsızlıkla bekliyorum.</p>
+      <div class="sign">seni çok seven biri 💕</div>
+    </div>
+    <div class="choices">
+      <button class="opt" onclick="goto(0)">Baştan oyna ↺</button>
+    </div>
+  </div>
+
+</div>
+
+<button class="skip" onclick="goto(0)">↺ baştan başla</button>
+
+<script>
+  // FLOATING HEARTS BG
+  const heartsEl = document.getElementById('hearts');
+  const heartEmojis = ['💗','💕','💖','❤','💓'];
+  for (let i = 0; i < 24; i++) {
+    const h = document.createElement('span');
+    h.className = 'heart';
+    h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    const left = Math.random()*100;
+    const dur = 9 + Math.random()*10;
+    const delay = Math.random()*10;
+    const size = 14 + Math.random()*20;
+    const drift = (Math.random()*80 - 40) + 'px';
+    h.style.left = left + 'vw';
+    h.style.fontSize = size + 'px';
+    h.style.animationDuration = dur + 's';
+    h.style.animationDelay = delay + 's';
+    h.style.setProperty('--drift', drift);
+    heartsEl.appendChild(h);
+  }
+
+  // SCENE NAV
+  const scenes = ['0','1','1r','2','3','4'];
+  const progressFill = document.getElementById('progressFill');
+  function goto(id) {
+    document.querySelectorAll('.scene').forEach(s => s.classList.add('hidden'));
+    const el = document.querySelector('.scene[data-scene="' + id + '"]');
+    el.classList.remove('hidden');
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = '';
+    const idx = scenes.indexOf(String(id));
+    progressFill.style.width = (idx >= 0 ? (idx/(scenes.length-1))*100 : 0) + '%';
+    if (id === 4) launchConfetti();
+    if (id === 2) initMemory();
+  }
+
+  function pick1(btn, label) {
+    document.getElementById('pick1Result').innerHTML = '<em>' + label + '</em> — güzel seçim.';
+    goto('1r');
+  }
+
+  // NO BUTTON DODGE
+  const noBtn = document.getElementById('noBtn');
+  const noBtnWrap = document.getElementById('noBtnWrap');
+  function dodgeNo() {
+    const wrapRect = noBtnWrap.getBoundingClientRect();
+    const maxX = Math.max(0, window.innerWidth - 140);
+    const maxY = Math.max(0, window.innerHeight - 80);
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+    noBtn.style.zIndex = 50;
+  }
+
+  // MEMORY MATCH
+  let memInit = false;
+  function initMemory() {
+    if (memInit) return;
+    memInit = true;
+    const symbols = ['💗','🌸','✨','🎈','🎵','☕','🌙','🍓'];
+    let deck = [...symbols, ...symbols];
+    deck.sort(() => Math.random() - 0.5);
+    const grid = document.getElementById('memGrid');
+    let first = null, second = null, lock = false, matched = 0;
+    deck.forEach((sym, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.sym = sym;
+      card.textContent = '?';
+      card.addEventListener('click', () => {
+        if (lock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+        card.classList.add('flipped');
+        card.textContent = sym;
+        if (!first) { first = card; return; }
+        second = card;
+        lock = true;
+        setTimeout(() => {
+          if (first.dataset.sym === second.dataset.sym) {
+            first.classList.add('matched');
+            second.classList.add('matched');
+            matched++;
+            document.getElementById('memStatus').textContent = matched + ' / 8 çift bulundu';
+            if (matched === 8) {
+              document.getElementById('memDone').style.display = 'block';
+              document.getElementById('memNext').style.display = 'flex';
+            }
+          } else {
+            first.classList.remove('flipped'); first.textContent = '?';
+            second.classList.remove('flipped'); second.textContent = '?';
+          }
+          first = null; second = null; lock = false;
+        }, 700);
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  // CONFETTI
+  function launchConfetti() {
+    const c = document.getElementById('confetti');
+    c.innerHTML = '';
+    const colors = ['#ff5e8e','#ff2d55','#ffb3c6','#fff0f4','#ff85a2'];
+    for (let i = 0; i < 80; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      const size = 6 + Math.random()*8;
+      p.style.width = size + 'px';
+      p.style.height = (size*0.4) + 'px';
+      p.style.left = Math.random()*100 + 'vw';
+      p.style.background = colors[Math.floor(Math.random()*colors.length)];
+      p.style.animationDuration = (2.5 + Math.random()*2.5) + 's';
+      p.style.animationDelay = (Math.random()*1.5) + 's';
+      c.appendChild(p);
+    }
+    setTimeout(() => { c.innerHTML = ''; }, 6000);
+  }
+
+  goto(0);
+</script>
+
+</body>
+</html>
