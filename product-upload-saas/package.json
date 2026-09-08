@@ -1,0 +1,35 @@
+{
+  "name": "ideasoft-product-upload-saas",
+  "version": "0.1.0",
+  "description": "Multi-tenant SaaS: Google Sheets -> IdeaSoft product upload, AI descriptions/SEO, image search",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev:api": "ts-node-dev --respawn --transpile-only src/api/server.ts",
+    "dev:worker": "ts-node-dev --respawn --transpile-only src/queue/worker.ts",
+    "migrate": "node-pg-migrate",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down",
+    "admin": "ts-node-dev --transpile-only src/admin/cli.ts"
+  },
+  "dependencies": {
+    "bullmq": "^5.7.8",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "google-auth-library": "^9.7.0",
+    "googleapis": "^134.0.0",
+    "ioredis": "^5.4.1",
+    "otplib": "^12.0.1",
+    "pg": "^8.11.5",
+    "playwright": "^1.44.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@types/pg": "^8.11.6",
+    "node-pg-migrate": "^6.2.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}
