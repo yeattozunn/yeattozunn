@@ -16,7 +16,6 @@
     html { scroll-behavior:smooth; }
     body { background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;cursor:none;transition:background 0.4s,color 0.4s; }
 
-```
 /* LOADER */
 #loader { position:fixed;inset:0;background:#080808;z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:40px;transition:opacity 0.8s,visibility 0.8s; }
 #loader.hidden { opacity:0;visibility:hidden;pointer-events:none; }
@@ -55,6 +54,7 @@ nav.scrolled { border-bottom-color:var(--border); }
 
 /* HERO */
 .hero { min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 48px;position:relative;z-index:1;overflow:hidden; }
+#heroCanvas { position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0.55; }
 .orb { position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none; }
 .orb-1 { width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,0.025) 0%,transparent 70%);top:-200px;right:-100px;animation:orb1 14s ease-in-out infinite; }
 .orb-2 { width:400px;height:400px;background:radial-gradient(circle,rgba(160,160,255,0.04) 0%,transparent 70%);bottom:0;left:-100px;animation:orb2 17s ease-in-out infinite; }
@@ -94,6 +94,24 @@ nav.scrolled { border-bottom-color:var(--border); }
 .service-num { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:32px; }
 .service-title { font-size:22px;font-weight:400;letter-spacing:-0.02em;margin-bottom:16px;line-height:1.3; }
 .service-desc { font-size:14px;color:var(--muted);line-height:1.8; }
+
+/* PROJECTS */
+.projects { padding:160px 48px;position:relative;z-index:1; }
+.projects-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:24px; }
+.pcard { border:1px solid var(--border);border-radius:4px;overflow:hidden;position:relative;transition:border-color 0.3s,transform 0.4s cubic-bezier(0.23,1,0.32,1); }
+.pcard:hover { border-color:rgba(255,255,255,0.25);transform:translateY(-6px); }
+[data-theme="light"] .pcard:hover { border-color:rgba(0,0,0,0.2); }
+.pcard-visual { height:260px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center; }
+.pcard-visual::before { content:'';position:absolute;inset:0;background:var(--pgrad);transition:transform 0.6s cubic-bezier(0.23,1,0.32,1); }
+.pcard:hover .pcard-visual::before { transform:scale(1.08); }
+.pcard-visual span { position:relative;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:0.15em;color:rgba(255,255,255,0.85);text-transform:uppercase;z-index:1; }
+.pcard-body { padding:32px 36px;background:var(--bg); }
+.pcard-top { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:16px; }
+.pcard-title { font-size:20px;font-weight:400;letter-spacing:-0.02em; }
+.pcard-year { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.08em;white-space:nowrap;margin-top:4px; }
+.pcard-desc { font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px; }
+.pcard-tags { display:flex;flex-wrap:wrap;gap:8px; }
+.pcard-tags span { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--muted);border:1px solid var(--border);padding:4px 10px;border-radius:100px;text-transform:uppercase; }
 
 /* ABOUT */
 .about { padding:160px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1; }
@@ -180,8 +198,8 @@ footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);let
   nav{padding:18px 20px} .nav-links{display:none}
   .hero{padding:0 20px} .hero-title{font-size:clamp(44px,13vw,72px)}
   .stats{padding:48px 20px;grid-template-columns:1fr}
-  .services,.about,.testimonials,.blog,.contact{padding:80px 20px}
-  .services-grid,.testimonials-grid,.blog-grid{grid-template-columns:1fr}
+  .services,.projects,.about,.testimonials,.blog,.contact{padding:80px 20px}
+  .services-grid,.testimonials-grid,.blog-grid,.projects-grid{grid-template-columns:1fr}
   .about{grid-template-columns:1fr;gap:40px}
   .contact-title{font-size:clamp(36px,11vw,60px)}
   footer{padding:28px 20px;flex-direction:column;gap:10px;text-align:center}
@@ -190,8 +208,6 @@ footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);let
   .whatsapp-btn{bottom:24px;right:24px} .music-btn{bottom:24px;right:84px}
   .blog-modal-inner{padding:32px 24px}
 }
-```
-
   </style>
 </head>
 <body>
@@ -210,6 +226,7 @@ footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);let
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#services" data-tr="hizmetler" data-en="services">hizmetler</a></li>
+      <li><a href="#projects" data-tr="projeler" data-en="projects">projeler</a></li>
       <li><a href="#about" data-tr="hakkinda" data-en="about">hakkında</a></li>
       <li><a href="#blog" data-tr="blog" data-en="blog">blog</a></li>
       <li><a href="#contact" data-tr="iletisim" data-en="contact">iletişim</a></li>
@@ -222,6 +239,7 @@ footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);let
 </nav>
 
 <section class="hero">
+  <canvas id="heroCanvas"></canvas>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <p class="hero-eyebrow" data-tr="freelancer · dijital cozumler" data-en="freelancer · digital solutions">freelancer · dijital çözümler</p>
@@ -274,6 +292,58 @@ footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);let
       <p class="service-num">03</p>
       <h3 class="service-title" data-tr="Yapay Zeka Entegrasyonu" data-en="AI Integration">Yapay Zeka Entegrasyonu</h3>
       <p class="service-desc" data-tr="Guncel AI araclariyla projelere deger katma. Verimli, akilli ve yaratici dijital cozumler." data-en="Adding value to projects with cutting-edge AI tools. Efficient, intelligent and creative digital solutions.">Güncel AI araçlarıyla projelere değer katma. Verimli, akıllı ve yaratıcı dijital çözümler.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="projects" id="projects">
+  <p class="section-label reveal" data-tr="secili projeler" data-en="selected work">seçili projeler</p>
+  <div class="projects-grid">
+    <div class="pcard reveal">
+      <div class="pcard-visual" style="--pgrad:linear-gradient(135deg,#1a1a2e,#3a2d5c)"><span data-tr="Kurumsal Web Sitesi" data-en="Corporate Website">Kurumsal Web Sitesi</span></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <h3 class="pcard-title" data-tr="Marka Lansman Sitesi" data-en="Brand Launch Site">Marka Lansman Sitesi</h3>
+          <span class="pcard-year">2025</span>
+        </div>
+        <p class="pcard-desc" data-tr="Kucuk bir isletme icin sifirdan tasarlanan, hizli yuklenen ve donusum odakli tek sayfalik web sitesi." data-en="A single-page, conversion-focused website designed from scratch for a small business, built for speed.">Küçük bir işletme için sıfırdan tasarlanan, hızlı yüklenen ve dönüşüm odaklı tek sayfalık web sitesi.</p>
+        <div class="pcard-tags"><span>html/css/js</span><span>responsive</span><span>seo</span></div>
+      </div>
+    </div>
+    <div class="pcard reveal" style="transition-delay:0.1s">
+      <div class="pcard-visual" style="--pgrad:linear-gradient(135deg,#0f2e2b,#1e5c4f)"><span data-tr="Sosyal Medya Kampanyasi" data-en="Social Media Campaign">Sosyal Medya Kampanyası</span></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <h3 class="pcard-title" data-tr="30 Gunluk Icerik Serisi" data-en="30-Day Content Series">30 Günlük İçerik Serisi</h3>
+          <span class="pcard-year">2025</span>
+        </div>
+        <p class="pcard-desc" data-tr="Bir icerik ureticisi icin planlanan, tutarli bir gorsel dil ve paylasim takvimiyle yurutulen kampanya." data-en="A campaign for a content creator, run with a consistent visual language and a structured posting schedule.">Bir içerik üreticisi için planlanan, tutarlı bir görsel dil ve paylaşım takvimiyle yürütülen kampanya.</p>
+        <div class="pcard-tags"><span>strateji</span><span>içerik</span><span>büyüme</span></div>
+      </div>
+    </div>
+    <div class="pcard reveal" style="transition-delay:0.2s">
+      <div class="pcard-visual" style="--pgrad:linear-gradient(135deg,#2e1a0f,#5c3a1e)"><span data-tr="AI Destekli Arac" data-en="AI-Powered Tool">AI Destekli Araç</span></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <h3 class="pcard-title" data-tr="Otomasyon Entegrasyonu" data-en="Automation Integration">Otomasyon Entegrasyonu</h3>
+          <span class="pcard-year">2025</span>
+        </div>
+        <p class="pcard-desc" data-tr="Guncel yapay zeka araclarini is akisina entegre ederek tekrarli gorevlerin otomatiklestirildigi bir proje." data-en="A project that automates repetitive tasks by integrating current AI tools into the workflow.">Güncel yapay zeka araçlarını iş akışına entegre ederek tekrarlı görevlerin otomatikleştirildiği bir proje.</p>
+        <div class="pcard-tags"><span>yapay zeka</span><span>otomasyon</span><span>verimlilik</span></div>
+      </div>
+    </div>
+    <div class="pcard reveal" style="transition-delay:0.3s">
+      <div class="pcard-visual" style="--pgrad:linear-gradient(135deg,#1a1a1a,#3d3d3d)"><span data-tr="Portfolyo Sitesi" data-en="Portfolio Site">Portfolyo Sitesi</span></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <h3 class="pcard-title" data-tr="Kisisel Marka Sitesi" data-en="Personal Brand Site">Kişisel Marka Sitesi</h3>
+          <span class="pcard-year">2025</span>
+        </div>
+        <p class="pcard-desc" data-tr="Su an gezdigin bu site: animasyonlar, tema/dil destegi ve ozel yapim etkilesimlerle kurulmus bir vitrin." data-en="This very site: built with custom animations, theme/language support, and hand-crafted interactions.">Şu an gezdiğin bu site: animasyonlar, tema/dil desteği ve özel yapım etkileşimlerle kurulmuş bir vitrin.</p>
+        <div class="pcard-tags"><span>tasarım</span><span>ui/ux</span><span>vanilla js</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -424,6 +494,69 @@ footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);let
     starData.push({ el: s, spd: spd });
   }
 
+  // HERO CANVAS PARTICLES
+  (function() {
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let w, h, particles, mouseX = -9999, mouseY = -9999;
+    function resize() {
+      w = canvas.width = canvas.offsetWidth;
+      h = canvas.height = canvas.offsetHeight;
+    }
+    function makeParticles() {
+      const count = Math.min(90, Math.floor((w * h) / 14000));
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          r: Math.random() * 1.6 + 0.6
+        });
+      }
+    }
+    resize();
+    makeParticles();
+    window.addEventListener('resize', function() { resize(); makeParticles(); });
+    canvas.addEventListener('mousemove', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left; mouseY = e.clientY - rect.top;
+    });
+    canvas.addEventListener('mouseleave', function() { mouseX = -9999; mouseY = -9999; });
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const dotColor = isLight ? '0,0,0' : '255,255,255';
+      particles.forEach(function(p) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        const dx = p.x - mouseX, dy = p.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) { p.x += dx / dist * 0.6; p.y += dy / dist * 0.6; }
+      });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 140) {
+            ctx.strokeStyle = 'rgba(' + dotColor + ',' + (0.12 * (1 - dist / 140)) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      particles.forEach(function(p) {
+        ctx.fillStyle = 'rgba(' + dotColor + ',0.5)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      });
+      requestAnimationFrame(step);
+    }
+    step();
+  })();
+
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', function() {
     const sy = window.scrollY;
@@ -447,7 +580,7 @@ footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);let
     ring.style.top = ry + 'px';
     requestAnimationFrame(loop);
   })();
-  document.querySelectorAll('a, button, .service-card, .tag, .tcard, .blog-card').forEach(function(el) {
+  document.querySelectorAll('a, button, .service-card, .tag, .tcard, .blog-card, .pcard').forEach(function(el) {
     el.addEventListener('mouseenter', function() { ring.classList.add('hovering'); });
     el.addEventListener('mouseleave', function() { ring.classList.remove('hovering'); });
   });
