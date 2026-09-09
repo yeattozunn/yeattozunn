@@ -1,0 +1,31 @@
+name: Günlük Parfüm Görseli - Instagram Paylaşımı
+
+on:
+  schedule:
+    # Her gün 09:00 (Türkiye saati, UTC+3) -> 06:00 UTC
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  generate-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodu al
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Bağımlılıkları yükle
+        run: pip install -r automation/requirements.txt
+
+      - name: Görsel üret ve Instagram'da paylaş
+        working-directory: automation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python generate_and_post.py
