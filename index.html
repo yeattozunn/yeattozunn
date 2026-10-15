@@ -1,577 +1,805 @@
 <!DOCTYPE html>
-
 <html lang="tr" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>yeattozunn — Freelancer</title>
-  <meta name="description" content="Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarıyla dijital projeler oluşturan freelancer." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --bg:#080808;--surface:#111;--border:rgba(255,255,255,0.07);--text:#f0f0f0;--muted:#666; }
-    [data-theme="light"] { --bg:#f8f8f6;--surface:#efefed;--border:rgba(0,0,0,0.08);--text:#111;--muted:#888; }
-    html { scroll-behavior:smooth; }
-    body { background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;cursor:none;transition:background 0.4s,color 0.4s; }
-
-```
-/* LOADER */
-#loader { position:fixed;inset:0;background:#080808;z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:40px;transition:opacity 0.8s,visibility 0.8s; }
-#loader.hidden { opacity:0;visibility:hidden;pointer-events:none; }
-.loader-text { font-family:'DM Mono',monospace;font-size:clamp(28px,6vw,64px);font-weight:300;letter-spacing:0.12em;color:#f0f0f0; }
-.loader-text span { opacity:0;display:inline-block;transform:translateY(16px);transition:opacity 0.2s,transform 0.35s cubic-bezier(0.23,1,0.32,1); }
-.loader-text span.show { opacity:1;transform:translateY(0); }
-.loader-line { width:200px;height:1px;background:rgba(255,255,255,0.1);overflow:hidden; }
-.loader-fill { height:100%;background:#f0f0f0;width:0%;transition:width 2.2s cubic-bezier(0.23,1,0.32,1); }
-
-/* STARS */
-#stars { position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden; }
-.star { position:absolute;border-radius:50%;background:rgba(255,255,255,0.55); }
-[data-theme="light"] .star { background:rgba(0,0,0,0.12); }
-
-/* NOISE */
-body::before { content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.3;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"); }
-
-/* CURSOR */
-.cursor { position:fixed;width:8px;height:8px;background:var(--text);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference; }
-.cursor-ring { position:fixed;width:36px;height:36px;border:1px solid rgba(255,255,255,0.35);border-radius:50%;pointer-events:none;z-index:9998;transition:width 0.3s,height 0.3s,opacity 0.3s; }
-[data-theme="light"] .cursor-ring { border-color:rgba(0,0,0,0.25); }
-.cursor-ring.hovering { width:54px;height:54px;opacity:0.5; }
-
-/* NAV */
-nav { position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color 0.3s; }
-nav.scrolled { border-bottom-color:var(--border); }
-.nav-logo { font-family:'DM Mono',monospace;font-size:14px;font-weight:300;letter-spacing:0.05em;color:var(--text);text-decoration:none; }
-.nav-right { display:flex;align-items:center;gap:28px; }
-.nav-links { display:flex;gap:32px;list-style:none; }
-.nav-links a { font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.04em;transition:color 0.3s; }
-.nav-links a:hover { color:var(--text); }
-.nav-controls { display:flex;gap:8px; }
-.ctrl-btn { background:none;border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;padding:5px 12px;border-radius:100px;cursor:none;transition:color 0.3s,border-color 0.3s; }
-.ctrl-btn:hover { color:var(--text);border-color:rgba(255,255,255,0.25); }
-[data-theme="light"] .ctrl-btn:hover { border-color:rgba(0,0,0,0.25); }
-
-/* HERO */
-.hero { min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 48px;position:relative;z-index:1;overflow:hidden; }
-.orb { position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none; }
-.orb-1 { width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,0.025) 0%,transparent 70%);top:-200px;right:-100px;animation:orb1 14s ease-in-out infinite; }
-.orb-2 { width:400px;height:400px;background:radial-gradient(circle,rgba(160,160,255,0.04) 0%,transparent 70%);bottom:0;left:-100px;animation:orb2 17s ease-in-out infinite; }
-@keyframes orb1 { 0%,100%{transform:translate(0,0)scale(1)}50%{transform:translate(-40px,60px)scale(1.1)} }
-@keyframes orb2 { 0%,100%{transform:translate(0,0)scale(1)}50%{transform:translate(60px,-40px)scale(0.9)} }
-.hero-eyebrow { font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:32px;opacity:0;animation:slideUp 1s 0.2s cubic-bezier(0.23,1,0.32,1) forwards; }
-.hero-title { font-size:clamp(56px,10vw,136px);font-weight:300;line-height:0.95;letter-spacing:-0.03em;margin-bottom:48px;opacity:0;animation:slideUp 1s 0.4s cubic-bezier(0.23,1,0.32,1) forwards; }
-.hero-title em { font-style:italic;color:var(--muted); }
-#typewriter { border-right:2px solid var(--muted);padding-right:3px; }
-.hero-desc { max-width:460px;font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:56px;opacity:0;animation:slideUp 1s 0.6s cubic-bezier(0.23,1,0.32,1) forwards; }
-.hero-cta { display:flex;gap:16px;align-items:center;opacity:0;animation:slideUp 1s 0.8s cubic-bezier(0.23,1,0.32,1) forwards; }
-.btn-primary { display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--text);color:var(--bg);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.03em;text-decoration:none;border-radius:100px;transition:transform 0.3s cubic-bezier(0.23,1,0.32,1); }
-.btn-primary:hover { transform:scale(1.04); }
-.btn-secondary { font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.03em;transition:color 0.3s;display:flex;align-items:center;gap:6px; }
-.btn-secondary:hover { color:var(--text); }
-.btn-secondary::after { content:'→';transition:transform 0.3s; }
-.btn-secondary:hover::after { transform:translateX(4px); }
-.scroll-indicator { position:absolute;bottom:48px;left:48px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeIn 1s 1.5s forwards; }
-.scroll-line { width:40px;height:1px;background:var(--muted);transform-origin:left;animation:expandLine 1.5s 1.7s cubic-bezier(0.23,1,0.32,1) forwards;transform:scaleX(0); }
-@keyframes expandLine { to{transform:scaleX(1)} }
-.scroll-text { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase; }
-
-/* STATS */
-.stats { padding:72px 48px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1; }
-.stat { background:var(--bg);padding:48px 40px;transition:background 0.3s; }
-.stat:hover { background:var(--surface); }
-.stat-num { font-size:clamp(40px,5vw,68px);font-weight:300;letter-spacing:-0.04em;line-height:1;margin-bottom:12px; }
-.stat-label { font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase; }
-
-/* SERVICES */
-.services { padding:160px 48px;position:relative;z-index:1; }
-.section-label { font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:80px;display:flex;align-items:center;gap:16px; }
-.section-label::before { content:'';width:32px;height:1px;background:var(--muted); }
-.services-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border); }
-.service-card { background:var(--bg);padding:48px 40px;transition:background 0.4s; }
-.service-card:hover { background:var(--surface); }
-.service-num { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:32px; }
-.service-title { font-size:22px;font-weight:400;letter-spacing:-0.02em;margin-bottom:16px;line-height:1.3; }
-.service-desc { font-size:14px;color:var(--muted);line-height:1.8; }
-
-/* ABOUT */
-.about { padding:160px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1; }
-.big-text { font-size:clamp(36px,4vw,56px);font-weight:300;letter-spacing:-0.03em;line-height:1.2; }
-.big-text em { font-style:italic;color:var(--muted); }
-.about-right p { font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:24px; }
-.about-tags { display:flex;flex-wrap:wrap;gap:8px;margin-top:40px; }
-.tag { padding:6px 16px;border:1px solid var(--border);border-radius:100px;font-size:12px;font-family:'DM Mono',monospace;color:var(--muted);letter-spacing:0.05em;transition:border-color 0.3s,color 0.3s; }
-.tag:hover { border-color:rgba(255,255,255,0.3);color:var(--text); }
-[data-theme="light"] .tag:hover { border-color:rgba(0,0,0,0.3); }
-
-/* TESTIMONIALS */
-.testimonials { padding:160px 48px;position:relative;z-index:1; }
-.testimonials-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
-.tcard { border:1px solid var(--border);padding:40px;border-radius:4px;transition:border-color 0.3s,background 0.3s; }
-.tcard:hover { border-color:rgba(255,255,255,0.2);background:var(--surface); }
-[data-theme="light"] .tcard:hover { border-color:rgba(0,0,0,0.2); }
-.tcard-quote { font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:32px;font-style:italic; }
-.tcard-quote::before { content:'"';font-size:32px;line-height:0;vertical-align:-12px;margin-right:4px;opacity:0.3; }
-.tcard-author { font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase; }
-.tcard-role { font-size:12px;color:var(--muted);opacity:0.6;margin-top:4px; }
-
-/* BLOG */
-.blog { padding:160px 48px;position:relative;z-index:1; }
-.blog-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border); }
-.blog-card { background:var(--bg);padding:40px;transition:background 0.3s;cursor:pointer; }
-.blog-card:hover { background:var(--surface); }
-.blog-date { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:20px; }
-.blog-title { font-size:18px;font-weight:400;letter-spacing:-0.02em;line-height:1.4;margin-bottom:16px; }
-.blog-excerpt { font-size:14px;color:var(--muted);line-height:1.8; }
-.blog-read { display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:0.08em;color:var(--muted);transition:color 0.3s; }
-.blog-card:hover .blog-read { color:var(--text); }
-
-/* BLOG MODAL */
-.blog-modal { display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow-y:auto;padding:60px 20px; }
-.blog-modal-inner { max-width:680px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:56px;position:relative;opacity:0;transform:translateY(30px);transition:opacity 0.5s cubic-bezier(0.23,1,0.32,1),transform 0.5s cubic-bezier(0.23,1,0.32,1); }
-.blog-modal-inner.open { opacity:1;transform:translateY(0); }
-.modal-close { position:absolute;top:24px;right:24px;background:none;border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;padding:6px 14px;border-radius:100px;cursor:pointer;transition:color 0.3s; }
-.modal-close:hover { color:var(--text); }
-.modal-date { font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:24px; }
-.modal-title { font-size:clamp(22px,4vw,34px);font-weight:300;letter-spacing:-0.03em;line-height:1.2;margin-bottom:40px;color:var(--text); }
-.modal-body { font-size:16px;color:var(--muted);line-height:1.9; }
-.modal-body p { margin-bottom:20px; }
-.modal-body strong { color:var(--text); }
-
-/* CONTACT */
-.contact { padding:160px 48px;text-align:center;position:relative;z-index:1; }
-.contact-title { font-size:clamp(48px,8vw,108px);font-weight:300;letter-spacing:-0.04em;line-height:1;margin-bottom:48px; }
-.contact-title em { font-style:italic;color:var(--muted); }
-.contact-email { display:inline-flex;align-items:center;gap:12px;font-size:18px;color:var(--muted);text-decoration:none;padding:20px 40px;border:1px solid var(--border);border-radius:100px;transition:color 0.3s,border-color 0.3s; }
-.contact-email:hover { color:var(--text);border-color:rgba(255,255,255,0.2); }
-[data-theme="light"] .contact-email:hover { border-color:rgba(0,0,0,0.2); }
-
-/* FOOTER */
-footer { padding:40px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1; }
-footer p { font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.05em; }
-.divider { height:1px;background:var(--border);margin:0 48px;position:relative;z-index:1; }
-
-/* WHATSAPP */
-.whatsapp-btn { position:fixed;bottom:32px;right:32px;z-index:600;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,0.3);transition:transform 0.3s cubic-bezier(0.23,1,0.32,1),box-shadow 0.3s;opacity:0;animation:fadeIn 0.6s 2.6s forwards; }
-.whatsapp-btn:hover { transform:scale(1.1);box-shadow:0 12px 40px rgba(37,211,102,0.45); }
-
-/* MUSIC */
-.music-btn { position:fixed;bottom:32px;right:96px;z-index:600;width:52px;height:52px;background:var(--surface);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:none;transition:transform 0.3s,background 0.3s;opacity:0;animation:fadeIn 0.6s 2.7s forwards; }
-.music-btn:hover { transform:scale(1.1); }
-.music-btn.playing { background:var(--text);border-color:var(--text); }
-.music-bars { display:flex;gap:2px;align-items:flex-end;height:16px; }
-.music-bar { width:3px;background:var(--muted);border-radius:2px;transition:background 0.3s; }
-.music-btn.playing .music-bar { background:var(--bg);animation:mbar 0.8s ease-in-out infinite alternate; }
-.music-bar:nth-child(1){height:6px;animation-delay:0s}
-.music-bar:nth-child(2){height:12px;animation-delay:0.15s}
-.music-bar:nth-child(3){height:8px;animation-delay:0.3s}
-.music-bar:nth-child(4){height:14px;animation-delay:0.1s}
-@keyframes mbar { from{transform:scaleY(0.4)}to{transform:scaleY(1.2)} }
-
-/* ANIMATIONS */
-@keyframes fadeIn { to{opacity:1} }
-@keyframes slideUp { from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)} }
-.reveal { opacity:0;transform:translateY(28px);transition:opacity 0.9s cubic-bezier(0.23,1,0.32,1),transform 0.9s cubic-bezier(0.23,1,0.32,1); }
-.reveal.visible { opacity:1;transform:translateY(0); }
-
-/* MOBILE */
-@media(max-width:768px){
-  nav{padding:18px 20px} .nav-links{display:none}
-  .hero{padding:0 20px} .hero-title{font-size:clamp(44px,13vw,72px)}
-  .stats{padding:48px 20px;grid-template-columns:1fr}
-  .services,.about,.testimonials,.blog,.contact{padding:80px 20px}
-  .services-grid,.testimonials-grid,.blog-grid{grid-template-columns:1fr}
-  .about{grid-template-columns:1fr;gap:40px}
-  .contact-title{font-size:clamp(36px,11vw,60px)}
-  footer{padding:28px 20px;flex-direction:column;gap:10px;text-align:center}
-  .divider{margin:0 20px} .scroll-indicator{left:20px;bottom:28px}
-  body{cursor:auto} .cursor,.cursor-ring{display:none}
-  .whatsapp-btn{bottom:24px;right:24px} .music-btn{bottom:24px;right:84px}
-  .blog-modal-inner{padding:32px 24px}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>yeattozunn — Freelancer</title>
+<meta name="description" content="Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarıyla markaları dijital ortamda güçlendiren freelancer." />
+<meta property="og:title" content="yeattozunn — Freelancer" />
+<meta property="og:description" content="Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka entegrasyonu." />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%23c8ff3d'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--surface:#131313;--surface-2:#1a1a1a;--border:rgba(255,255,255,.08);
+  --text:#f2f2ee;--muted:#7a7a74;--accent:#c8ff3d;--accent-ink:#0a0a0a;
+  --display:'Syne',sans-serif;--body:'Manrope',sans-serif;--mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
 }
-```
+[data-theme="light"]{
+  --bg:#f4f3ee;--surface:#e9e8e2;--surface-2:#dfded7;--border:rgba(0,0,0,.09);
+  --text:#121212;--muted:#77756d;--accent:#5b3dff;--accent-ink:#ffffff;
+}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:400;line-height:1.6;overflow-x:hidden;transition:background .5s,color .5s;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:var(--accent-ink)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{width:min(1280px,100% - 32px);margin-inline:auto}
+@media(min-width:768px){.wrap{width:min(1280px,100% - 80px)}}
 
-  </style>
+/* grain */
+body::after{content:'';position:fixed;inset:-50%;pointer-events:none;z-index:900;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:2000;background:#0a0a0a;color:#f2f2ee;display:flex;align-items:flex-end;justify-content:space-between;padding:32px;transition:transform 1s var(--ease)}
+#loader.done{transform:translateY(-100%)}
+#loader .count{font-family:var(--display);font-weight:800;font-size:clamp(80px,18vw,240px);line-height:.8;letter-spacing:-.04em}
+#loader .lname{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+
+/* cursor */
+.has-cursor,.has-cursor *{cursor:none!important}
+#cdot,#cring{position:fixed;top:0;left:0;pointer-events:none;z-index:1500;border-radius:50%;will-change:transform}
+#cdot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--accent)}
+#cring{width:40px;height:40px;margin:-20px 0 0 -20px;border:1px solid var(--text);opacity:.5;display:flex;align-items:center;justify-content:center;
+  transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background .35s,opacity .35s,border-color .35s}
+#cring span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);opacity:0;transition:opacity .2s;white-space:nowrap}
+#cring.big{width:88px;height:88px;margin:-44px 0 0 -44px;background:var(--accent);border-color:var(--accent);opacity:1}
+#cring.big span{opacity:1}
+#cring.hover{width:64px;height:64px;margin:-32px 0 0 -32px;opacity:.9}
+#cring.down{width:28px;height:28px;margin:-14px 0 0 -14px}
+@media (hover:none){#cdot,#cring{display:none}}
+
+/* progress + nav */
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:1001}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:transform .5s var(--ease)}
+nav.hide{transform:translateY(-110%)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.logo{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:8px}
+.logo i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{50%{transform:scale(.6)}}
+.links{display:flex;gap:6px;align-items:center;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:99px;padding:6px}
+.links a{font-size:14px;padding:8px 14px;border-radius:99px;transition:background .3s,color .3s}
+.links a:hover{background:var(--text);color:var(--bg)}
+#theme{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--text);color:var(--bg);font-size:16px}
+@media(max-width:720px){.links a{display:none}.hero-top .hint{display:none}}
+
+/* hero */
+#hero{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden}
+#particles{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.hero-meta{position:absolute;left:0;right:0;bottom:32px;pointer-events:none}
+.hero-meta .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.hero-meta p{max-width:420px;font-size:clamp(16px,1.6vw,19px);color:var(--muted)}
+.hero-meta p b{color:var(--text);font-weight:500}
+.rotator{display:inline-block;color:var(--accent);font-weight:600;min-width:1ch}
+.rotator::after{content:'_';animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-top{position:absolute;top:96px;left:0;right:0;pointer-events:none}
+.hero-top .wrap{display:flex;justify-content:space-between}
+.hint{display:flex;align-items:center;gap:10px}
+.hint .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* marquee */
+.marquee{overflow:hidden;border-block:1px solid var(--border);padding:22px 0;background:var(--surface)}
+.marquee .track{display:flex;width:max-content;will-change:transform}
+.marquee .item{font-family:var(--display);font-weight:700;font-size:clamp(36px,7vw,96px);letter-spacing:-.03em;line-height:1;padding-right:.4em;white-space:nowrap;display:flex;align-items:center;gap:.4em}
+.marquee .item em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--text)}
+.marquee .item .star{color:var(--accent);font-size:.6em}
+
+/* sections */
+section{position:relative}
+.sec{padding:clamp(96px,14vw,180px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:56px;flex-wrap:wrap}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,96px);line-height:.95;letter-spacing:-.04em}
+h2 .out{color:transparent;-webkit-text-stroke:1px var(--text)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.split .ch{display:inline-block;transform:translateY(110%);transition:transform .9s var(--ease)}
+.split .ln{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+.split.in .ch{transform:none}
+
+/* services */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;perspective:1200px}
+.card{position:relative;border:1px solid var(--border);border-radius:24px;background:var(--surface);padding:32px;min-height:420px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
+  transform-style:preserve-3d;transition:transform .6s var(--ease),border-color .4s;--mx:50%;--my:50%}
+.card::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;
+  background:radial-gradient(420px circle at var(--mx) var(--my),color-mix(in srgb,var(--accent) 22%,transparent),transparent 60%)}
+.card:hover{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.card:hover::before{opacity:1}
+.card .num{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.card h3{font-family:var(--display);font-size:30px;font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:12px 0;transform:translateZ(40px)}
+.card p{color:var(--muted);font-size:15px;transform:translateZ(20px)}
+.demo{height:150px;border-radius:16px;background:var(--bg);border:1px solid var(--border);position:relative;overflow:hidden;transform:translateZ(30px)}
+/* demo: code */
+.demo-code{font-family:var(--mono);font-size:12px;padding:16px;line-height:1.7;color:var(--muted);white-space:pre}
+.demo-code .k{color:var(--accent)}
+.demo-code .c{display:inline-block;width:7px;height:14px;background:var(--accent);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+/* demo: social */
+.demo-social{display:flex;align-items:center;justify-content:center;gap:28px}
+.demo-social .stat{text-align:center;font-family:var(--display);font-weight:700;font-size:28px;line-height:1}
+.demo-social .stat small{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400;letter-spacing:.1em;margin-top:6px}
+.heart{position:absolute;bottom:10px;font-size:18px;pointer-events:none;animation:float 1.6s var(--ease) forwards}
+@keyframes float{to{transform:translate(var(--dx),-140px) scale(1.4);opacity:0}}
+/* demo: ai */
+.demo-ai canvas{width:100%;height:100%;display:block}
+
+/* about */
+.about-grid{display:grid;gap:48px}
+@media(min-width:900px){.about-grid{grid-template-columns:1.6fr 1fr;align-items:start}}
+.scrub{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.6vw,48px);line-height:1.15;letter-spacing:-.02em}
+.scrub .w{opacity:.14;transition:opacity .3s}
+.scrub .w.on{opacity:1}
+.scrub .w.hl{color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.stats div{border-top:1px solid var(--border);padding-top:16px}
+.stats b{display:block;font-family:var(--display);font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1}
+.stats span{font-size:13px;color:var(--muted)}
+.pit-wrap .mono{display:flex;justify-content:space-between;margin-bottom:12px}
+#pit{position:relative;height:420px;border:1px solid var(--border);border-radius:24px;background:var(--surface);overflow:hidden;touch-action:none}
+.tag{position:absolute;top:0;left:0;padding:12px 20px;border-radius:99px;border:1px solid var(--text);background:var(--bg);font-weight:500;font-size:15px;white-space:nowrap;user-select:none;-webkit-user-select:none;will-change:transform}
+.tag.a{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tag.dragging{z-index:5;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+
+/* process (horizontal) */
+#process{height:400vh}
+#process .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+#process .sec-head{margin-bottom:40px}
+.htrack{display:flex;gap:24px;padding-left:max(16px,calc((100vw - 1280px)/2));will-change:transform}
+.step{flex:0 0 min(78vw,520px);height:min(52vh,420px);border-radius:28px;border:1px solid var(--border);background:var(--surface);padding:36px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.step .big{font-family:var(--display);font-weight:800;font-size:clamp(100px,16vw,200px);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px var(--muted);position:absolute;right:24px;top:20px;opacity:.5}
+.step h3{font-family:var(--display);font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1}
+.step p{max-width:340px;color:var(--muted);position:relative}
+.step.end{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.step.end p{color:inherit;opacity:.75}
+.step.end .big{-webkit-text-stroke-color:var(--accent-ink);opacity:.25}
+.pbar{height:2px;background:var(--border);margin-top:40px;position:relative}
+.pbar i{position:absolute;inset:0;background:var(--text);transform-origin:0;transform:scaleX(0)}
+
+/* blog */
+.posts{border-top:1px solid var(--border)}
+.post{display:grid;grid-template-columns:120px 1fr auto;gap:24px;align-items:center;padding:32px 0;border-bottom:1px solid var(--border);position:relative;transition:padding .5s var(--ease),color .3s}
+.post h3{font-family:var(--display);font-weight:600;font-size:clamp(22px,3vw,40px);letter-spacing:-.02em;line-height:1.1}
+.post p{color:var(--muted);font-size:15px;margin-top:6px}
+.post .arrow{font-size:28px;transition:transform .5s var(--ease)}
+.post:hover{padding-left:20px}
+.post:hover .arrow{transform:rotate(-45deg)}
+.posts:hover .post:not(:hover){opacity:.35}
+.post{transition:padding .5s var(--ease),opacity .4s}
+@media(max-width:700px){.post{grid-template-columns:1fr auto}.post .mono{grid-column:1/-1}}
+#preview{position:fixed;top:0;left:0;width:300px;height:200px;margin:-100px 0 0 -150px;border-radius:20px;pointer-events:none;z-index:50;overflow:hidden;transform:scale(0);transition:transform .45s var(--ease);display:grid;place-items:center}
+#preview.on{transform:scale(1)}
+#preview .pv{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:110px;color:rgba(255,255,255,.92);letter-spacing:-.05em;transition:opacity .3s}
+@media (hover:none){#preview{display:none}}
+
+/* contact */
+#contact{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 0 40px}
+.wave{font-family:var(--display);font-size:clamp(52px,13vw,200px);line-height:.9;letter-spacing:-.05em;font-weight:400;user-select:none}
+.wave .ch{display:inline-block;transition:color .3s;will-change:transform}
+.wave .ch.sp{width:.25em}
+.cta-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:56px;align-items:center}
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:22px 34px;border-radius:99px;font-weight:600;font-size:17px;border:1px solid var(--text);overflow:hidden;isolation:isolate;transition:color .45s var(--ease)}
+.btn::before{content:'';position:absolute;inset:0;background:var(--text);border-radius:inherit;transform:translateY(101%);transition:transform .5s var(--ease);z-index:-1}
+.btn:hover{color:var(--bg)}
+.btn:hover::before{transform:none}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary::before{background:var(--text)}
+.btn .in{display:inline-block;pointer-events:none}
+footer{border-top:1px solid var(--border);margin-top:120px;padding-top:28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,calc(100% + 60px));visibility:hidden;background:var(--text);color:var(--bg);padding:14px 22px;border-radius:99px;font-weight:500;z-index:1600;transition:transform .5s var(--ease)}
+#toast.on{transform:translate(-50%,0);visibility:visible}
+#totop{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#totop:hover{color:var(--text)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  #process{height:auto}#process .sticky{position:static;height:auto;padding:96px 0}
+  .htrack{flex-direction:column;padding:0 16px;transform:none!important}.step{flex-basis:auto}
+}
+</style>
 </head>
 <body>
 
-<div id="loader">
-  <div class="loader-text" id="loaderText"></div>
-  <div class="loader-line"><div class="loader-fill" id="loaderFill"></div></div>
-</div>
-
-<div id="stars"></div>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div id="loader" aria-hidden="true"><div class="count" id="count">0</div><div class="lname">yeattozunn — portfolyo</div></div>
+<div id="cdot"></div><div id="cring"><span></span></div>
+<div id="progress"></div>
+<div id="preview"><div class="pv"></div></div>
+<div id="toast">E-posta kopyalandı ✓</div>
 
 <nav id="nav">
-  <a href="#" class="nav-logo">yeattozunn</a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#services" data-tr="hizmetler" data-en="services">hizmetler</a></li>
-      <li><a href="#about" data-tr="hakkinda" data-en="about">hakkında</a></li>
-      <li><a href="#blog" data-tr="blog" data-en="blog">blog</a></li>
-      <li><a href="#contact" data-tr="iletisim" data-en="contact">iletişim</a></li>
-    </ul>
-    <div class="nav-controls">
-      <button class="ctrl-btn" id="langBtn">EN</button>
-      <button class="ctrl-btn" id="themeBtn">☾</button>
+  <div class="wrap">
+    <a href="#hero" class="logo" data-magnetic data-cursor="hover"><i></i>yeattozunn</a>
+    <div class="links">
+      <a href="#services" data-cursor="hover">hizmetler</a>
+      <a href="#about" data-cursor="hover">hakkında</a>
+      <a href="#process" data-cursor="hover">süreç</a>
+      <a href="#blog" data-cursor="hover">blog</a>
+      <a href="#contact" data-cursor="hover">iletişim</a>
+      <button id="theme" aria-label="Temayı değiştir" data-magnetic data-cursor="hover">◐</button>
     </div>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <p class="hero-eyebrow" data-tr="freelancer · dijital cozumler" data-en="freelancer · digital solutions">freelancer · dijital çözümler</p>
-  <h1 class="hero-title">
-    yeattozunn<br/>
-    <em><span id="typewriter"></span></em>
-  </h1>
-  <p class="hero-desc" data-tr="Web sitesi gelistirme, sosyal medya yonetimi ve yapay zeka araclariyla markalari dijital ortamda guclendiren freelancer." data-en="A freelancer building brands in the digital world through web development, social media management, and AI-powered tools.">
-    Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarıyla markaları dijital ortamda güçlendiren freelancer.
-  </p>
-  <div class="hero-cta">
-    <a href="#contact" class="btn-primary" data-tr="Projeyi Konusalim" data-en="Let's Talk">Projeyi Konuşalım</a>
-    <a href="#services" class="btn-secondary" data-tr="Hizmetleri Gor" data-en="See Services">Hizmetleri Gör</a>
-  </div>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    <span class="scroll-text" data-tr="asagi kaydir" data-en="scroll down">aşağı kaydır</span>
-  </div>
+<main>
+<section id="hero" data-cursor-label="tıkla">
+  <canvas id="particles" aria-label="yeattozunn"></canvas>
+  <div class="hero-top"><div class="wrap">
+    <span class="mono">freelancer · dijital çözümler</span>
+    <span class="mono hint"><span class="dot"></span>müsait · yeni projeler</span>
+  </div></div>
+  <div class="hero-meta"><div class="wrap">
+    <p>Markaları dijitalde güçlendiriyorum: <b>web siteleri</b>, <b>sosyal medya</b> ve <b>yapay zeka</b>. Şu an <span class="rotator" id="rotator"></span></p>
+    <span class="mono">fareyi gezdir · tıkla ↓</span>
+  </div></div>
 </section>
 
-<div class="stats">
-  <div class="stat reveal">
-    <div class="stat-num">2025</div>
-    <div class="stat-label" data-tr="yilindan beri" data-en="since">yılından beri</div>
-  </div>
-  <div class="stat reveal" style="transition-delay:0.1s">
-    <div class="stat-num">Yeni</div>
-    <div class="stat-label" data-tr="buyume yolculugu basliyor" data-en="the journey begins">— büyüme yolculuğu başlıyor</div>
-  </div>
-  <div class="stat reveal" style="transition-delay:0.2s">
-    <div class="stat-num">3</div>
-    <div class="stat-label" data-tr="hizmet alani" data-en="service areas">hizmet alanı</div>
-  </div>
-</div>
+<div class="marquee" aria-hidden="true"><div class="track" id="mtrack"></div></div>
 
-<section class="services" id="services">
-  <p class="section-label reveal" data-tr="hizmetler" data-en="services">hizmetler</p>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <p class="service-num">01</p>
-      <h3 class="service-title" data-tr="Web Sitesi Gelistirme" data-en="Web Development">Web Sitesi Geliştirme</h3>
-      <p class="service-desc" data-tr="Hizli, modern ve kullanici odakli web siteleri. Markani yansitan, donusum saglayan tasarimlar." data-en="Fast, modern and user-focused websites. Designs that reflect your brand and drive conversions.">Hızlı, modern ve kullanıcı odaklı web siteleri. Markanı yansıtan, dönüşüm sağlayan tasarımlar.</p>
+<section id="services" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="split">Neler<br><span class="out">yapıyorum</span></h2>
+      <span class="mono rv">(03) hizmet alanı</span>
     </div>
-    <div class="service-card reveal" style="transition-delay:0.1s">
-      <p class="service-num">02</p>
-      <h3 class="service-title" data-tr="Sosyal Medya Yonetimi" data-en="Social Media Management">Sosyal Medya Yönetimi</h3>
-      <p class="service-desc" data-tr="Icerik stratejisi, planlama ve yonetim. Platformlarda guclu ve tutarli bir varlik olusturma." data-en="Content strategy, planning and management. Building a strong and consistent presence across platforms.">İçerik stratejisi, planlama ve yönetim. Platformlarda güçlü ve tutarlı bir varlık oluşturma.</p>
-    </div>
-    <div class="service-card reveal" style="transition-delay:0.2s">
-      <p class="service-num">03</p>
-      <h3 class="service-title" data-tr="Yapay Zeka Entegrasyonu" data-en="AI Integration">Yapay Zeka Entegrasyonu</h3>
-      <p class="service-desc" data-tr="Guncel AI araclariyla projelere deger katma. Verimli, akilli ve yaratici dijital cozumler." data-en="Adding value to projects with cutting-edge AI tools. Efficient, intelligent and creative digital solutions.">Güncel AI araçlarıyla projelere değer katma. Verimli, akıllı ve yaratıcı dijital çözümler.</p>
+    <div class="cards">
+      <article class="card rv" data-tilt data-cursor="hover">
+        <div>
+          <span class="num">01 / web</span>
+          <h3>Web Sitesi<br>Geliştirme</h3>
+          <p>Hızlı, modern ve kullanıcı odaklı web siteleri. Markanı yansıtan, dönüşüm sağlayan tasarımlar.</p>
+        </div>
+        <div class="demo"><div class="demo-code" id="codeDemo"></div></div>
+      </article>
+      <article class="card rv" data-tilt data-cursor-label="beğen" id="socialCard">
+        <div>
+          <span class="num">02 / sosyal</span>
+          <h3>Sosyal Medya<br>Yönetimi</h3>
+          <p>İçerik stratejisi, planlama ve yönetim. Platformlarda güçlü ve tutarlı bir varlık oluşturma.</p>
+        </div>
+        <div class="demo demo-social">
+          <div class="stat"><span id="likes">1.204</span><small>BEĞENİ</small></div>
+          <div class="stat"><span id="reach">8.9K</span><small>ERİŞİM</small></div>
+          <div class="stat">+<span id="growth">32</span>%<small>BÜYÜME</small></div>
+        </div>
+      </article>
+      <article class="card rv" data-tilt data-cursor="hover">
+        <div>
+          <span class="num">03 / ai</span>
+          <h3>Yapay Zeka<br>Entegrasyonu</h3>
+          <p>Güncel AI araçlarıyla projelere değer katma. Verimli, akıllı ve yaratıcı dijital çözümler.</p>
+        </div>
+        <div class="demo demo-ai"><canvas id="neural"></canvas></div>
+      </article>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<section class="about" id="about">
-  <div class="about-left reveal">
-    <p class="big-text" data-tr="Dijitalde guclu olmak bir secim." data-en="Being strong digitally is a choice.">Dijitalde<br/>güçlü olmak<br/><em>bir seçim.</em></p>
-  </div>
-  <div class="about-right reveal" style="transition-delay:0.15s">
-    <p data-tr="Web sitesi gelistirme, sosyal medya yonetimi ve yapay zeka araclari kullanarak dijital projeler olusturan bir freelancerim." data-en="I'm a freelancer building digital projects using web development, social media management, and AI tools.">
-      Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarını kullanarak dijital projeler oluşturan bir freelancerım.
-    </p>
-    <p data-tr="Markalarin ve bireylerin dijital ortamda daha guclu gorunmesine yardimci olacak modern, hizli ve kullanici odakli cozumler uretirim." data-en="I create modern, fast and user-focused solutions that help brands and individuals appear stronger in the digital space.">
-      Markaların ve bireylerin dijital ortamda daha güçlü görünmesine yardımcı olacak modern, hızlı ve kullanıcı odaklı çözümler üretirim.
-    </p>
-    <p data-tr="Verimli calisma, yaratici fikirler ve guncel teknolojilerle projelere deger katmayi hedeflerim." data-en="I aim to add value to projects through efficient work, creative ideas, and up-to-date technologies.">
-      Verimli çalışma, yaratıcı fikirler ve güncel teknolojilerle projelere değer katmayı hedeflerim.
-    </p>
-    <div class="about-tags">
-      <span class="tag">web geliştirme</span>
-      <span class="tag">sosyal medya</span>
-      <span class="tag">yapay zeka</span>
-      <span class="tag">ui/ux</span>
-      <span class="tag">freelance</span>
-      <span class="tag">dijital strateji</span>
+<section id="about" class="sec" style="padding-top:0">
+  <div class="wrap about-grid">
+    <div>
+      <span class="mono" style="display:block;margin-bottom:28px">(hakkında)</span>
+      <p class="scrub" id="scrub">Dijitalde güçlü olmak bir *seçim. Web sitesi geliştirme, sosyal medya yönetimi ve yapay zeka araçlarıyla dijital projeler oluşturuyorum. Markaların ve bireylerin daha güçlü görünmesi için *modern, *hızlı ve *kullanıcı *odaklı çözümler üretiyorum.</p>
+      <div class="stats">
+        <div class="rv"><b data-count="2025">0</b><span>yılından beri</span></div>
+        <div class="rv"><b data-count="3">0</b><span>hizmet alanı</span></div>
+        <div class="rv"><b data-count="100" data-suffix="%">0</b><span>özen</span></div>
+      </div>
+    </div>
+    <div class="pit-wrap rv">
+      <div class="mono"><span>(yetenekler)</span><span>sürükle · fırlat</span></div>
+      <div id="pit" data-cursor-label="sürükle"></div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
+<section id="process">
+  <div class="sticky">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:40px">
+        <h2>Süreç<span class="out">.</span></h2>
+        <span class="mono">aşağı kaydır →</span>
+      </div>
+    </div>
+    <div class="htrack" id="htrack">
+      <div class="step"><span class="mono">adım</span><div><h3>Keşif</h3><p>Hedeflerini, kitleni ve rakiplerini dinliyorum. Projenin neden var olduğunu birlikte netleştiriyoruz.</p></div><span class="big">01</span></div>
+      <div class="step"><span class="mono">adım</span><div><h3>Tasarım</h3><p>Markana uygun bir görsel dil, akış ve içerik planı. Önce fikir, sonra piksel.</p></div><span class="big">02</span></div>
+      <div class="step"><span class="mono">adım</span><div><h3>Geliştirme</h3><p>Hızlı, erişilebilir ve her ekranda kusursuz çalışan kod. Gerektiğinde yapay zeka ile güçlendirilmiş.</p></div><span class="big">03</span></div>
+      <div class="step"><span class="mono">adım</span><div><h3>Yayın &amp; Büyüme</h3><p>Yayına alıyor, ölçüyor ve sosyal medyada sürekli büyütüyoruz.</p></div><span class="big">04</span></div>
+      <a href="#contact" class="step end" data-cursor-label="başla"><span class="mono" style="color:inherit;opacity:.7">sıra sende</span><div><h3>Hadi<br>başlayalım →</h3><p>İlk görüşme ücretsiz.</p></div><span class="big">05</span></a>
+    </div>
+    <div class="wrap"><div class="pbar"><i id="pbar"></i></div></div>
+  </div>
+</section>
 
-<section class="testimonials" id="testimonials">
-  <p class="section-label reveal" data-tr="musteri yorumlari" data-en="testimonials">müşteri yorumları</p>
-  <div class="testimonials-grid">
-    <div class="tcard reveal">
-      <p class="tcard-quote">Henüz çok yeni ama şimdiden etkileyici işler çıkarıyor. Sosyal medya içeriklerimiz hiç bu kadar düzenli olmamıştı.</p>
-      <p class="tcard-author">Ahmet K.</p>
-      <p class="tcard-role" data-tr="Kucuk Isletme Sahibi" data-en="Small Business Owner">Küçük İşletme Sahibi</p>
+<section id="blog" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="split">Son<br><span class="out">yazılar</span></h2>
+      <span class="mono rv">(03) yazı</span>
     </div>
-    <div class="tcard reveal" style="transition-delay:0.1s">
-      <p class="tcard-quote">Beklentilerimin üzerinde bir sonuç aldım. Hem hızlı hem de kaliteli çalışıyor, kesinlikle tavsiye ederim.</p>
-      <p class="tcard-author">Zeynep M.</p>
-      <p class="tcard-role" data-tr="Icerik Ureticisi" data-en="Content Creator">İçerik Üreticisi</p>
-    </div>
-    <div class="tcard reveal" style="transition-delay:0.2s">
-      <p class="tcard-quote">Web sitem tam istediğim gibi oldu. Yapay zeka araçlarını da işe katması gerçekten fark yaratıyor.</p>
-      <p class="tcard-author">Can T.</p>
-      <p class="tcard-role" data-tr="Girisimci" data-en="Entrepreneur">Girişimci</p>
+    <div class="posts">
+      <a href="#blog" class="post rv" data-pv="AI" data-bg="linear-gradient(135deg,#5b3dff,#ff3dc8)" data-cursor-label="oku">
+        <span class="mono">Mart 2025</span>
+        <div><h3>Yapay Zeka Web Tasarımını Nasıl Değiştiriyor?</h3><p>AI araçları artık sadece kod yazmakla kalmıyor; tasarım kararlarını da etkiliyor.</p></div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#blog" class="post rv" data-pv="♥" data-bg="linear-gradient(135deg,#ff6a3d,#ffcf3d)" data-cursor-label="oku">
+        <span class="mono">Şubat 2025</span>
+        <div><h3>Sosyal Medyada Tutarlılık Neden Önemli?</h3><p>Haftada bir paylaşım yapıp takipçi kazanmayı beklemek artık işe yaramıyor.</p></div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#blog" class="post rv" data-pv="01" data-bg="linear-gradient(135deg,#1b8f5a,#c8ff3d)" data-cursor-label="oku">
+        <span class="mono">Ocak 2025</span>
+        <div><h3>Freelancer Olarak Başlamak: İlk Adımlar</h3><p>2025'te freelance kariyerime başladım. Öğrendiklerimi dürüstçe paylaşıyorum.</p></div>
+        <span class="arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<section class="blog" id="blog">
-  <p class="section-label reveal" data-tr="son yazilar" data-en="latest posts">son yazılar</p>
-  <div class="blog-grid">
-    <div class="blog-card reveal" onclick="openBlog(0)">
-      <p class="blog-date">Mart 2025</p>
-      <h3 class="blog-title">Yapay Zeka Web Tasarımını Nasıl Değiştiriyor?</h3>
-      <p class="blog-excerpt">AI araçları artık sadece kod yazmakla kalmıyor; tasarım kararlarını da etkiliyor.</p>
-      <span class="blog-read">okumaya devam et →</span>
+<section id="contact">
+  <div class="wrap">
+    <span class="mono" style="display:block;margin-bottom:24px">(iletişim)</span>
+    <h2 class="wave" id="wave" aria-label="Bir fikrin mi var?">Bir fikrin|mi var?</h2>
+    <div class="cta-row">
+      <a href="mailto:yeattozunn@gmail.com" class="btn primary" id="mail" data-magnetic data-cursor-label="kopyala"><span class="in">✉ yeattozunn@gmail.com</span></a>
+      <a href="https://wa.me/905524373745" target="_blank" rel="noopener" class="btn" data-magnetic data-cursor-label="yaz"><span class="in">WhatsApp ↗</span></a>
     </div>
-    <div class="blog-card reveal" style="transition-delay:0.1s" onclick="openBlog(1)">
-      <p class="blog-date">Şubat 2025</p>
-      <h3 class="blog-title">Sosyal Medyada Tutarlılık Neden Önemli?</h3>
-      <p class="blog-excerpt">Haftada bir paylaşım yapıp takipçi kazanmayı beklemek artık işe yaramıyor.</p>
-      <span class="blog-read">okumaya devam et →</span>
-    </div>
-    <div class="blog-card reveal" style="transition-delay:0.2s" onclick="openBlog(2)">
-      <p class="blog-date">Ocak 2025</p>
-      <h3 class="blog-title">Freelancer Olarak Başlamak: İlk Adımlar</h3>
-      <p class="blog-excerpt">2025'te freelance kariyerime başladım. Öğrendiklerimi dürüstçe paylaşıyorum.</p>
-      <span class="blog-read">okumaya devam et →</span>
-    </div>
+    <footer>
+      <span class="mono">© <span id="year">2025</span> yeattozunn</span>
+      <span class="mono">İstanbul · <span id="clock">--:--</span></span>
+      <a href="#hero" id="totop" data-cursor="hover">yukarı ↑</a>
+    </footer>
   </div>
 </section>
-
-<div class="divider"></div>
-
-<section class="contact" id="contact">
-  <h2 class="contact-title reveal">
-    <span data-tr="Bir fikrin" data-en="Got an">Bir fikrin</span><br/>
-    <em><span data-tr="mi var?" data-en="idea?">mi var?</span></em>
-  </h2>
-  <a href="mailto:yeattozunn@gmail.com" class="contact-email reveal" style="transition-delay:0.2s">
-    <span>✉</span> yeattozunn@gmail.com
-  </a>
-</section>
-
-<footer>
-  <p>© 2025 yeattozunn</p>
-  <p data-tr="tum haklari saklidir" data-en="all rights reserved">tüm hakları saklıdır</p>
-</footer>
-
-<a href="https://wa.me/905524373745" target="_blank" class="whatsapp-btn" title="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
-<button class="music-btn" id="musicBtn" title="Muzik">
-  <div class="music-bars">
-    <div class="music-bar"></div>
-    <div class="music-bar"></div>
-    <div class="music-bar"></div>
-    <div class="music-bar"></div>
-  </div>
-</button>
-
-<!-- BLOG MODAL -->
-
-<div class="blog-modal" id="blogModal">
-  <div class="blog-modal-inner" id="blogModalInner">
-    <button class="modal-close" onclick="closeBlog()">✕ kapat</button>
-    <p class="modal-date" id="modalDate"></p>
-    <h2 class="modal-title" id="modalTitle"></h2>
-    <div class="modal-body" id="modalBody"></div>
-  </div>
-</div>
+</main>
 
 <script>
-  // LOADER
-  const loaderEl = document.getElementById('loader');
-  const loaderFill = document.getElementById('loaderFill');
-  const loaderText = document.getElementById('loaderText');
-  'yeattozunn'.split('').forEach((ch, i) => {
-    const s = document.createElement('span');
-    s.textContent = ch;
-    loaderText.appendChild(s);
-    setTimeout(() => s.classList.add('show'), 80 + i * 110);
-  });
-  setTimeout(() => { loaderFill.style.width = '100%'; }, 100);
-  setTimeout(() => { loaderEl.classList.add('hidden'); }, 2500);
+(() => {
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let accent = css('--accent'), textCol = css('--text');
 
-  // STARS
-  const starsEl = document.getElementById('stars');
-  const starData = [];
-  for (let i = 0; i < 120; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const sz = Math.random() * 2 + 0.4;
-    const x = Math.random() * 100;
-    const y = Math.random() * 300;
-    const spd = Math.random() * 0.25 + 0.04;
-    s.style.cssText = 'width:' + sz + 'px;height:' + sz + 'px;left:' + x + 'vw;top:' + y + 'vh;opacity:' + (Math.random() * 0.5 + 0.1);
-    starsEl.appendChild(s);
-    starData.push({ el: s, spd: spd });
+/* ---------- theme ---------- */
+const root = document.documentElement;
+try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
+const refreshColors = () => { accent = css('--accent'); textCol = css('--text'); };
+refreshColors();
+$('#theme').addEventListener('click', () => {
+  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  refreshColors();
+});
+
+/* ---------- loader ---------- */
+const loader = $('#loader'), count = $('#count');
+let started = false;
+const start = () => { if (started) return; started = true; loader.classList.add('done'); document.body.style.overflow = ''; assemble(); };
+if (reduced) { loader.remove(); }
+else {
+  document.body.style.overflow = 'hidden';
+  const t0 = performance.now(), dur = 1400;
+  (function tick(now) {
+    const p = clamp((now - t0) / dur, 0, 1);
+    count.textContent = Math.round((1 - Math.pow(1 - p, 3)) * 100);
+    if (p < 1) requestAnimationFrame(tick); else setTimeout(start, 200);
+  })(t0);
+}
+
+/* ---------- pointer state ---------- */
+const mouse = { x: innerWidth / 2, y: innerHeight / 2, active: false };
+addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; }, { passive: true });
+
+/* ---------- custom cursor ---------- */
+const dot = $('#cdot'), ring = $('#cring'), ringLabel = ring.querySelector('span');
+let rx = mouse.x, ry = mouse.y;
+if (fine) {
+  document.body.classList.add('has-cursor');
+  addEventListener('pointerdown', () => ring.classList.add('down'));
+  addEventListener('pointerup', () => ring.classList.remove('down'));
+  document.addEventListener('pointerover', e => {
+    const l = e.target.closest('[data-cursor-label]'), h = e.target.closest('[data-cursor="hover"],a,button');
+    // inner elements win over outer labelled areas
+    if (h && (!l || l.contains(h)) && h !== l && !h.hasAttribute('data-cursor-label')) { ring.className = 'hover'; ringLabel.textContent = ''; }
+    else if (l) { ring.className = 'big'; ringLabel.textContent = l.dataset.cursorLabel; }
+    else { ring.className = ''; ringLabel.textContent = ''; }
+  });
+  document.addEventListener('pointerleave', () => { dot.style.opacity = ring.style.opacity = 0; });
+  document.addEventListener('pointerenter', () => { dot.style.opacity = ring.style.opacity = ''; });
+}
+
+/* ---------- magnetic ---------- */
+const magnets = $$('[data-magnetic]');
+if (fine) magnets.forEach(el => {
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    el.style.transform = `translate(${dx * .35}px,${dy * .35}px)`;
+    const inner = el.querySelector('.in'); if (inner) inner.style.transform = `translate(${dx * .15}px,${dy * .15}px)`;
+  });
+  el.addEventListener('pointerleave', () => {
+    el.style.transition = 'transform .6s cubic-bezier(.22,1,.36,1)'; el.style.transform = '';
+    const inner = el.querySelector('.in'); if (inner) { inner.style.transition = 'transform .6s cubic-bezier(.22,1,.36,1)'; inner.style.transform = ''; }
+    setTimeout(() => { el.style.transition = ''; if (inner) inner.style.transition = ''; }, 600);
+  });
+});
+
+/* ---------- hero particles ---------- */
+const cvs = $('#particles'), ctx = cvs.getContext('2d');
+let W, H, DPR, parts = [], assembled = reduced;
+function buildParticles() {
+  DPR = Math.min(devicePixelRatio || 1, 2);
+  W = cvs.clientWidth; H = cvs.clientHeight;
+  cvs.width = W * DPR; cvs.height = H * DPR;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const off = document.createElement('canvas'), oc = off.getContext('2d');
+  off.width = W; off.height = H;
+  const word = 'yeattozunn';
+  let fs = W * .17;
+  oc.font = `800 ${fs}px Syne`;
+  const tw = oc.measureText(word).width;
+  fs *= Math.min((W * .9) / tw, (H * .34) / fs);
+  oc.font = `800 ${fs}px Syne`;
+  oc.textAlign = 'center'; oc.textBaseline = 'middle';
+  oc.fillStyle = '#fff';
+  oc.fillText(word, W / 2, H * .47);
+  const data = oc.getImageData(0, 0, W, H).data;
+  const gap = W < 600 ? 3 : W < 1200 ? 4 : 5;
+  const old = parts; parts = [];
+  for (let y = 0; y < H; y += gap) for (let x = 0; x < W; x += gap) {
+    if (data[(y * W + x) * 4 + 3] > 128) {
+      const p = old[parts.length];
+      parts.push({
+        hx: x, hy: y,
+        x: p ? p.x : (assembled ? x : Math.random() * W), y: p ? p.y : (assembled ? y : Math.random() * H),
+        vx: 0, vy: 0, s: gap * .55 + Math.random() * gap * .3
+      });
+    }
   }
+}
+let springK = assembled ? .06 : 0;
+function assemble() { assembled = true; springK = .012; }
+function shock(x, y, power) {
+  for (const p of parts) {
+    const dx = p.x - x, dy = p.y - y, d = Math.hypot(dx, dy) + .1;
+    const f = power * Math.exp(-d / 180);
+    p.vx += dx / d * f; p.vy += dy / d * f;
+  }
+}
+cvs.addEventListener('pointerdown', e => { const r = cvs.getBoundingClientRect(); shock(e.clientX - r.left, e.clientY - r.top, 38); });
+let heroVisible = true;
+new IntersectionObserver(([e]) => heroVisible = e.isIntersecting).observe(cvs);
+function drawParticles() {
+  if (!heroVisible) return;
+  if (springK < .06 && assembled) springK = Math.min(.06, springK * 1.03);
+  const r = cvs.getBoundingClientRect();
+  const mx = mouse.x - r.left, my = mouse.y - r.top, R = W < 600 ? 70 : 120;
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = textCol; ctx.beginPath();
+  const hot = [];
+  for (const p of parts) {
+    if (mouse.active) {
+      const dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy;
+      if (d2 < R * R) { const d = Math.sqrt(d2) + .1, f = (1 - d / R) * 3.2; p.vx += dx / d * f; p.vy += dy / d * f; }
+    }
+    if (!assembled) { p.vx += (Math.random() - .5) * .3; p.vy += (Math.random() - .5) * .3; }
+    p.vx += (p.hx - p.x) * springK; p.vy += (p.hy - p.y) * springK;
+    p.vx *= .86; p.vy *= .86;
+    p.x += p.vx; p.y += p.vy;
+    if (Math.abs(p.vx) + Math.abs(p.vy) > 2.2) hot.push(p); else ctx.rect(p.x, p.y, p.s, p.s);
+  }
+  ctx.fill();
+  ctx.fillStyle = accent; ctx.beginPath();
+  for (const p of hot) ctx.rect(p.x, p.y, p.s, p.s);
+  ctx.fill();
+}
+(document.fonts ? document.fonts.load('800 100px Syne').then(() => document.fonts.ready) : Promise.resolve()).then(buildParticles);
+let rsT; addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(() => { if (cvs.clientWidth !== W || Math.abs(cvs.clientHeight - H) > 120) buildParticles(); }, 200); });
 
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', function() {
-    const sy = window.scrollY;
-    starData.forEach(function(d) { d.el.style.transform = 'translateY(' + (sy * d.spd) + 'px)'; });
-    nav.classList.toggle('scrolled', sy > 20);
+/* rotator */
+const words = ['web siteleri tasarlıyorum.', 'markanı büyütüyorum.', 'yapay zeka kullanıyorum.', 'yeni projelere açığım.'];
+const rot = $('#rotator'); let wi = 0, ci = 0, del = false;
+(function type() {
+  const w = words[wi];
+  rot.textContent = w.slice(0, ci);
+  if (!del && ci === w.length) { del = true; return setTimeout(type, 1800); }
+  if (del && ci === 0) { del = false; wi = (wi + 1) % words.length; }
+  ci += del ? -1 : 1;
+  setTimeout(type, del ? 30 : 60);
+})();
+
+/* ---------- marquee ---------- */
+const mtrack = $('#mtrack');
+const mItem = '<div class="item">Web Tasarım <span class="star">✦</span> <em>Sosyal Medya</em> <span class="star">✦</span> Yapay Zeka <span class="star">✦</span> <em>Freelance</em> <span class="star">✦</span></div>';
+mtrack.innerHTML = mItem.repeat(4);
+let mx0 = 0, mDir = -1, lastY = scrollY, vel = 0;
+
+/* ---------- split headings ---------- */
+$$('.split').forEach(el => {
+  const parts = el.innerHTML.split(/<br\s*\/?>/i);
+  el.innerHTML = parts.map(html => {
+    const tmp = document.createElement('div'); tmp.innerHTML = html;
+    const walk = n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        [...n.textContent].forEach(c => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = c === ' ' ? ' ' : c; frag.appendChild(s); });
+        n.replaceWith(frag);
+      } else [...n.childNodes].forEach(walk);
+    };
+    [...tmp.childNodes].forEach(walk);
+    return `<span class="ln">${tmp.innerHTML}</span>`;
+  }).join('<br>');
+  $$('.ch', el).forEach((c, i) => c.style.transitionDelay = i * 25 + 'ms');
+});
+
+/* ---------- reveal + counters ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add('in'); io.unobserve(e.target);
+  const b = e.target.querySelector('[data-count]');
+  if (b) {
+    const to = +b.dataset.count, from = to > 1000 ? to - 40 : 0, suf = b.dataset.suffix || '', t0 = performance.now();
+    (function c(now) { const p = clamp((now - t0) / 1600, 0, 1); b.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 4))) + suf; if (p < 1) requestAnimationFrame(c); })(t0);
+  }
+}), { threshold: .15 });
+$$('.rv,.split').forEach((el, i) => { if (el.classList.contains('rv')) el.style.transitionDelay = (i % 3) * 90 + 'ms'; io.observe(el); });
+
+/* ---------- card tilt ---------- */
+if (fine) $$('[data-tilt]').forEach(card => {
+  card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+    card.style.setProperty('--mx', px * 100 + '%'); card.style.setProperty('--my', py * 100 + '%');
+    card.style.transition = 'transform .1s, border-color .4s';
+    card.style.transform = `rotateY(${(px - .5) * 14}deg) rotateX(${(.5 - py) * 14}deg)`;
   });
+  card.addEventListener('pointerleave', () => { card.style.transition = ''; card.style.transform = ''; });
+});
 
-  // CURSOR
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', function(e) {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = (mx - 4) + 'px';
-    cursor.style.top = (my - 4) + 'px';
-  });
-  (function loop() {
-    rx += (mx - rx - 18) * 0.1;
-    ry += (my - ry - 18) * 0.1;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a, button, .service-card, .tag, .tcard, .blog-card').forEach(function(el) {
-    el.addEventListener('mouseenter', function() { ring.classList.add('hovering'); });
-    el.addEventListener('mouseleave', function() { ring.classList.remove('hovering'); });
-  });
+/* demo: code typing */
+const code = [['<span class="k">const</span> site = build({', 0], ['  hızlı: <span class="k">true</span>,', 0], ['  mobil: <span class="k">true</span>,', 0], ['  marka: "senin",', 0], ['});', 0], ['site.<span class="k">yayınla</span>();', 0]];
+const codeEl = $('#codeDemo');
+const plain = code.map(([h]) => h.replace(/<[^>]+>/g, ''));
+let cl = 0, cc = 0;
+(function typeCode() {
+  if (cl >= code.length) { setTimeout(() => { cl = cc = 0; typeCode(); }, 2500); return; }
+  const done = code.slice(0, cl).map(([h]) => h).join('\n');
+  const cur = plain[cl].slice(0, cc);
+  codeEl.innerHTML = (done ? done + '\n' : '') + cur.replace(/</g, '&lt;') + '<span class="c"></span>';
+  cc++; if (cc > plain[cl].length) { cl++; cc = 0; }
+  setTimeout(typeCode, 45 + Math.random() * 60);
+})();
 
-  // REVEAL
-  const obs = new IntersectionObserver(function(es) {
-    es.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+/* demo: social hearts */
+const sc = $('#socialCard'), sdemo = sc.querySelector('.demo-social');
+const likesEl = $('#likes'), reachEl = $('#reach'), growthEl = $('#growth');
+let likes = 1204, reach = 8.9, growth = 32;
+const like = () => {
+  likes += 1 + (Math.random() * 3 | 0); reach += .1; growth = Math.min(99, growth + (Math.random() < .3 ? 1 : 0));
+  likesEl.textContent = likes.toLocaleString('tr-TR'); reachEl.textContent = reach.toFixed(1) + 'K'; growthEl.textContent = growth;
+  const h = document.createElement('span'); h.className = 'heart'; h.textContent = ['♥', '★', '✦', '♥'][Math.random() * 4 | 0];
+  h.style.left = 10 + Math.random() * 80 + '%'; h.style.color = Math.random() < .5 ? accent : textCol; h.style.setProperty('--dx', (Math.random() - .5) * 60 + 'px');
+  sdemo.appendChild(h); setTimeout(() => h.remove(), 1600);
+};
+sc.addEventListener('click', () => { for (let i = 0; i < 6; i++) setTimeout(like, i * 60); });
+let hoverSoc = false; sc.addEventListener('pointerenter', () => hoverSoc = true); sc.addEventListener('pointerleave', () => hoverSoc = false);
+setInterval(() => { if (hoverSoc || Math.random() < .25) like(); }, 260);
 
-  // TYPEWRITER
-  const phrases = {
-    tr: ['dijital dünyada iz bırakır.', 'web siteleri tasarlar.', 'markanı güçlendirir.', 'yapay zeka kullanır.'],
-    en: ['leaves a mark digitally.', 'designs websites.', 'strengthens your brand.', 'uses AI tools.']
-  };
-  let lang = 'tr', twIdx = 0, twChar = 0, twDel = false;
-  const twEl = document.getElementById('typewriter');
-  function typeStep() {
-    const word = phrases[lang][twIdx];
-    if (!twDel) {
-      twChar++;
-      twEl.textContent = word.slice(0, twChar);
-      if (twChar === word.length) { twDel = true; setTimeout(typeStep, 2200); return; }
-      setTimeout(typeStep, 65);
+/* demo: neural net */
+const nc = $('#neural'), nx = nc.getContext('2d');
+let nodes = [], NW, NH;
+function sizeNeural() {
+  const d = Math.min(devicePixelRatio || 1, 2); NW = nc.clientWidth; NH = nc.clientHeight;
+  nc.width = NW * d; nc.height = NH * d; nx.setTransform(d, 0, 0, d, 0, 0);
+  const layers = [3, 5, 5, 2]; nodes = [];
+  layers.forEach((n, li) => { for (let i = 0; i < n; i++) nodes.push({ l: li, x: (li + .5) / layers.length * NW, y: (i + .5) / n * NH, a: 0 }); });
+}
+sizeNeural(); addEventListener('resize', sizeNeural);
+const pulses = [];
+function fire() {
+  const from = nodes.filter(n => n.l === 0)[Math.random() * 3 | 0];
+  pulses.push({ from, to: nodes.filter(n => n.l === 1)[Math.random() * 5 | 0], t: 0 });
+}
+nc.parentElement.addEventListener('pointermove', () => { if (Math.random() < .5) fire(); });
+setInterval(fire, 500);
+function drawNeural() {
+  nx.clearRect(0, 0, NW, NH);
+  nx.strokeStyle = textCol; nx.globalAlpha = .12; nx.lineWidth = 1; nx.beginPath();
+  for (const a of nodes) for (const b of nodes) if (b.l === a.l + 1) { nx.moveTo(a.x, a.y); nx.lineTo(b.x, b.y); }
+  nx.stroke(); nx.globalAlpha = 1;
+  for (let i = pulses.length - 1; i >= 0; i--) {
+    const p = pulses[i]; p.t += .035;
+    if (p.t >= 1) {
+      p.to.a = 1; pulses.splice(i, 1);
+      const next = nodes.filter(n => n.l === p.to.l + 1);
+      if (next.length) for (let k = 0; k < 2; k++) pulses.push({ from: p.to, to: next[Math.random() * next.length | 0], t: 0 });
+      continue;
+    }
+    nx.fillStyle = accent; nx.beginPath(); nx.arc(lerp(p.from.x, p.to.x, p.t), lerp(p.from.y, p.to.y, p.t), 2.5, 0, 7); nx.fill();
+  }
+  for (const n of nodes) {
+    n.a *= .94;
+    nx.fillStyle = n.a > .05 ? accent : textCol; nx.globalAlpha = .35 + n.a * .65;
+    nx.beginPath(); nx.arc(n.x, n.y, 4 + n.a * 3, 0, 7); nx.fill();
+  }
+  nx.globalAlpha = 1;
+}
+
+/* ---------- about: scroll scrub text ---------- */
+const scrub = $('#scrub');
+scrub.innerHTML = scrub.textContent.trim().split(/\s+/).map(w => w.startsWith('*') ? `<span class="w hl">${w.slice(1)}</span>` : `<span class="w">${w}</span>`).join(' ');
+const sWords = $$('.w', scrub);
+
+/* ---------- physics pit ---------- */
+const pit = $('#pit');
+const skills = ['web geliştirme', 'sosyal medya', 'yapay zeka', 'ui/ux', 'freelance', 'dijital strateji', 'HTML & CSS', 'JavaScript', 'içerik', 'marka', 'SEO', 'prompt'];
+const bodies = skills.map((s, i) => {
+  const el = document.createElement('div'); el.className = 'tag' + (i % 4 === 0 ? ' a' : ''); el.textContent = s; pit.appendChild(el);
+  return { el, x: 0, y: 0, vx: 0, vy: 0, w: 0, h: 0, drag: false, rot: 0, vr: 0 };
+});
+let pitOn = false, PW, PH;
+function measurePit() { PW = pit.clientWidth; PH = pit.clientHeight; bodies.forEach(b => { b.w = b.el.offsetWidth; b.h = b.el.offsetHeight; }); }
+function dropTags() {
+  measurePit();
+  bodies.forEach((b, i) => { b.x = Math.random() * (PW - b.w); b.y = -60 - i * 50; b.vx = (Math.random() - .5) * 4; b.vy = 0; b.rot = (Math.random() - .5) * 30; });
+  pitOn = true;
+}
+new IntersectionObserver(([e]) => { if (e.isIntersecting && !pitOn) dropTags(); }, { threshold: .4 }).observe(pit);
+addEventListener('resize', () => { if (pitOn) { measurePit(); bodies.forEach(b => { b.x = clamp(b.x, 0, PW - b.w); b.y = clamp(b.y, 0, PH - b.h); }); } });
+let grab = null, gdx = 0, gdy = 0, lastPX = 0, lastPY = 0;
+pit.addEventListener('pointerdown', e => {
+  const t = e.target.closest('.tag'); if (!t) return;
+  grab = bodies.find(b => b.el === t); grab.drag = true; t.classList.add('dragging');
+  const r = pit.getBoundingClientRect(); gdx = e.clientX - r.left - grab.x; gdy = e.clientY - r.top - grab.y;
+  lastPX = e.clientX; lastPY = e.clientY; pit.setPointerCapture(e.pointerId);
+});
+pit.addEventListener('pointermove', e => {
+  if (!grab) return; const r = pit.getBoundingClientRect();
+  grab.x = clamp(e.clientX - r.left - gdx, 0, PW - grab.w); grab.y = clamp(e.clientY - r.top - gdy, -40, PH - grab.h);
+  grab.vx = (e.clientX - lastPX) * .9; grab.vy = (e.clientY - lastPY) * .9; lastPX = e.clientX; lastPY = e.clientY;
+});
+const release = () => { if (!grab) return; grab.drag = false; grab.el.classList.remove('dragging'); grab.vr = grab.vx * .5; grab = null; };
+pit.addEventListener('pointerup', release); pit.addEventListener('pointercancel', release);
+function stepPit() {
+  if (!pitOn) return;
+  for (const b of bodies) {
+    if (b.drag) continue;
+    b.vy += .55; b.vx *= .99; b.x += b.vx; b.y += b.vy; b.rot += b.vr; b.vr *= .92;
+    if (b.y + b.h > PH) { b.y = PH - b.h; b.vy *= -.35; b.vx *= .85; if (Math.abs(b.vy) < 1) b.vy = 0; b.rot *= .85; }
+    if (b.x < 0) { b.x = 0; b.vx *= -.6; } if (b.x + b.w > PW) { b.x = PW - b.w; b.vx *= -.6; }
+  }
+  for (let k = 0; k < 3; k++) for (let i = 0; i < bodies.length; i++) for (let j = i + 1; j < bodies.length; j++) {
+    const a = bodies[i], b = bodies[j];
+    const ox = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x), oy = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+    if (ox <= 0 || oy <= 0) continue;
+    const ma = a.drag ? 0 : 1, mb = b.drag ? 0 : 1, sum = ma + mb || 1;
+    if (ox < oy) {
+      const s = a.x < b.x ? -1 : 1; a.x += s * ox * ma / sum; b.x -= s * ox * mb / sum;
+      const v = (a.vx + b.vx) / 2; if (ma) a.vx = v; if (mb) b.vx = v;
     } else {
-      twChar--;
-      twEl.textContent = word.slice(0, twChar);
-      if (twChar === 0) { twDel = false; twIdx = (twIdx + 1) % phrases[lang].length; setTimeout(typeStep, 400); return; }
-      setTimeout(typeStep, 32);
+      const s = a.y < b.y ? -1 : 1; a.y += s * oy * ma / sum; b.y -= s * oy * mb / sum;
+      if (s < 0 && ma) { a.vy = Math.min(a.vy, mb ? b.vy : 0) * .5; a.vx *= .9; } if (s > 0 && mb) { b.vy = Math.min(b.vy, ma ? a.vy : 0) * .5; b.vx *= .9; }
     }
   }
-  setTimeout(typeStep, 2800);
+  for (const b of bodies) { b.rot *= .98; b.el.style.transform = `translate(${b.x}px,${b.y}px) rotate(${b.rot}deg)`; }
+}
 
-  // THEME
-  document.getElementById('themeBtn').addEventListener('click', function() {
-    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
-    this.textContent = dark ? '☀' : '☾';
-  });
+/* ---------- blog preview ---------- */
+const pv = $('#preview'), pvIn = pv.querySelector('.pv');
+let pvx = mouse.x, pvy = mouse.y, pvRot = 0;
+$$('.post').forEach(p => {
+  p.addEventListener('pointerenter', () => { pv.style.background = p.dataset.bg; pvIn.textContent = p.dataset.pv; pv.classList.add('on'); });
+  p.addEventListener('pointerleave', () => pv.classList.remove('on'));
+  p.addEventListener('click', e => { e.preventDefault(); toast('Yazılar çok yakında ✍'); });
+});
 
-  // LANGUAGE
-  document.getElementById('langBtn').addEventListener('click', function() {
-    lang = lang === 'tr' ? 'en' : 'tr';
-    this.textContent = lang === 'tr' ? 'EN' : 'TR';
-    document.querySelectorAll('[data-tr]').forEach(function(el) {
-      const v = el.getAttribute('data-' + lang);
-      if (v) el.innerHTML = v;
-    });
-    twIdx = 0; twChar = 0; twDel = false;
-  });
+/* ---------- contact wave text ---------- */
+const wave = $('#wave');
+wave.innerHTML = wave.textContent.split('|').map(line => [...line].map(c => c === ' ' ? '<span class="ch sp"> </span>' : `<span class="ch">${c}</span>`).join('')).join('<br>');
+const wChars = $$('.ch:not(.sp)', wave);
 
-  // MUSIC
-  let actx = null, gn = null, playing = false;
-  const musicBtn = document.getElementById('musicBtn');
-  function startAudio() {
-    actx = new (window.AudioContext || window.webkitAudioContext)();
-    gn = actx.createGain();
-    gn.gain.setValueAtTime(0, actx.currentTime);
-    gn.gain.linearRampToValueAtTime(0.05, actx.currentTime + 2);
-    gn.connect(actx.destination);
-    [55, 82.4, 110, 164.8, 220].forEach(function(f, i) {
-      const o = actx.createOscillator();
-      const g = actx.createGain();
-      o.type = ['sine','sine','triangle','sine','triangle'][i];
-      o.frequency.value = f;
-      g.gain.value = 0.6 / (i + 1);
-      o.connect(g); g.connect(gn); o.start();
-    });
-  }
-  musicBtn.addEventListener('click', function() {
-    if (!playing) {
-      if (!actx) startAudio();
-      else { gn.gain.cancelScheduledValues(actx.currentTime); gn.gain.linearRampToValueAtTime(0.05, actx.currentTime + 1); }
-      playing = true; musicBtn.classList.add('playing');
-    } else {
-      gn.gain.linearRampToValueAtTime(0, actx.currentTime + 1);
-      playing = false; musicBtn.classList.remove('playing');
-    }
-  });
+/* ---------- mail copy ---------- */
+const toastEl = $('#toast'); let tT;
+function toast(msg) { toastEl.textContent = msg; toastEl.classList.add('on'); clearTimeout(tT); tT = setTimeout(() => toastEl.classList.remove('on'), 2200); }
+$('#mail').addEventListener('click', e => {
+  if (!navigator.clipboard) return;
+  e.preventDefault();
+  navigator.clipboard.writeText('yeattozunn@gmail.com').then(() => toast('E-posta kopyalandı ✓'), () => location.href = 'mailto:yeattozunn@gmail.com');
+});
 
-  // BLOG MODAL
-  const blogPosts = [
-    {
-      date: 'Mart 2025',
-      title: 'Yapay Zeka Web Tasarımını Nasıl Değiştiriyor?',
-      body: '<p>Birkaç yıl öncesine kadar web tasarımı tamamen insan eliyle yapılan bir işti. Tasarımcılar saatlerce renk paletleri, tipografi seçimleri ve layout denemeleriyle uğraşırdı. Şimdi ise yapay zeka bu süreçlerin tam ortasında.</p><p><strong>AI Araçları Ne Yapıyor?</strong></p><p>Midjourney, DALL-E ve Adobe Firefly gibi araçlar görsel üretimini kolaylaştırırken; GitHub Copilot ve Cursor gibi araçlar kod yazmayı hızlandırıyor. Figmanın AI özellikleri ise tasarım sürecini baştan aşağı değiştiriyor.</p><p><strong>Freelancerlar İçin Ne Anlama Geliyor?</strong></p><p>Bu gelişmeler bazılarını korkutsa da aslında bir freelancer için muazzam bir fırsat. Daha az zamanda daha fazla iş üretebiliyorsun. Müşteriye hızlı prototip gösterebiliyorsun. Rekabet avantajı yaratabiliyorsun.</p><p>Ben de bu araçları aktif kullanıyorum ve sonuçlar gerçekten etkileyici. Anahtar nokta şu: AI araçlarını bilen freelancer, bilmeyenden her zaman bir adım önde olacak.</p>'
-    },
-    {
-      date: 'Şubat 2025',
-      title: 'Sosyal Medyada Tutarlılık Neden Önemli?',
-      body: '<p>Sosyal medyada büyümek istiyorsan tek bir kural var: tutarlı ol. Haftada bir paylaşım yapıp neden takipçi gelmiyor diye sormak maalesef işe yaramıyor.</p><p><strong>Algoritmalar Tutarlılığı Seviyor</strong></p><p>Instagram, TikTok ve LinkedIn algoritmaları düzenli içerik üreticilerini ödüllendiriyor. Haftada 3-5 gün paylaşım yapan bir hesap, ayda birkaç kez paylaşım yapan hesaba kıyasla çok daha fazla organik erişim alıyor.</p><p><strong>Nasıl Tutarlı Olunur?</strong></p><p>İçerik takvimi oluştur. Bir haftalık içerikleri tek oturumda hazırla. Zamanlama araçları kullan. Ve en önemlisi: mükemmeliyetçiliği bırak. İyi bir içerik hiç yoktan iyidir.</p><p>Sosyal medya yönetimi hizmeti verirken müşterilerime hep şunu söylüyorum: bir ay boyunca düzenli paylaşım yap, sonuçları beraber görelim. Şimdiye kadar hayal kırıklığı yaşamadık.</p>'
-    },
-    {
-      date: 'Ocak 2025',
-      title: 'Freelancer Olarak Başlamak: İlk Adımlar',
-      body: '<p>2025in başında freelance kariyerime adım attım. Dürüst olmak gerekirse, ilk başta ne yapacağımı tam olarak bilmiyordum. Ama öğrendiklerimi burada paylaşmak istedim.</p><p><strong>İlk Hata: Her Şeyi Yapmaya Çalışmak</strong></p><p>Başlangıçta web sitesi de yaparım, logo da tasarlarım, video da çekerim dedim. Bu yanlıştı. Müşteriler uzman arıyor. Odaklanmak çok daha iyi sonuç veriyor.</p><p><strong>Doğru Olan: Portfolyo Önce</strong></p><p>Müşteri olmadan önce portfolyon olmalı. Bu site tam da bunun için. Yaptığın işleri gösteren, seni anlatan bir yer olmadan müşteri ikna etmek çok zor.</p><p><strong>Şu An Neredeyim?</strong></p><p>Yeni başladım, bunu saklamıyorum. Ama her gün öğreniyorum, her gün gelişiyorum. Yolculuk yeni başladı ve heyecanlıyım. Senin projen belki de ilk büyük adımım olur.</p>'
-    }
-  ];
+/* ---------- clock ---------- */
+const clock = $('#clock'); $('#year').textContent = new Date().getFullYear();
+const tick = () => clock.textContent = new Date().toLocaleTimeString('tr-TR', { timeZone: 'Europe/Istanbul', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+tick(); setInterval(tick, 1000);
 
-  function openBlog(idx) {
-    const post = blogPosts[idx];
-    document.getElementById('modalDate').textContent = post.date;
-    document.getElementById('modalTitle').textContent = post.title;
-    document.getElementById('modalBody').innerHTML = post.body;
-    const modal = document.getElementById('blogModal');
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    setTimeout(function() {
-      document.getElementById('blogModalInner').classList.add('open');
-    }, 10);
+/* ---------- smooth anchor scroll ---------- */
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const t = $(a.getAttribute('href')); if (!t || a.classList.contains('post')) return;
+  e.preventDefault(); t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+}));
+
+/* ---------- main loop ---------- */
+const nav = $('#nav'), prog = $('#progress'), proc = $('#process'), htrack = $('#htrack'), pbar = $('#pbar'), about = $('#about');
+let navY = 0;
+function frame() {
+  const y = scrollY, dy = y - lastY; lastY = y;
+  vel = lerp(vel, dy, .15);
+
+  // cursor
+  if (fine) {
+    rx = lerp(rx, mouse.x, .18); ry = lerp(ry, mouse.y, .18);
+    dot.style.transform = `translate(${mouse.x}px,${mouse.y}px)`;
+    ring.style.transform = `translate(${rx}px,${ry}px)`;
   }
 
-  function closeBlog() {
-    document.getElementById('blogModalInner').classList.remove('open');
-    setTimeout(function() {
-      document.getElementById('blogModal').style.display = 'none';
-      document.body.style.overflow = '';
-    }, 500);
+  // nav + progress
+  const max = document.documentElement.scrollHeight - innerHeight;
+  prog.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+  if (Math.abs(y - navY) > 8) { nav.classList.toggle('hide', y > navY && y > 200); navY = y; }
+
+  // marquee
+  if (!reduced) {
+    if (dy !== 0) mDir = dy > 0 ? -1 : 1;
+    const half = mtrack.scrollWidth / 2;
+    mx0 += mDir * (1 + Math.abs(vel) * .6);
+    if (mx0 <= -half) mx0 += half; if (mx0 > 0) mx0 -= half;
+    mtrack.style.transform = `translateX(${mx0}px) skewX(${clamp(-vel * .4, -14, 14)}deg)`;
   }
 
-  document.getElementById('blogModal').addEventListener('click', function(e) {
-    if (e.target === this) closeBlog();
-  });
+  // about scrub
+  const ar = scrub.getBoundingClientRect();
+  const sp = clamp((innerHeight * .85 - ar.top) / (ar.height + innerHeight * .4), 0, 1);
+  const on = Math.floor(sp * sWords.length * 1.05);
+  sWords.forEach((w, i) => w.classList.toggle('on', i < on));
+
+  // horizontal process
+  if (!reduced) {
+    const pr = proc.getBoundingClientRect();
+    const hp = clamp(-pr.top / (pr.height - innerHeight), 0, 1);
+    const dist = htrack.scrollWidth - innerWidth + Math.max(16, (innerWidth - 1280) / 2);
+    htrack.style.transform = `translateX(${-hp * Math.max(0, dist)}px)`;
+    pbar.style.transform = `scaleX(${hp})`;
+  }
+
+  // blog preview follow
+  if (fine) {
+    const nxp = lerp(pvx, mouse.x, .12); pvRot = lerp(pvRot, clamp((mouse.x - pvx) * .3, -15, 15), .1); pvx = nxp; pvy = lerp(pvy, mouse.y, .12);
+    pv.style.left = pvx + 'px'; pv.style.top = pvy + 'px'; pv.style.rotate = pvRot + 'deg';
+  }
+
+  // contact wave
+  if (fine) for (const c of wChars) {
+    const r = c.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) break;
+    const d = Math.hypot(mouse.x - (r.left + r.width / 2), mouse.y - (r.top + r.height / 2));
+    const k = clamp(1 - d / 260, 0, 1);
+    c.style.fontWeight = Math.round(400 + k * 400);
+    c.style.transform = `translateY(${-k * 18}px)`;
+    c.style.color = k > .6 ? accent : '';
+  }
+
+  drawParticles();
+  drawNeural();
+  stepPit();
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
 </script>
-
 </body>
 </html>
