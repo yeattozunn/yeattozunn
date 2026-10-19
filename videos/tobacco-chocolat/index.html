@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Tobacco Chocolat × Splitcim</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; src: url("assets/fonts/display-latin.woff2") format("woff2"); font-weight: 300 700; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+      @font-face { font-family: "Montserrat"; src: url("assets/fonts/display-ext.woff2") format("woff2"); font-weight: 300 700; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "Cormorant Garamond"; font-style: italic; src: url("assets/fonts/ui-latin.woff2") format("woff2"); font-weight: 400 600; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+      @font-face { font-family: "Cormorant Garamond"; font-style: italic; src: url("assets/fonts/ui-ext.woff2") format("woff2"); font-weight: 400 600; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+      :root { --ink: #0d0704; --gold: #d9b46a; --cream: #f3e7d3; --panel: #f1e9dd; --teal: #154c5c; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ink); }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .sans { font-family: "Montserrat", sans-serif; text-transform: uppercase; }
+      .serif { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500; }
+
+      /* a still: blurred cover of itself behind, the sharp photo feathered into it */
+      .inner { position: absolute; inset: 0; transform-origin: 50% 50%; }
+      .bgblur { position: absolute; left: -10%; top: -10%; width: 120%; height: 120%; object-fit: cover; filter: blur(46px) brightness(0.62) saturate(1.1); }
+      .fg { position: absolute; left: 0; width: 1080px; object-fit: cover;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%); }
+      .shade-b { position: absolute; left: 0; right: 0; bottom: 0; height: 900px; background: linear-gradient(to bottom, rgba(13,7,4,0) 0%, rgba(13,7,4,0.82) 62%, rgba(13,7,4,0.94) 100%); }
+      .shade-t { position: absolute; left: 0; right: 0; top: 0; height: 640px; background: linear-gradient(to top, rgba(13,7,4,0) 0%, rgba(13,7,4,0.75) 70%, rgba(13,7,4,0.9) 100%); }
+      .vig { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 62% at 50% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%); }
+
+      /* footage: timed videos sit inside untimed wrappers so the wrapper can move */
+      .vwrap { position: absolute; overflow: hidden; }
+      .vwrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .grade-choc { filter: contrast(1.12) brightness(0.8) saturate(1.05) sepia(0.12); }
+      .smoke { mix-blend-mode: screen; filter: grayscale(1) sepia(1) saturate(2.6) hue-rotate(-36deg) brightness(0.72) contrast(1.3); }
+
+      /* type */
+      .kicker { position: absolute; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 500; letter-spacing: 0.42em; color: var(--gold); }
+      .line { position: absolute; left: 60px; right: 60px; text-align: center; color: var(--cream); }
+      .big-serif { font-size: 92px; line-height: 1.05; }
+      .mask { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+      .mask > span { display: block; }
+
+      /* A */
+      #a-kicker { top: 300px; }
+      #a-line { top: 1300px; }
+      /* B: real split screen */
+      #b-top { left: 0; top: 0; width: 1080px; height: 958px; }
+      #b-bot { left: 0; top: 962px; width: 1080px; height: 958px; }
+      #b-seam { position: absolute; left: 0; top: 958px; width: 1080px; height: 4px; background: var(--gold); transform-origin: 50% 50%; }
+      #b-band { position: absolute; left: 0; right: 0; top: 880px; height: 160px; display: flex; align-items: center; justify-content: center; }
+      #b-band .pill { padding: 14px 54px 22px; background: rgba(13,7,4,0.86); border: 2px solid var(--gold); }
+      #b-band .pill span { font-size: 78px; color: var(--cream); display: block; }
+      /* C */
+      #c-v { left: 0; top: 0; width: 1080px; height: 1920px; }
+      #c-smoke { left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0.55; }
+      #c-words { position: absolute; left: 0; right: 0; top: 640px; text-align: center; }
+      #c-words .w { display: block; overflow: hidden; color: var(--cream); font-size: 150px; font-weight: 500; letter-spacing: 0.04em; line-height: 1.12; }
+      #c-words .w > span { display: block; }
+      #c-words .w.gold { color: var(--gold); }
+      #c-dark { position: absolute; inset: 0; background: rgba(20,8,3,0.55); }
+      #c-thick { left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0; }
+      #c-thick video { filter: grayscale(1) sepia(1) saturate(3) hue-rotate(-38deg) brightness(0.62) contrast(1.35); }
+      /* D hero */
+      #d-title { position: absolute; left: 0; right: 0; top: 1320px; text-align: center; }
+      #d-title .t { font-size: 66px; font-weight: 500; letter-spacing: 0.2em; color: var(--cream); }
+      #d-title .s { margin-top: 18px; font-size: 52px; color: var(--gold); }
+      #d-smoke { left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0.35; }
+      /* E notes */
+      .note { position: absolute; left: 0; right: 0; top: 1280px; text-align: center; }
+      .note .k { font-size: 32px; font-weight: 600; letter-spacing: 0.36em; color: var(--gold); }
+      .note .rule { width: 220px; height: 2px; margin: 24px auto 26px; background: var(--gold); }
+      .note .v { font-size: 88px; line-height: 1.05; color: var(--cream); }
+      #e2-v { left: 0; top: 0; width: 1080px; height: 1920px; }
+      .num { position: absolute; left: 0; right: 0; top: 300px; text-align: center; font-size: 30px; font-weight: 500; letter-spacing: 0.42em; color: var(--gold); }
+      /* F */
+      #f-line { top: 270px; }
+      #f-line .big-serif { font-size: 96px; }
+      /* G end */
+      #panel { position: absolute; left: 0; top: 1150px; width: 1080px; height: 770px; background: var(--panel); }
+      #panel .edge { position: absolute; left: 0; top: 0; width: 100%; height: 4px; background: var(--gold); }
+      #panel .logo { position: absolute; left: 330px; top: 52px; width: 420px; height: 160px; background: var(--teal);
+        -webkit-mask: url("assets/img/splitcim_wordmark.png") center / contain no-repeat; mask: url("assets/img/splitcim_wordmark.png") center / contain no-repeat; }
+      #panel .l1 { position: absolute; left: 0; right: 0; top: 232px; text-align: center; font-size: 30px; font-weight: 600; letter-spacing: 0.3em; color: var(--teal); }
+      #panel .l2 { position: absolute; left: 0; right: 0; top: 270px; text-align: center; font-size: 70px; color: var(--teal); }
+      #g-title { position: absolute; left: 0; right: 0; top: 1040px; text-align: center; font-size: 46px; font-weight: 500; letter-spacing: 0.22em; color: var(--cream); }
+
+      #grain { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 60; }
+      #grain .tex { position: absolute; left: -300px; top: -300px; width: 1680px; height: 2520px; opacity: 0.1; mix-blend-mode: overlay;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; }
+      .z1 { z-index: 1; } .z2 { z-index: 2; } .z3 { z-index: 3; } .z4 { z-index: 4; } .z5 { z-index: 5; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+
+      <!-- A 0–1.51 · the tobacco leaf (official ingredient still) -->
+      <section id="a" class="clip z1" data-start="0" data-duration="1.51" data-track-index="1">
+        <div class="inner">
+          <img class="bgblur" src="assets/press/ingredient_leaf.jpg" alt="" />
+          <img class="fg" src="assets/press/ingredient_leaf.jpg" style="top: 285px; height: 1349px" alt="Tütün yaprağı" />
+        </div>
+        <div class="shade-b"></div>
+        <div class="vig"></div>
+        <div id="a-kicker" class="kicker sans"><span class="mask"><span>Tom Ford · Private Blend</span></span></div>
+        <div id="a-line" class="line serif big-serif"><span class="mask"><span>Kavrulmuş tütün yaprağı,</span></span></div>
+      </section>
+
+      <!-- B 1.51–2.98 · split screen: chocolate chunks over pouring chocolate -->
+      <div id="b-top" class="vwrap z1"><video id="b-top-v" class="grade-choc" src="assets/footage/41121.mp4" data-start="1.51" data-duration="1.47" data-media-start="1.2" data-track-index="2" muted playsinline></video></div>
+      <div id="b-bot" class="vwrap z1"><video id="b-bot-v" class="grade-choc" src="assets/footage/41126.mp4" data-start="1.51" data-duration="1.47" data-media-start="3" data-track-index="3" muted playsinline></video></div>
+      <section id="b" class="clip z2" data-start="1.51" data-duration="1.47" data-track-index="4">
+        <div id="b-seam"></div>
+        <div id="b-band"><div class="pill serif"><span class="mask"><span>ve bitter çikolata.</span></span></div></div>
+      </section>
+
+      <!-- C 2.98–4.97 · build: pouring chocolate, warm smoke, three words on three beats -->
+      <div id="c-v" class="vwrap z1"><video id="c-v-v" class="grade-choc" src="assets/footage/41126.mp4" data-start="2.98" data-duration="1.99" data-media-start="7" data-track-index="2" muted playsinline></video></div>
+      <div id="c-smoke" class="vwrap z2"><video id="c-smoke-v" class="smoke" src="assets/footage/1968.mp4" data-start="2.98" data-duration="1.99" data-media-start="2" data-track-index="3" muted playsinline></video></div>
+      <section id="c" class="clip z3" data-start="2.98" data-duration="1.99" data-track-index="4">
+        <div id="c-dark"></div>
+        <div class="vig"></div>
+        <div id="c-words" class="sans">
+          <span class="w"><span>Tom Ford'un</span></span>
+          <span class="w gold"><span>yeni</span></span>
+          <span class="w"><span>kokusu</span></span>
+        </div>
+      </section>
+      <div id="c-thick" class="vwrap z4"><video id="c-thick-v" class="smoke" src="assets/footage/1966.mp4" data-start="4.2" data-duration="0.77" data-media-start="6" data-track-index="5" muted playsinline></video></div>
+
+      <!-- D 4.97–7.43 · the drop: official key visual -->
+      <section id="d" class="clip z1" data-start="4.97" data-duration="2.46" data-track-index="1">
+        <div class="inner">
+          <img class="bgblur" src="assets/press/kv_leaf_choc.webp" alt="" />
+          <img class="fg" src="assets/press/kv_leaf_choc.webp" style="top: 200px; height: 1227px" alt="Tom Ford Tobacco Chocolat" />
+        </div>
+        <div class="shade-b"></div>
+        <div class="vig"></div>
+        <div id="d-title">
+          <div class="t sans mask"><span>Tobacco Chocolat</span></div>
+          <div class="s serif mask"><span>Eau de Parfum</span></div>
+        </div>
+      </section>
+      <div id="d-smoke" class="vwrap z2"><video id="d-smoke-v" class="smoke" src="assets/footage/1968.mp4" data-start="4.97" data-duration="2.46" data-media-start="7" data-track-index="5" muted playsinline></video></div>
+
+      <!-- E1 7.43–8.43 · top notes over the amber key visual -->
+      <section id="e1" class="clip z1" data-start="7.43" data-duration="1" data-track-index="1">
+        <div class="inner">
+          <img class="bgblur" src="assets/press/kv_amber.jpg" alt="" />
+          <img class="fg" src="assets/press/kv_amber.jpg" style="top: 40px; height: 1349px" alt="Tom Ford Tobacco Chocolat" />
+        </div>
+        <div class="shade-b"></div>
+        <div class="note"><div class="k sans">Üst notalar</div><div class="rule"></div><div class="v serif mask"><span>Portakal · Akigalawood</span></div></div>
+      </section>
+
+      <!-- E2 8.43–9.43 · heart notes over real chocolate -->
+      <div id="e2-v" class="vwrap z1"><video id="e2-v-v" class="grade-choc" src="assets/footage/41117.mp4" data-start="8.43" data-duration="1" data-media-start="5" data-track-index="2" muted playsinline></video></div>
+      <section id="e2" class="clip z2" data-start="8.43" data-duration="1" data-track-index="4">
+        <div class="shade-b"></div>
+        <div class="shade-t"></div>
+        <div class="note"><div class="k sans">Kalp notaları</div><div class="rule"></div><div class="v serif mask"><span>Bitter Çikolata · Kakao</span></div></div>
+      </section>
+
+      <!-- E3 9.43–10.41 · base notes over the official still life -->
+      <section id="e3" class="clip z1" data-start="9.43" data-duration="0.98" data-track-index="1">
+        <div class="inner">
+          <img class="bgblur" src="assets/press/gst_square.jpg" alt="" />
+          <img class="fg" src="assets/press/gst_square.jpg" style="top: 240px; height: 1080px" alt="Tom Ford Tobacco Chocolat" />
+        </div>
+        <div class="shade-b"></div>
+        <div class="note"><div class="k sans">Dip notalar</div><div class="rule"></div><div class="v serif mask"><span>Tütün · Paçuli · Peru Balsamı</span></div></div>
+      </section>
+
+      <!-- F 10.41–12.89 · next to Tobacco Vanille -->
+      <section id="f" class="clip z1" data-start="10.41" data-duration="2.48" data-track-index="1">
+        <div class="inner">
+          <img class="bgblur" src="assets/press/duo_vanille.webp" alt="" />
+          <img class="fg" src="assets/press/duo_vanille.webp" style="top: 520px; height: 1080px" alt="Tobacco Chocolat ve Tobacco Vanille" />
+        </div>
+        <div class="shade-t"></div>
+        <div id="f-line" class="line serif">
+          <div class="big-serif mask"><span>Tobacco Vanille'in</span></div>
+          <div class="big-serif mask" style="color: var(--gold)"><span>karanlık kardeşi.</span></div>
+        </div>
+      </section>
+
+      <!-- G 12.89–15 · Splitcim: the frame splits, the cream panel rises -->
+      <section id="g" class="clip z1" data-start="12.89" data-duration="2.11" data-track-index="1">
+        <div class="inner">
+          <img class="bgblur" src="assets/press/kv_amber.jpg" alt="" />
+          <img class="fg" src="assets/press/kv_amber.jpg" style="top: -40px; height: 1349px" alt="Tom Ford Tobacco Chocolat" />
+        </div>
+        <div class="shade-b" style="height: 700px; bottom: 770px"></div>
+        <div id="g-title" class="sans mask"><span>Tobacco Chocolat</span></div>
+        <div id="panel">
+          <div class="edge"></div>
+          <div class="logo" role="img" aria-label="Splitcim"></div>
+          <div class="l1 sans">Dekant seçenekleriyle</div>
+          <div class="l2 serif mask"><span>şimdi Splitcim'de</span></div>
+        </div>
+      </section>
+
+      <div id="grain"><div class="tex"></div></div>
+      <audio id="music" src="assets/audio/hazy-after-hours.wav" data-start="0" data-duration="15" data-track-index="9" data-volume="1"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const rise = (sel, t, d = 0.7, stagger = 0) =>
+        tl.fromTo(sel, { yPercent: 115 }, { yPercent: 0, duration: d, ease: "expo.out", stagger }, t);
+      const soft = (sel, t, d = 0.6) =>
+        tl.fromTo(sel, { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: d, ease: "power2.out" }, t);
+
+      tl.fromTo("#grain .tex", { x: 0, y: 0 }, { x: -230, y: 170, duration: 15, ease: "steps(360)" }, 0);
+
+      // A — leaf: slow push, kicker + line
+      tl.fromTo("#a .inner", { scale: 1.12 }, { scale: 1.02, duration: 1.6, ease: "power1.out" }, 0);
+      rise("#a-kicker .mask > span", 0.05, 0.8);
+      rise("#a-line .mask > span", 0.35, 0.8);
+
+      // B — split screen: halves slide in against each other, seam draws
+      tl.fromTo("#b-top", { yPercent: -18 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, 1.51);
+      tl.fromTo("#b-bot", { yPercent: 18 }, { yPercent: 0, duration: 0.7, ease: "expo.out" }, 1.51);
+      tl.fromTo("#b-seam", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 1.51);
+      tl.fromTo("#b-band .pill", { scaleX: 0.6, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.5, ease: "expo.out" }, 1.75);
+      rise("#b-band .mask > span", 1.85, 0.6);
+
+      // C — the build: slow push into the pour, words land on the beats, smoke swallows the frame
+      tl.fromTo("#c-v", { scale: 1.0 }, { scale: 1.12, duration: 2.0, ease: "none" }, 2.98);
+      rise("#c-words .w:nth-child(1) > span", 2.98, 0.55);
+      rise("#c-words .w:nth-child(2) > span", 3.46, 0.55);
+      rise("#c-words .w:nth-child(3) > span", 3.98, 0.55);
+      tl.fromTo("#c-thick", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1.0, duration: 0.77, ease: "power2.in" }, 4.2);
+      tl.to("#c-words", { opacity: 0, filter: "blur(12px)", duration: 0.45, ease: "power2.in" }, 4.45);
+
+      // D — hero on the drop
+      tl.fromTo("#d .inner", { scale: 1.16 }, { scale: 1.0, duration: 2.5, ease: "expo.out" }, 4.97);
+      rise("#d-title .t > span", 5.35, 0.8);
+      rise("#d-title .s > span", 5.6, 0.8);
+
+      // E — notes, one per two beats
+      tl.fromTo("#e1 .inner", { scale: 1.08, y: 0 }, { scale: 1.0, y: -20, duration: 1.0, ease: "power1.out" }, 7.43);
+      soft("#e1 .note .k", 7.47, 0.4); rise("#e1 .note .v > span", 7.52, 0.55);
+      tl.fromTo("#e2-v", { scale: 1.12 }, { scale: 1.0, duration: 1.0, ease: "power1.out" }, 8.43);
+      soft("#e2 .note .k", 8.47, 0.4); rise("#e2 .note .v > span", 8.52, 0.55);
+      tl.fromTo("#e3 .inner", { scale: 1.1 }, { scale: 1.0, duration: 1.0, ease: "power1.out" }, 9.43);
+      soft("#e3 .note .k", 9.47, 0.4); rise("#e3 .note .v > span", 9.52, 0.55);
+
+      // F — the sibling line
+      tl.fromTo("#f .inner", { scale: 1.0, x: 0 }, { scale: 1.08, x: -20, duration: 2.5, ease: "none" }, 10.41);
+      rise("#f-line .mask:nth-child(1) > span", 10.5, 0.8);
+      rise("#f-line .mask:nth-child(2) > span", 10.92, 0.8);
+
+      // G — Splitcim: the panel splits the frame from below
+      tl.fromTo("#g .inner", { scale: 1.06 }, { scale: 1.0, duration: 2.1, ease: "power1.out" }, 12.89);
+      tl.fromTo("#panel", { yPercent: 100 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 12.89);
+      rise("#g-title > span", 13.1, 0.7);
+      tl.fromTo("#panel .logo", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, 13.31);
+      soft("#panel .l1", 13.6, 0.5);
+      rise("#panel .l2 > span", 13.82, 0.7);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
