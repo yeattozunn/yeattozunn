@@ -1,0 +1,23 @@
+{
+  "name": "yeattozunn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeattozunn/yeattozunn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yeattozunn/yeattozunn/issues"
+  },
+  "homepage": "https://github.com/yeattozunn/yeattozunn#readme",
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}
