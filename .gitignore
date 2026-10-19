@@ -1,2 +1,8 @@
 node_modules/
 out/
+.agents/
+.claude/
+skills-lock.json
+videos/*/snaps*/
+videos/*/.hyperframes/
+videos/*/node_modules/
