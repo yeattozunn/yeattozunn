@@ -15,6 +15,8 @@ Bu repo, Higgsfield API ile üretilen AI videoları içeriyor. Kullanıcıyla T�
 - Fiyatı üretmeden önce `POST /estimate/<endpoint>` ile kontrol et.
 
 ## Görsel tarzı (AI gibi durmasın)
+**Kullanıcıya verdiğin her görsel promptu baştan doğal ve gerçekçi yazılmalı.** Aşağıdaki kuralların hepsi her promptta uygulanır; kullanıcının "AI duruyor" demesini bekleme. Prompt "Candid behind-the-scenes still from a low-budget 1990s ... TV series" ile başlar; kimse kameraya bakmaz, ürün doğal kullanılır, karakter işine odaklıdır, her şey odaktadır.
+
 Görsel promptlarının sonuna bu stil cümlesi eklenir (dönem/yer sahneye göre değişir):
 ```
 still frame from a low-budget 1990s historical TV series, shot on worn 16mm film, flat daylight, slightly overexposed, muted washed-out colors, soft focus, visible film grain and dust, off-center imperfect framing, crowded background with extras, worn and dirty costumes, ordinary faces with wrinkles, sweat and bad teeth, motion blur on moving people, not cinematic, not polished, horizontal 4:3.
