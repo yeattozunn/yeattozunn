@@ -2,6 +2,9 @@
 
 Bu repo, Higgsfield API ile üretilen AI videoları içeriyor. Kullanıcıyla Türkçe konuş.
 
+## Hedef kitle
+- Videolar **dünya çapında** izlenecek. Türkiye'ye özgü şeyler kullanma (çay bardağı, simit, Yemeksepeti, Türk dizisi, Türkçe yazı). Diyalogsuz, her kültürün anlayacağı görsel şakalar ve global markalar (McDonald's, Apple, IKEA, Coca-Cola).
+
 ## Para ve onay
 - Kredi harcayan hiçbir şeyi (görsel ya da video üretimi) kullanıcının açık onayı olmadan yapma. Önce ne üreteceğini ve kaç dolar tutacağını söyle, "tamam" bekle.
 - Kullanıcı bir bütçe verirse (ör. "en fazla 0,60 $") onu aşma.
