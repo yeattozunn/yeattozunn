@@ -34,7 +34,7 @@ still frame from a low-budget 1990s historical TV series, shot on worn 16mm film
 - Gerçek ürünler kullan: MacBook, iPhone, AirPods, Coca-Cola, Trendyol Go vb.
 
 ## İkinci tarz: "Simli Gece" (Kırmızı Montlu Adam serisi)
-Kullanıcının çok beğendiği tarz (telefon kulübesi görseli). Parlama neon/hale DEĞİL, simli kırağı ve yıldız parlamaları. Ünlü tarihi sahneler bu tarzla çalışmıyor; sade, ıssız, gece mekânları kullan. Referansları birebir kopyalama, yeni sahneler yaz.
+Kullanıcının çok beğendiği tarz (telefon kulübesi görseli). Parlama neon/hale DEĞİL, simli kırağı ve yıldız parlamaları. Arka plan "dolu" istense bile çok öğe yazma: flaş sadece önü aydınlatır, arka plandaki öğeler karanlıkta ve siste yarı görünür siluetler olmalı; aksi halde görüntü dijital resim / oyun posterine dönüşüyor. Promptta "real photograph, not digital art, not an illustration" yaz. Ünlü tarihi sahneler bu tarzla çalışmıyor; sade, ıssız, gece mekânları kullan. Referansları birebir kopyalama, yeni sahneler yaz.
 ```
 Grainy early-2000s flash photo at night, [SAHNE], a lone man [EYLEM], his puffy jacket made entirely of glittering red frost crystals and tiny red sparkles catching the flash, [ZEMİN] dusted with violet glitter, four-point star glints in the air. Deep navy shadows, lavender-violet highlights, the red jacket as the only bright color, centered simple composition, soft vignette, low-resolution digital camera look, real textures, no smooth neon glow, horizontal 4:3. No text, no watermark.
 ```
