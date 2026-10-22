@@ -33,6 +33,12 @@ still frame from a low-budget 1990s historical TV series, shot on worn 16mm film
 - Ürünleri tam model adıyla ve tanınır detayıyla yaz (ör. "a real Apple iPhone 15 Pro in natural titanium, triple camera bump visible"); "old iPhone" gibi belirsiz ifadeler eski tuşlu telefona dönüşüyor.
 - Gerçek ürünler kullan: MacBook, iPhone, AirPods, Coca-Cola, Trendyol Go vb.
 
+## İkinci tarz: "Simli Gece" (Kırmızı Montlu Adam serisi)
+Kullanıcının çok beğendiği tarz (telefon kulübesi görseli). Parlama neon/hale DEĞİL, simli kırağı ve yıldız parlamaları. Ünlü tarihi sahneler bu tarzla çalışmıyor; sade, ıssız, gece mekânları kullan. Referansları birebir kopyalama, yeni sahneler yaz.
+```
+Grainy early-2000s flash photo at night, [SAHNE], a lone man [EYLEM], his puffy jacket made entirely of glittering red frost crystals and tiny red sparkles catching the flash, [ZEMİN] dusted with violet glitter, four-point star glints in the air. Deep navy shadows, lavender-violet highlights, the red jacket as the only bright color, centered simple composition, soft vignette, low-resolution digital camera look, real textures, no smooth neon glow, horizontal 4:3. No text, no watermark.
+```
+
 ## Video kuralları (kullanıcının istekleri)
 - İnsan ve hayvan hareketleri doğal olsun: gerçekçi ağırlık, duraksamalar, morph yok.
 - Mimikler küçük ve doğal olsun: "kaşını hafifçe kaldırıyor", "gözlerini kısıyor", "iç çekiyor", "hafifçe sırıtıyor". Abartılı ifadeler (çılgınca gülme, avaz avaz bağırma) yazma. Tepki planlarını yakın çek.
