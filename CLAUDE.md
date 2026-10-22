@@ -34,6 +34,7 @@ still frame from a low-budget 1990s historical TV series, shot on worn 16mm film
 - Mimikler küçük ve doğal olsun: "kaşını hafifçe kaldırıyor", "gözlerini kısıyor", "iç çekiyor", "hafifçe sırıtıyor". Abartılı ifadeler (çılgınca gülme, avaz avaz bağırma) yazma. Tepki planlarını yakın çek.
 - Kamera hep sabit kalmasın; doğal el kamerası hareketi, açı değiştirme, zoom in / zoom out.
 - Etraftaki olaylar kamerayı etkilesin (ör. ağır bir adım ya da çarpma anında kamera titrer).
+- **Kullanıcının favori yöntemi:** tek görsel + Kling 3.0 Standard multi-shot, 10-12 saniye, 4 plan (geniş → ürün detayı → tepki → geri çekilen final). ~0,42-0,50 $. Yeni fikirlerde önce bunu öner.
 - Uygunsa aynı anı farklı açıdan göster: Kling multi-shot, sahne başı 3 saniye = 2 s geniş plan + 1 s ikinci açı.
 - **İkinci açı tercihen ürün detay planı (insert) olsun:** ekran, kutu, logo, para, kutunun açılması gibi şakayı "satan" yakın plan.
 - **Tepki planları ekle:** bazı sahnelerin ikinci açısı olayı izleyen birinin şaşkın yüzü olsun.
