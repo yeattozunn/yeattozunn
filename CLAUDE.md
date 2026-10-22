@@ -20,10 +20,12 @@ Görsel promptlarının sonuna bu stil cümlesi eklenir (dönem/yer sahneye gör
 still frame from a low-budget 1990s historical TV series, shot on worn 16mm film, flat daylight, slightly overexposed, muted washed-out colors, soft focus, visible film grain and dust, off-center imperfect framing, crowded background with extras, worn and dirty costumes, ordinary faces with wrinkles, sweat and bad teeth, motion blur on moving people, not cinematic, not polished, horizontal 4:3.
 ```
 - "golden hour", "cinematic", dramatik ışık huzmesi, kahramanca poz gibi ifadeler kullanma; görüntüyü fazla AI gösteriyor.
+- AI görünümünü artıran diğer şeyler: kameraya poz veren / ürünü kameraya gösteren karakter, herkesin kameraya bakması, bulanık arka plan (bokeh), parlayan neon ekranlar, kusursuz kostüm. Bunun yerine: kimse kameraya bakmıyor, ürün doğal kullanılıyor, her şey odakta (deep focus), ekranlar soluk.
 - Gerçek ürünler kullan: MacBook, iPhone, AirPods, Coca-Cola, Trendyol Go vb.
 
 ## Video kuralları (kullanıcının istekleri)
 - İnsan ve hayvan hareketleri doğal olsun: gerçekçi ağırlık, duraksamalar, morph yok.
+- Mimikler küçük ve doğal olsun: "kaşını hafifçe kaldırıyor", "gözlerini kısıyor", "iç çekiyor", "hafifçe sırıtıyor". Abartılı ifadeler (çılgınca gülme, avaz avaz bağırma) yazma. Tepki planlarını yakın çek.
 - Kamera hep sabit kalmasın; doğal el kamerası hareketi, açı değiştirme, zoom in / zoom out.
 - Etraftaki olaylar kamerayı etkilesin (ör. ağır bir adım ya da çarpma anında kamera titrer).
 - Uygunsa aynı anı farklı açıdan göster: Kling multi-shot, sahne başı 3 saniye = 2 s geniş plan + 1 s ikinci açı.
