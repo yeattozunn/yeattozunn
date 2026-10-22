@@ -23,6 +23,7 @@ still frame from a low-budget 1990s historical TV series, shot on worn 16mm film
 ```
 - "golden hour", "cinematic", dramatik ışık huzmesi, kahramanca poz gibi ifadeler kullanma; görüntüyü fazla AI gösteriyor.
 - AI görünümünü artıran diğer şeyler: kameraya poz veren / ürünü kameraya gösteren karakter, herkesin kameraya bakması, bulanık arka plan (bokeh), parlayan neon ekranlar, kusursuz kostüm. Bunun yerine: kimse kameraya bakmıyor, ürün doğal kullanılıyor, her şey odakta (deep focus), ekranlar soluk.
+- **Plastik AI dokusu kesinlikle olmasın** (kullanıcı bundan nefret ediyor). Her görsel promptuna ekle: "real skin texture with visible pores, blemishes and uneven skin tone, real worn materials, no airbrushed, waxy or plastic-looking skin or surfaces". Her video promptuna ekle: "keep real skin pores and film grain, no smoothing, no plastic or waxy look". Kurguda her videoya gren ekle; Kling'in yakın planlarda pürüzsüzleştirdiği yüzleri gren bastırır.
 - Renkler canlı olmasın: "heavily desaturated, faded low-contrast color, muddy grey-brown palette" gibi ifadeler mutlaka olsun.
 - Görselde hiçbir yazı olmasın: "screenshot", "TV documentary", "VHS", "REC" gibi kelimeler kullanma (model ekrana başlık, REC ve tarih yazıyor). Her promptun sonuna "no text, no captions, no timestamp, no watermark" ekle.
 - Promptlar kısa ve sade olsun; uzun kural listeleri yerine 3-4 net cümle.
