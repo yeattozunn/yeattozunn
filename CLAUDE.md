@@ -26,6 +26,7 @@ still frame from a low-budget 1990s historical TV series, shot on worn 16mm film
 - Renkler canlı olmasın: "heavily desaturated, faded low-contrast color, muddy grey-brown palette" gibi ifadeler mutlaka olsun.
 - Görselde hiçbir yazı olmasın: "screenshot", "TV documentary", "VHS", "REC" gibi kelimeler kullanma (model ekrana başlık, REC ve tarih yazıyor). Her promptun sonuna "no text, no captions, no timestamp, no watermark" ekle.
 - Promptlar kısa ve sade olsun; uzun kural listeleri yerine 3-4 net cümle.
+- Ürünleri tam model adıyla ve tanınır detayıyla yaz (ör. "a real Apple iPhone 15 Pro in natural titanium, triple camera bump visible"); "old iPhone" gibi belirsiz ifadeler eski tuşlu telefona dönüşüyor.
 - Gerçek ürünler kullan: MacBook, iPhone, AirPods, Coca-Cola, Trendyol Go vb.
 
 ## Video kuralları (kullanıcının istekleri)
