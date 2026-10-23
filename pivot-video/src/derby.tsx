@@ -12,7 +12,7 @@ import {
 } from "remotion";
 import { Caption, Count, Crest, Drop, FadeIn, Grain, Meta, PivotMark, Stage } from "./parts";
 import { C, display, F, mono } from "./theme";
-import { DERBY_CAPTIONS, VO_OFFSET } from "./derbyCaptions";
+import { DERBY_CAPTIONS } from "./derbyCaptions";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const PAD = 90;
@@ -595,8 +595,7 @@ export const DerbyReel: React.FC = () => (
     <Captions />
     <Grain />
     <Audio src={staticFile("score-derby.wav")} volume={0.45} />
-    <Sequence from={Math.round(VO_OFFSET * FPS)}>
-      <Audio src={staticFile("voice-derby.mp3")} />
-    </Sequence>
+    {/* voice-derby-fit.wav already carries the VO offset: each phrase sits at its caption time (scripts/fit_voice.py) */}
+    <Audio src={staticFile("voice-derby-fit.wav")} />
   </AbsoluteFill>
 );
