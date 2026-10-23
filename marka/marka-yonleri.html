@@ -1,0 +1,194 @@
+<title>Marka Yönleri</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Archivo:wght@400;600;800&family=Unbounded:wght@500;800&family=IBM+Plex+Mono:wght@400;600&family=Doto:wght@700;900&family=Rubik:wght@400;600;800&family=Instrument+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: page header + three brand directions stacked; each = identity column + 9:16 reel mock */
+:root {
+  --bg: #f3f4f1; --fg: #15181a; --muted: #5d6468; --line: #d6d9d4; --card: #ffffff; --chip: #e7e9e4;
+  --f-ui: "Instrument Sans", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111416; --fg: #eceeea; --muted: #9aa2a6; --line: #2a3033; --card: #181c1f; --chip: #22282b; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #111416; --fg: #eceeea; --muted: #9aa2a6; --line: #2a3033; --card: #181c1f; --chip: #22282b; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--f-ui); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+header h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; margin: 0 0 10px; text-wrap: balance; letter-spacing: -0.01em; }
+header p { margin: 0; color: var(--muted); max-width: 62ch; }
+.dir { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 32px; align-items: start; }
+@media (max-width: 760px) { .dir { grid-template-columns: 1fr; padding: 20px; } .reel { justify-self: center; } }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.ident { display: grid; gap: 22px; min-width: 0; }
+.lockup { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.lockup svg { width: 64px; height: 64px; flex: none; border-radius: 12px; }
+.name { font-size: 40px; line-height: 1; }
+.idea { margin: 0; max-width: 60ch; }
+.row { display: grid; gap: 8px; }
+.sw { display: flex; gap: 8px; flex-wrap: wrap; }
+.sw span { display: grid; gap: 4px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+.sw i { display: block; width: 52px; height: 40px; border-radius: 8px; border: 1px solid var(--line); }
+.types { display: grid; gap: 4px; }
+.types div { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.types small { font-family: var(--f-mono); font-size: 11px; color: var(--muted); min-width: 120px; }
+ul.notes { margin: 0; padding-left: 18px; color: var(--muted); }
+ul.notes li { margin: 2px 0; }
+
+/* reel mocks: each direction paints its own fixed colors on purpose */
+.reel { width: 270px; max-width: 100%; aspect-ratio: 9 / 16; border-radius: 22px; overflow: hidden; position: relative; padding: 26px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; }
+.reel .handle { position: absolute; left: 20px; bottom: 18px; display: flex; gap: 8px; align-items: center; font-size: 12px; }
+.reel .handle b { width: 22px; height: 22px; border-radius: 50%; display: inline-block; }
+.reel .sub { position: absolute; left: 0; right: 0; bottom: 56px; text-align: center; font-size: 14px; font-weight: 600; }
+
+/* A — DOKSAN */
+.a .name { font-family: "Big Shoulders Display", Impact, sans-serif; font-weight: 900; letter-spacing: .02em; }
+.ra { background: radial-gradient(120% 80% at 50% 0%, #24433a 0%, #17302a 55%, #10221d 100%); color: #f2efe6; font-family: "Archivo", sans-serif; }
+.ra h3 { font-family: "Big Shoulders Display", Impact, sans-serif; font-weight: 900; font-size: 38px; line-height: .95; margin: 0; text-transform: uppercase; }
+.ra h3 em { font-style: normal; color: #ffd23f; }
+.ra .sub { color: #f2efe6; }
+
+/* B — OLASI */
+.b .name { font-family: "Unbounded", sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+.rb { background: #f7f6f2; color: #14213d; font-family: "Unbounded", sans-serif; border: 1px solid #ddd9cf; }
+.rb h3 { font-weight: 800; font-size: 26px; line-height: 1.05; margin: 0; letter-spacing: -0.02em; }
+.rb h3 em { font-style: normal; color: #ff5a1f; }
+.rb .big { font-size: 64px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.rb .mono { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: #56607a; }
+.rb .bar { height: 10px; border-radius: 5px; background: #e4e2db; overflow: hidden; display: flex; }
+.rb .bar i { display: block; height: 100%; }
+.rb .sub { color: #14213d; font-family: "Instrument Sans", sans-serif; }
+
+/* C — KALE ARKASI */
+.c .name { font-family: "Doto", "Courier New", monospace; font-weight: 900; letter-spacing: .02em; font-size: 34px; }
+.rc { background: linear-gradient(180deg, #0b1230 0%, #070b1f 100%); color: #e8ecff; font-family: "Rubik", sans-serif; }
+.rc h3 { font-weight: 800; font-size: 26px; line-height: 1.05; margin: 0; }
+.rc h3 em { font-style: normal; color: #3d8bff; }
+.rc .led { font-family: "Doto", "Courier New", monospace; font-weight: 900; font-size: 56px; color: #ffb020; text-shadow: 0 0 14px rgba(255,176,32,.55); line-height: 1; text-align: center; }
+.rc .sub { color: #e8ecff; }
+
+footer { color: var(--muted); font-size: 14px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="tag">Futbol analiz kanalı · marka keşfi</div>
+    <h1>Üç marka yönü. Birini seç, gerisini ona göre kuralım.</h1>
+    <p>Her yönün bir adı, logo işareti, renkleri, yazı tipleri ve örnek bir Reels karesi var. İsim ve stil karıştırılabilir. Örneğin A'nın ismi, C'nin renkleri olabilir. Kulüp logoları videolarda gerçek armalarla yer alacak, bu kareler sadece stil örneği.</p>
+  </header>
+
+  <!-- A -->
+  <section class="dir a">
+    <div class="ident">
+      <div class="tag">Yön A · Taktik tahtası</div>
+      <div class="lockup">
+        <svg viewBox="0 0 64 64" aria-label="Doksan logo işareti">
+          <rect width="64" height="64" fill="#17302a"/>
+          <circle cx="32" cy="32" r="19" fill="none" stroke="#f2efe6" stroke-width="2.5"/>
+          <line x1="6" y1="32" x2="58" y2="32" stroke="#f2efe6" stroke-width="2.5"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Big Shoulders Display, Impact, sans-serif" font-weight="900" font-size="22" fill="#ffd23f">90</text>
+        </svg>
+        <div class="name">DOKSAN</div>
+      </div>
+      <p class="idea">90 dakika ve "yüzde doksan ihtimalle". Soyunma odasındaki taktik tahtası gibi: koyu çim yeşili zemin, tebeşir beyazı çizgiler, sarı keçeli kalemle çizilmiş oklar. Sıcak ve elle yapılmış hissi verir.</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#17302a"></i>Tahta</span><span><i style="background:#f2efe6"></i>Tebeşir</span><span><i style="background:#ffd23f"></i>Keçeli</span><span><i style="background:#e5484d"></i>Kırmızı kart</span></div></div>
+      <div class="row"><div class="tag">Yazı tipleri</div>
+        <div class="types">
+          <div><small>Başlık</small><span style="font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:26px">ÜÇ KİŞİYLE BASTIRIYOR</span></div>
+          <div><small>Metin</small><span style="font-family:Archivo,sans-serif">Şampiyonlar Ligi · 3. hafta · Kadıköy</span></div>
+        </div></div>
+      <ul class="notes"><li>Taktik analiz videolarında en güçlü yön</li><li>Animasyon: çizgiler tebeşirle çiziliyormuş gibi açılır</li></ul>
+    </div>
+    <div class="reel ra" aria-label="Doksan örnek Reels karesi">
+      <div style="font-size:11px;opacity:.7;letter-spacing:.06em">ŞAMPİYONLAR LİGİ · 3. HAFTA</div>
+      <h3>Plan iki:<br><em>Kanté düşer.</em></h3>
+      <svg viewBox="0 0 230 250" style="width:100%">
+        <g fill="none" stroke="#f2efe6" stroke-opacity=".55" stroke-width="1.4">
+          <rect x="8" y="6" width="214" height="238" rx="2"/><line x1="8" y1="125" x2="222" y2="125"/>
+          <circle cx="115" cy="125" r="26"/><rect x="65" y="6" width="100" height="38"/><rect x="65" y="206" width="100" height="38"/>
+        </g>
+        <g fill="#f2efe6"><circle cx="115" cy="62" r="4"/><circle cx="60" cy="90" r="4"/><circle cx="170" cy="90" r="4"/><circle cx="90" cy="150" r="4"/><circle cx="140" cy="150" r="4"/></g>
+        <circle cx="115" cy="180" r="5" fill="#ffd23f"/>
+        <g stroke="#ffd23f" stroke-width="2" stroke-dasharray="5 4" fill="none"><path d="M90 150 L112 176"/><path d="M140 150 L118 176"/><path d="M115 125 L115 172"/></g>
+        <text x="128" y="196" font-family="Archivo,sans-serif" font-size="11" fill="#ffd23f">3 kişilik pres</text>
+      </svg>
+      <div class="sub">üç kişiyle bastırıyor.</div>
+      <div class="handle"><b style="background:#ffd23f"></b>@doksan.analiz</div>
+    </div>
+  </section>
+
+  <!-- B -->
+  <section class="dir b">
+    <div class="ident">
+      <div class="tag">Yön B · Veri laboratuvarı</div>
+      <div class="lockup">
+        <svg viewBox="0 0 64 64" aria-label="Olası logo işareti">
+          <rect width="64" height="64" fill="#14213d"/>
+          <circle cx="21" cy="21" r="9" fill="#f7f6f2"/>
+          <circle cx="43" cy="43" r="9" fill="#ff5a1f"/>
+          <line x1="46" y1="14" x2="18" y2="50" stroke="#f7f6f2" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <div class="name">olası</div>
+      </div>
+      <p class="idea">Yüzde işaretinin dairelerinden biri top. Akışta herkes siyah video atarken açık renkli, temiz bir bilim dergisi görünümü öne çıkar. Rakamlar büyük, renkler az. Mesaj: "biz sayıyla konuşuruz."</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#f7f6f2"></i>Kâğıt</span><span><i style="background:#14213d"></i>Mürekkep</span><span><i style="background:#ff5a1f"></i>Sinyal</span><span><i style="background:#2a9d8f"></i>Beraberlik</span></div></div>
+      <div class="row"><div class="tag">Yazı tipleri</div>
+        <div class="types">
+          <div><small>Başlık</small><span style="font-family:Unbounded,sans-serif;font-weight:800;font-size:22px">En olası skor.</span></div>
+          <div><small>Veri</small><span style="font-family:'IBM Plex Mono',monospace">%17 · 50.000 maçta en çok çıkan skor</span></div>
+        </div></div>
+      <ul class="notes"><li>Skor tahmini ve simülasyon videolarında en güçlü yön</li><li>Animasyon: barlar ve sayılar hızlıca dolar</li></ul>
+    </div>
+    <div class="reel rb" aria-label="Olası örnek Reels karesi">
+      <div class="mono">TRABZONSPOR – HEARTS · 50.000 SİMÜLASYON</div>
+      <h3>Kim<br><em>kazanır?</em></h3>
+      <div class="big">%68</div>
+      <div class="mono">Trabzonspor galibiyeti</div>
+      <div class="bar"><i style="width:68%;background:#ff5a1f"></i><i style="width:19%;background:#2a9d8f"></i><i style="width:13%;background:#14213d"></i></div>
+      <div class="mono" style="display:flex;justify-content:space-between"><span>TS %68</span><span>X %19</span><span>HRT %13</span></div>
+      <div class="sub">yüzde altmış sekiz ihtimalle.</div>
+      <div class="handle"><b style="background:#ff5a1f"></b>@olasi.futbol</div>
+    </div>
+  </section>
+
+  <!-- C -->
+  <section class="dir c">
+    <div class="ident">
+      <div class="tag">Yön C · Stadyum skorbordu</div>
+      <div class="lockup">
+        <svg viewBox="0 0 64 64" aria-label="Kale Arkası logo işareti">
+          <rect width="64" height="64" fill="#0b1230"/>
+          <path d="M10 48 V18 H54 V48" fill="none" stroke="#e8ecff" stroke-width="3.5" stroke-linejoin="round"/>
+          <g fill="#ffb020"><circle cx="20" cy="27" r="2.2"/><circle cx="28" cy="27" r="2.2"/><circle cx="36" cy="27" r="2.2"/><circle cx="44" cy="27" r="2.2"/><circle cx="20" cy="35" r="2.2"/><circle cx="28" cy="35" r="2.2"/><circle cx="36" cy="35" r="2.2"/><circle cx="44" cy="35" r="2.2"/><circle cx="20" cy="43" r="2.2"/><circle cx="28" cy="43" r="2.2"/><circle cx="36" cy="43" r="2.2"/><circle cx="44" cy="43" r="2.2"/></g>
+        </svg>
+        <div class="name">KALE ARKASI</div>
+      </div>
+      <p class="idea">Kale filesi ile stadyumdaki LED skorbordun noktaları aynı ızgara. Gece maçı havası: lacivert gökyüzü, amber LED rakamlar, projektör mavisi vurgular. Maç günü heyecanı ve tribün dili.</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#0b1230"></i>Gece</span><span><i style="background:#ffb020"></i>LED</span><span><i style="background:#3d8bff"></i>Projektör</span><span><i style="background:#e8ecff"></i>Işık</span></div></div>
+      <div class="row"><div class="tag">Yazı tipleri</div>
+        <div class="types">
+          <div><small>Skorbord</small><span style="font-family:Doto,'Courier New',monospace;font-weight:900;font-size:26px">50.000</span></div>
+          <div><small>Başlık / metin</small><span style="font-family:Rubik,sans-serif;font-weight:600">Bu akşamki maç 50 bin kez oynandı.</span></div>
+        </div></div>
+      <ul class="notes"><li>Maç önü "bu akşam" videolarında en güçlü yön</li><li>Animasyon: LED rakamlar skorbord gibi döner, noktalar tek tek yanar</li></ul>
+    </div>
+    <div class="reel rc" aria-label="Kale Arkası örnek Reels karesi">
+      <h3>Bu akşamki maç,<br><em>50 bin kez oynandı.</em></h3>
+      <div style="display:flex;justify-content:center;gap:18px;align-items:center;margin-top:18px">
+        <span style="width:44px;height:44px;border-radius:50%;background:#7a1e3a;display:grid;place-items:center;font-weight:800;font-size:13px">TS</span>
+        <span style="opacity:.5">–</span>
+        <span style="width:44px;height:44px;border-radius:50%;background:#8b1f2c;display:grid;place-items:center;font-weight:800;font-size:13px">HRT</span>
+      </div>
+      <div class="led" style="margin-top:14px">50.000</div>
+      <div style="text-align:center;font-size:12px;opacity:.65;letter-spacing:.1em">SİMÜLASYON</div>
+      <div class="sub">elli bin kez oynattık.</div>
+      <div class="handle"><b style="background:#ffb020"></b>@kalearkasi.ai</div>
+    </div>
+  </section>
+
+  <footer>Seçimini yaz. "B ama ismi DOKSAN olsun" gibi karışık da olur. Kendi aklında bir isim varsa onu da söyle, bu stillere uyarlarım.</footer>
+</div>
