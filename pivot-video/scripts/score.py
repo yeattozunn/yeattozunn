@@ -1,8 +1,10 @@
 """Synthesize the PİVOT reel score: tension drone, pulse, riser, impacts.
 
 Cue times (seconds) mirror the scene timeline in src/timeline.ts.
-Usage: python3 scripts/score.py public/score.wav
+Usage: python3 scripts/score.py public/score.wav [cues.json]
+A cues file overrides DUR, CUTS, REVEAL, LOGO and TICKS (TICKS may be null).
 """
+import json
 import sys
 import wave
 
@@ -10,14 +12,17 @@ import numpy as np
 
 SR = 48000
 DUR = 36.5
-N = int(SR * DUR)
-t = np.arange(N) / SR
-rng = np.random.default_rng(7)
-
 CUTS = [3.55, 8.1, 13.1, 20.75, 24.95, 28.55]
 REVEAL = 10.33  # score 2–4 lands on "Lille iki"
 TICKS = (20.75, 24.95)  # goal timeline playhead
 LOGO = 33.98
+if len(sys.argv) > 2:
+    cues = json.load(open(sys.argv[2]))
+    DUR, CUTS, REVEAL, LOGO, TICKS = cues["dur"], cues["cuts"], cues["reveal"], cues["logo"], cues.get("ticks")
+
+N = int(SR * DUR)
+t = np.arange(N) / SR
+rng = np.random.default_rng(7)
 
 
 def env(start, attack, decay):
@@ -96,7 +101,7 @@ for c in CUTS:
     out += 0.12 * lowpass(noise, 400 + 5000 * ramp) * ramp
 
 # goal timeline clicks (one per goal marker)
-for frac in (2, 7, 39, 44, 52, 61):
+for frac in (2, 7, 39, 44, 52, 61) if TICKS else ():
     at = TICKS[0] + 0.4 + 3.2 * frac / 90
     out += 0.25 * env(at, 0.001, 0.04) * np.sin(2 * np.pi * 1760 * t)
 

@@ -14,8 +14,9 @@ import { Chances, Goals, Possession, Reveal, Shots, Simulation, Outro } from "./
 import { FPS, H, W } from "./theme";
 import { SCENES, TOTAL } from "./timeline";
 import { CAPTIONS, VO } from "./captions";
+import { DERBY_TOTAL, DerbyReel } from "./derby";
 
-const useFonts = () => {
+export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
   useEffect(() => {
     Promise.all([
@@ -75,4 +76,13 @@ export const MyComposition: React.FC = () => (
     height={H}
     defaultProps={{ voice: "voice.mp3" as string | undefined }}
   />
+);
+
+const DerbyWithFonts: React.FC = () => {
+  useFonts();
+  return <DerbyReel />;
+};
+
+export const DerbyComposition: React.FC = () => (
+  <Composition id="PivotDerbyGSFB" component={DerbyWithFonts} durationInFrames={DERBY_TOTAL} fps={FPS} width={W} height={H} />
 );

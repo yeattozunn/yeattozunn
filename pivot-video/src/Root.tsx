@@ -1,9 +1,10 @@
-import { MyComposition } from "./Composition";
+import { DerbyComposition, MyComposition } from "./Composition";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <MyComposition />
+      <DerbyComposition />
     </>
   );
 };
