@@ -1,7 +1,7 @@
 <title>Marka Yönleri</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;500;700&family=Archivo:wdth,wght@62..125,300..900&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;500;700&family=Archivo:wdth,wght@62..125,300..900&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Schibsted+Grotesk:wght@400;800;900&family=Syne:wght@500;800&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Michroma&display=swap">
 <style>
 /* Layout: dark-first presentation board; header, three cinematic directions (identity + 9:16 frame), name pool */
 :root {
@@ -69,6 +69,64 @@ header p { margin: 0; color: var(--muted); max-width: 62ch; }
 .r3 .score { font-family: "Instrument Serif", Georgia, serif; font-size: 96px; line-height: 1; text-align: center; margin-top: 26px; letter-spacing: -0.02em; }
 .r3 .score span { opacity: .35; }
 
+.round { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
+.round h2 { margin: 0; font-size: 24px; font-weight: 500; letter-spacing: -0.025em; }
+.new { font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; color: var(--muted); }
+
+/* 4 — KADRAJ: broadcast viewfinder, tungsten + REC red */
+.n4 { font-family: "Bricolage Grotesque", sans-serif; font-variation-settings: "wdth" 75; font-weight: 800; font-size: 50px; letter-spacing: -0.02em; line-height: .9; }
+.r4 .vig { background: radial-gradient(75% 50% at 50% 45%, #2a241c 0%, #0b0a08 75%); }
+.r4 .corners { position: absolute; inset: 16px; z-index: 1; pointer-events: none;
+  background: linear-gradient(#f3e9d8,#f3e9d8) 0 0/18px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 0 0/1.5px 18px,
+    linear-gradient(#f3e9d8,#f3e9d8) 100% 0/18px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 100% 0/1.5px 18px,
+    linear-gradient(#f3e9d8,#f3e9d8) 0 100%/18px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 0 100%/1.5px 18px,
+    linear-gradient(#f3e9d8,#f3e9d8) 100% 100%/18px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 100% 100%/1.5px 18px; background-repeat: no-repeat; opacity: .7; }
+.r4 .rec { font-family: "Geist Mono", monospace; font-size: 10px; letter-spacing: .14em; display: flex; justify-content: space-between; color: #f3e9d8; opacity: .85; }
+.r4 .rec b { color: #ff3b30; font-weight: 500; }
+.r4 h3 { font-family: "Bricolage Grotesque", sans-serif; font-variation-settings: "wdth" 75; font-weight: 800; font-size: 50px; line-height: .9; margin: auto 0 0; letter-spacing: -0.02em; color: #f3e9d8; }
+.r4 h3 em { font-style: normal; font-weight: 300; }
+.r4 .lower { margin: 14px 0 82px; display: flex; gap: 10px; align-items: center; font-family: "Geist", sans-serif; font-size: 12px; color: #f3e9d8; }
+.r4 .lower i { width: 3px; height: 26px; background: #ff3b30; display: block; }
+
+/* 5 — KESİN: swiss precision, white on black, one red hairline */
+.n5 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 900; font-size: 46px; letter-spacing: -0.045em; line-height: 1; }
+.r5 { background: #000; }
+.r5 .top { display: flex; justify-content: space-between; font-family: "Schibsted Grotesk", sans-serif; font-size: 11px; font-weight: 400; }
+.r5 h3 { font-family: "Schibsted Grotesk", sans-serif; font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -0.04em; margin: 20px 0 0; }
+.r5 .pct { font-family: "Schibsted Grotesk", sans-serif; font-weight: 900; font-size: 128px; letter-spacing: -0.075em; line-height: .8; margin-top: auto; }
+.r5 .rule { height: 1px; background: #ff2a2a; margin: 18px 0 8px; position: relative; }
+.r5 .rule::after { content: ""; position: absolute; left: 92%; top: -4px; width: 1px; height: 9px; background: #ff2a2a; }
+.r5 .lbl { font-family: "Schibsted Grotesk", sans-serif; font-size: 12px; display: flex; justify-content: space-between; margin-bottom: 76px; }
+
+/* 6 — SEZGİ: midnight aurora, the AI's intuition */
+.n6 { font-family: "Syne", sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -0.01em; background: linear-gradient(100deg, #b9a7ff, #7fe0f0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.r6 .vig { background: radial-gradient(60% 35% at 30% 55%, rgba(140,110,255,.55) 0%, transparent 70%), radial-gradient(55% 32% at 75% 62%, rgba(90,215,235,.40) 0%, transparent 70%), #05060d; filter: saturate(1.1); }
+.r6 h3 { font-family: "Syne", sans-serif; font-weight: 800; font-size: 34px; line-height: 1; margin: 0; letter-spacing: -0.02em; }
+.r6 h3 em { font-style: normal; font-weight: 500; opacity: .6; }
+.r6 .orb { margin: auto auto 0; width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.22), rgba(255,255,255,.04) 60%); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(6px); }
+.r6 .orb b { font-family: "Syne", sans-serif; font-size: 46px; font-weight: 800; letter-spacing: -0.03em; }
+.r6 .orb small { display: block; text-align: center; font-family: "Geist Mono", monospace; font-size: 9px; letter-spacing: .16em; opacity: .7; }
+.r6 .spacer { height: 92px; }
+
+/* 7 — LİBERO: 90s calcio elegance, navy + ivory + gold stripe */
+.n7 { font-family: "Bodoni Moda", Didot, serif; font-style: italic; font-weight: 700; font-size: 52px; letter-spacing: -0.02em; line-height: 1; }
+.r7 .vig { background: linear-gradient(180deg, #0c1a3a 0%, #071026 100%); }
+.r7 .stripe { position: absolute; left: 0; right: 0; top: 0; height: 6px; background: linear-gradient(90deg, #0c1a3a 0 33%, #c9a55a 33% 66%, #f3ecdc 66%); }
+.r7 .ed { font-family: "Bodoni Moda", serif; font-size: 11px; letter-spacing: .3em; color: #c9a55a; text-align: center; margin-top: 6px; }
+.r7 h3 { font-family: "Bodoni Moda", Didot, serif; font-weight: 500; font-size: 40px; line-height: 1; margin: auto 0 0; text-align: center; color: #f3ecdc; letter-spacing: -0.02em; }
+.r7 h3 em { font-weight: 800; color: #c9a55a; }
+.r7 .num { font-family: "Bodoni Moda", serif; font-size: 12px; text-align: center; color: #f3ecdc; opacity: .7; margin: 16px 0 84px; letter-spacing: .14em; }
+
+/* 8 — TEMPO: chrome and speed, F1 broadcast */
+.n8 { font-family: "Michroma", sans-serif; font-size: 34px; letter-spacing: .08em; background: linear-gradient(180deg, #ffffff 0%, #9aa1a8 48%, #e9edf0 52%, #6d747b 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.r8 .vig { background: repeating-linear-gradient(100deg, rgba(255,255,255,.035) 0 2px, transparent 2px 22px), radial-gradient(80% 50% at 50% 50%, #1b1e22 0%, #060708 80%); }
+.r8 .meta { font-family: "Michroma", sans-serif; font-size: 9px; letter-spacing: .18em; opacity: .7; }
+.r8 .chrome { font-family: "Michroma", sans-serif; font-size: 54px; line-height: 1; margin-top: auto; letter-spacing: -0.02em; font-style: italic;
+  background: linear-gradient(180deg, #ffffff 0%, #a7aeb5 46%, #f0f3f5 54%, #5f666d 100%); -webkit-background-clip: text; background-clip: text; color: transparent; transform: skewX(-8deg); }
+.r8 .speed { height: 2px; margin: 12px 0; background: linear-gradient(90deg, transparent, #ff6a00 30%, #ffd2a8 70%, transparent); }
+.r8 .cap { font-family: "Michroma", sans-serif; font-size: 10px; letter-spacing: .3em; margin-bottom: 80px; opacity: .8; }
+
 /* name pool */
 .pool { display: grid; gap: 16px; }
 .pool h2 { margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
@@ -82,10 +140,171 @@ footer { color: var(--muted); font-size: 14px; }
 
 <div class="wrap">
   <header>
-    <div class="tag">Tur 2 · premium / sinematik · tek kelimelik isimler</div>
-    <h1>Daha az renk, daha büyük yazı, film afişi havası.</h1>
-    <p>Üç yönün hepsi koyu ve sade. Aralarındaki fark vurgu rengi, yazı karakteri ve logonun fikri. Kareler film greni ve ışık düşmesiyle sinematik hissi göstermek için hazırlandı. Asıl videolarda gerçek armalar olacak.</p>
+    <div class="tag">Tur 3 · premium / sinematik · tek kelimelik isimler</div>
+    <h1>Beş yeni yön, altta beğendiğin üç yön.</h1>
+    <p>Yenilerin hepsi aynı çizgide: koyu, sade, film havasında. Her biri farklı bir dünyadan besleniyor: TV yayın kamerası, İsviçre saati hassasiyeti, yapay zekâ sezgisi, 90'ların İtalyan futbolu ve F1 yayını. Asıl videolarda gerçek armalar olacak.</p>
   </header>
+
+  <div class="round"><h2>Yeni yönler</h2><span class="new">TUR 3</span></div>
+
+  <section class="dir">
+    <div class="ident">
+      <div class="tag">Yön 4 · Canlı yayın kamerası</div>
+      <div class="lockup">
+        <svg viewBox="0 0 60 60" aria-label="Kadraj logo işareti">
+          <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M8 20 V8 H20"/><path d="M40 8 H52 V20"/><path d="M52 40 V52 H40"/><path d="M20 52 H8 V40"/></g>
+          <circle cx="30" cy="30" r="6" fill="#ff3b30"/>
+        </svg>
+        <div class="n4">KADRAJ</div>
+      </div>
+      <p class="idea">Maçı kameranın arkasından anlatıyormuşuz gibi. Vizör köşeleri, kırmızı REC noktası, zaman kodu ve alt bant yazıları. Sıcak tungsten ışığı ve dar, sıkışık bir başlık yazısı. Logo da vizörün ta kendisi: dört köşe ve ortada kayıt noktası.</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#0b0a08"></i>Karanlık oda</span><span><i style="background:#f3e9d8"></i>Tungsten</span><span><i style="background:#ff3b30"></i>REC</span><span><i style="background:#2a241c"></i>Sıcak gölge</span></div></div>
+      <div class="row"><div class="tag">Yazı</div>
+        <div class="types">
+          <div><small>Başlık</small><span style="font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:30px">Bu akşam Kadıköy'de.</span></div>
+          <div><small>Kod</small><span style="font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:.12em">● REC 00:42:17</span></div>
+        </div></div>
+      <p class="motion">Hareket: kamera netlemesi (bulanıktan nete), zoom ve kaydırma, zaman kodu sürekli akar.</p>
+    </div>
+    <div class="reel r4" aria-label="Kadraj örnek kare">
+      <div class="vig"></div><div class="corners"></div>
+      <div class="rec"><span><b>●</b> REC</span><span>00:42:17</span></div>
+      <h3>Bu akşam<br><em>Kadıköy'de.</em></h3>
+      <div class="lower"><i></i><div><b style="font-weight:600">Fenerbahçe – Slavia Praha</b><br><span style="opacity:.65">Şampiyonlar Ligi · 3. hafta</span></div></div>
+      <div class="sub">bu akşam Kadıköy'de.</div>
+      <div class="handle">KADRAJ</div>
+    </div>
+  </section>
+
+  <section class="dir">
+    <div class="ident">
+      <div class="tag">Yön 5 · İsviçre hassasiyeti</div>
+      <div class="lockup">
+        <svg viewBox="0 0 60 60" aria-label="Kesin logo işareti">
+          <circle cx="30" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+          <g stroke="#ff2a2a" stroke-width="2" stroke-linecap="round"><line x1="30" y1="4" x2="30" y2="20"/><line x1="30" y1="40" x2="30" y2="56"/><line x1="4" y1="30" x2="20" y2="30"/><line x1="40" y1="30" x2="56" y2="30"/></g>
+          <circle cx="30" cy="30" r="3" fill="currentColor"/>
+        </svg>
+        <div class="n5">Kesin.</div>
+      </div>
+      <p class="idea">Adı zaten bir iddia: "En kesin tahmin." Saf siyah ve beyaz, dev ve sıkı rakamlar, tek bir ince kırmızı ölçü çizgisi. Logo bir nişangâh. Hiçbir süs yok, güven tamamen tipografiden geliyor.</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#000"></i>Siyah</span><span><i style="background:#fff"></i>Beyaz</span><span><i style="background:#ff2a2a"></i>Ölçü kırmızısı</span><span><i style="background:#1c1c1c"></i>Grafit</span></div></div>
+      <div class="row"><div class="tag">Yazı</div>
+        <div class="types">
+          <div><small>Rakam</small><span style="font-family:'Schibsted Grotesk',sans-serif;font-weight:900;font-size:34px;letter-spacing:-0.06em">%92</span></div>
+          <div><small>Metin</small><span style="font-family:'Schibsted Grotesk',sans-serif">Kart 4,5 alt · olasılığa göre sıralı</span></div>
+        </div></div>
+      <p class="motion">Hareket: neredeyse hiç yok. Rakamlar milimetrik kayarak yerine oturur, kırmızı çizgi soldan sağa çizilir.</p>
+    </div>
+    <div class="reel r5" aria-label="Kesin örnek kare">
+      <div class="top"><span>Trabzonspor – Hearts</span><span>01/08</span></div>
+      <h3>En emin tahmin:<br>kartlar.</h3>
+      <div class="pct">%92</div>
+      <div class="rule"></div>
+      <div class="lbl"><span>Kart 4,5 alt</span><span style="opacity:.55">50.000 sim.</span></div>
+      <div class="sub">yüzde doksan iki ihtimalle.</div>
+      <div class="handle">KESİN</div>
+    </div>
+  </section>
+
+  <section class="dir">
+    <div class="ident">
+      <div class="tag">Yön 6 · Yapay zekânın sezgisi</div>
+      <div class="lockup">
+        <svg viewBox="0 0 60 60" aria-label="Sezgi logo işareti">
+          <defs><linearGradient id="sz" x1="0" x2="1"><stop offset="0" stop-color="#b9a7ff"/><stop offset="1" stop-color="#7fe0f0"/></linearGradient></defs>
+          <circle cx="30" cy="30" r="21" fill="none" stroke="url(#sz)" stroke-width="2.2"/>
+          <circle cx="30" cy="30" r="12" fill="none" stroke="url(#sz)" stroke-width="1.4" opacity=".6"/>
+          <circle cx="30" cy="30" r="4" fill="url(#sz)"/>
+        </svg>
+        <div class="n6">sezgi</div>
+      </div>
+      <p class="idea">Kanalın sesi yapay zekâ olacaksa onu bir karakter gibi gösterelim. Gece mavisi zeminde yavaşça dalgalanan mor ve turkuaz kuzey ışıkları, buzlu cam gibi bir küre. Soğuk değil, gizemli ve sakin. Logo, merkezden yayılan halkalar.</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#05060d"></i>Gece</span><span><i style="background:#b9a7ff"></i>Lavanta</span><span><i style="background:#7fe0f0"></i>Buz</span><span><i style="background:#f1efea"></i>Işık</span></div></div>
+      <div class="row"><div class="tag">Yazı</div>
+        <div class="types">
+          <div><small>Başlık</small><span style="font-family:Syne,sans-serif;font-weight:800;font-size:28px">Kim kazanır?</span></div>
+          <div><small>Metin</small><span style="font-family:Geist,sans-serif;font-weight:500">Trabzonspor · %68</span></div>
+        </div></div>
+      <p class="motion">Hareket: ışıklar sürekli ve yavaş akar, küre rakam söylerken "nefes alır". Ses dalgasıyla senkron parlar.</p>
+    </div>
+    <div class="reel r6" aria-label="Sezgi örnek kare">
+      <div class="vig"></div>
+      <h3>Kim<br><em>kazanır?</em></h3>
+      <div class="orb"><div><b>%68</b><small>TRABZONSPOR</small></div></div>
+      <div class="spacer"></div>
+      <div class="sub">yüzde altmış sekiz ihtimalle.</div>
+      <div class="handle">SEZGİ</div>
+    </div>
+  </section>
+
+  <section class="dir">
+    <div class="ident">
+      <div class="tag">Yön 7 · 90'ların İtalyan futbolu</div>
+      <div class="lockup">
+        <svg viewBox="0 0 60 60" aria-label="Libero logo işareti">
+          <path d="M30 5 L52 13 V30 C52 43 42 52 30 56 C18 52 8 43 8 30 V13 Z" fill="none" stroke="#c9a55a" stroke-width="2"/>
+          <text x="30" y="39" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" font-style="italic" font-weight="700" font-size="26" fill="currentColor">L</text>
+        </svg>
+        <div class="n7">Libero</div>
+      </div>
+      <p class="idea">Serie A'nın altın yılları, eski forma ve dergi kapakları. Lacivert, fildişi ve altın şerit, yüksek kontrastlı italik serif. Logo bir arma kalkanı. Analizi bir futbol kültürü yayını gibi sunar, nostaljik ama çok şık.</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#0c1a3a"></i>Lacivert</span><span><i style="background:#f3ecdc"></i>Fildişi</span><span><i style="background:#c9a55a"></i>Altın</span><span><i style="background:#071026"></i>Gece laciverti</span></div></div>
+      <div class="row"><div class="tag">Yazı</div>
+        <div class="types">
+          <div><small>Başlık</small><span style="font-family:'Bodoni Moda',serif;font-style:italic;font-weight:700;font-size:28px">böyle yenecek.</span></div>
+          <div><small>Etiket</small><span style="font-family:'Bodoni Moda',serif;font-size:13px;letter-spacing:.24em">EDİZİONE N° 12</span></div>
+        </div></div>
+      <p class="motion">Hareket: zarif geçişler, sayfa çevirme, altın şerit kayarak açılır. Hafif analog film titremesi.</p>
+    </div>
+    <div class="reel r7" aria-label="Libero örnek kare">
+      <div class="vig"></div><div class="stripe"></div>
+      <div class="ed">ŞAMPİYONLAR LİGİ</div>
+      <h3>Fenerbahçe<br>Slavia'yı<br><em><i>böyle yenecek.</i></em></h3>
+      <div class="num">— N° 12 —</div>
+      <div class="sub">altı-sıfırı unutturmanın tek yolu.</div>
+      <div class="handle">LİBERO</div>
+    </div>
+  </section>
+
+  <section class="dir">
+    <div class="ident">
+      <div class="tag">Yön 8 · F1 yayını</div>
+      <div class="lockup">
+        <svg viewBox="0 0 60 60" aria-label="Tempo logo işareti">
+          <defs><linearGradient id="tp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".48" stop-color="#9aa1a8"/><stop offset=".52" stop-color="#e9edf0"/><stop offset="1" stop-color="#6d747b"/></linearGradient></defs>
+          <path d="M10 14 H54 L50 24 H36 L28 48 H16 L24 24 H6 Z" fill="url(#tp)"/>
+          <line x1="4" y1="34" x2="20" y2="34" stroke="#ff6a00" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="2" y1="41" x2="14" y2="41" stroke="#ff6a00" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>
+        </svg>
+        <div class="n8">TEMPO</div>
+      </div>
+      <p class="idea">Maçın temposu ve hızlı veri. F1 yayınları ve lüks araba reklamları gibi: krom metal yazılar, ince hız çizgileri, tek bir turuncu motor ışığı. Geniş ve teknik bir yazı. Logo, hız çizgileriyle kesilmiş bir T.</p>
+      <div class="row"><div class="tag">Renkler</div>
+        <div class="sw"><span><i style="background:#060708"></i>Karbon</span><span><i style="background:linear-gradient(180deg,#fff,#9aa1a8 48%,#e9edf0 52%,#6d747b)"></i>Krom</span><span><i style="background:#ff6a00"></i>Motor</span><span><i style="background:#1b1e22"></i>Asfalt</span></div></div>
+      <div class="row"><div class="tag">Yazı</div>
+        <div class="types">
+          <div><small>Başlık</small><span style="font-family:Michroma,sans-serif;font-size:22px;letter-spacing:.06em">50.000</span></div>
+          <div><small>Metin</small><span style="font-family:Geist,sans-serif;font-weight:500">Bu akşamki maç 50 bin kez oynandı.</span></div>
+        </div></div>
+      <p class="motion">Hareket: hızlı. Hareket bulanıklığı, sayaç tur süresi gibi döner, kromda ışık yansıması kayar.</p>
+    </div>
+    <div class="reel r8" aria-label="Tempo örnek kare">
+      <div class="vig"></div>
+      <div class="meta">TS — HRT · MAÇ ÖNÜ</div>
+      <div class="chrome">50.000</div>
+      <div class="speed"></div>
+      <div class="cap">SİMÜLASYON</div>
+      <div class="sub">elli bin kez oynattık.</div>
+      <div class="handle">TEMPO</div>
+    </div>
+  </section>
+
+  <div class="round"><h2>Beğendiğin üç yön</h2><span class="new">TUR 2</span></div>
 
   <section class="dir">
     <div class="ident">
@@ -191,16 +410,18 @@ footer { color: var(--muted); font-size: 14px; }
     <div class="tag">İsim havuzu</div>
     <h2>Başka tek kelimelik isimler</h2>
     <div class="names">
-      <div><b>KESİN</b><span>"En kesin tahmin" diye kendi sloganı var</span></div>
-      <div><b>LİBERO</b><span>Serbest, her yeri gören oyuncu</span></div>
-      <div><b>SEZGİ</b><span>Veriyle desteklenen önsezi</span></div>
       <div><b>AYAR</b><span>"Maçın ayarı", kısa ve sert</span></div>
-      <div><b>KADRAJ</b><span>Sinematik, kamera dili</span></div>
       <div><b>DÜDÜK</b><span>Maçın başladığı ve bittiği an</span></div>
       <div><b>RAKAM</b><span>Sayıyla konuşan kanal</span></div>
       <div><b>KANAT</b><span>Hem mevki hem hız hissi</span></div>
+      <div><b>VİZÖR</b><span>Kadraj'ın kardeşi, daha teknik</span></div>
+      <div><b>ÇİZGİ</b><span>Taktik çizgisi ve ofsayt çizgisi</span></div>
+      <div><b>NOKTA</b><span>Penaltı noktası, "nokta atışı tahmin"</span></div>
+      <div><b>GÖLGE</b><span>Maçın görünmeyen tarafı, gizemli</span></div>
+      <div><b>ÖNSEZİ</b><span>Sezgi'nin daha güçlü hâli</span></div>
+      <div><b>SKORA</b><span>Skor + aura, uluslararası duruyor</span></div>
     </div>
   </section>
 
-  <footer>Bir yön seç ve isterse havuzdan başka bir isimle eşleştir, örneğin "Yön 3'ün havası, adı KADRAJ". Bu turda da beğenmediğin bir şey olursa neresi olduğunu söyle, oradan devam edeyim.</footer>
+  <footer>Bir yön seç ve isterse havuzdan başka bir isimle eşleştir, örneğin "Yön 5'in havası, adı NOKTA". En beğendiğin iki ya da üç yönü söylersen onları daha da geliştiririm. Bu turda da beğenmediğin bir şey olursa neresi olduğunu söyle, oradan devam edeyim.</footer>
 </div>
