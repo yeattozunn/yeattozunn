@@ -39,6 +39,9 @@ Kullanıcının çok beğendiği tarz (telefon kulübesi görseli). Parlama neon
 Grainy early-2000s flash photo at night, [SAHNE], a lone man [EYLEM], his puffy jacket made entirely of glittering red frost crystals and tiny red sparkles catching the flash, [ZEMİN] dusted with violet glitter, four-point star glints in the air. Deep navy shadows, lavender-violet highlights, the red jacket as the only bright color, centered simple composition, soft vignette, low-resolution digital camera look, real textures, no smooth neon glow, horizontal 4:3. No text, no watermark.
 ```
 
+## Instagram'da en çok tutan: "Bir Mumyanın Bir Günü" (`mumyanin_bir_gunu_v2.mp4`)
+Kullanıcının en çok izlenen videosu. Formül: tanınır tek karakter (mumya) + antik dünyada sıradan modern hayat + gerçek ürünler + 90'lar düşük bütçeli dizi görseli + sahne başı 3 s iki açılı Kling + hızlı kesmeler ve geçişler. Yeni fikir istendiğinde önce bu serinin devamını öner.
+
 ## Referans başarı: Oakley v3 (`oakley_simli_gece_v3.mp4`)
 Kullanıcının "budur" dediği formül. Yeni montaj videolarında bunu uygula:
 - Kullanıcının ürettiği 5 görsel (Simli Gece tarzı), her biri ayrı Kling 3.0 Standard multi-shot, 3 s = 2 s dinamik ana plan (hızlı push-in, etrafında dönme, takip, el kamerası sarsıntısı) + 1 s farklı açıdan yakın plan (logo/ürün detayı). Asla "very slow" kamera yazma.
