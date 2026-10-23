@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><style>@font-face{font-family:D;src:url(../fonts/display.otf)}body{margin:0}</style>
+<canvas id="c" width="1080" height="1080"></canvas><script>
+const c=document.getElementById('c').getContext('2d'),W=1080,T=Math.PI*2;
+let g=c.createRadialGradient(540,520,50,540,540,760);g.addColorStop(0,'#3A0E10');g.addColorStop(.55,'#12060A');g.addColorStop(1,'#05070F');c.fillStyle=g;c.fillRect(0,0,W,W);
+// red signal glow behind
+g=c.createRadialGradient(540,470,0,540,470,520);g.addColorStop(0,'rgba(229,50,45,.55)');g.addColorStop(1,'rgba(229,50,45,0)');c.fillStyle=g;c.fillRect(0,0,W,W);
+// body
+c.fillStyle='#1B2236';c.beginPath();c.roundRect(250,700,580,500,200);c.fill();
+c.fillStyle='#C9A13B';[800,890].forEach(y=>{c.beginPath();c.arc(540,y,16,0,T);c.fill()});
+// head
+const x=540,y=500,r=250;c.fillStyle='#ECECEA';c.beginPath();c.arc(x,y,r,0,T);c.fill();
+g=c.createLinearGradient(0,y-r,0,y+r);g.addColorStop(0,'rgba(5,7,15,.75)');g.addColorStop(.7,'rgba(5,7,15,.35)');g.addColorStop(1,'rgba(5,7,15,0)');c.fillStyle=g;c.beginPath();c.arc(x,y,r,0,T);c.fill();
+c.fillStyle='#05070F';[-1,1].forEach(s=>{c.beginPath();c.ellipse(x+s*r*.33,y-r*.06,r*.17,r*.13,0,0,T);c.fill()});
+c.fillStyle='#E5322D';[-1,1].forEach(s=>{c.beginPath();c.arc(x+s*r*.33,y-r*.06,r*.04,0,T);c.fill()});
+c.strokeStyle='#05070F';c.lineWidth=r*.06;c.lineCap='round';c.beginPath();c.moveTo(x-r*.28,y+r*.38);c.quadraticCurveTo(x,y+r*.62,x+r*.28,y+r*.38);c.stroke();
+// cap
+c.fillStyle='#1B2236';c.beginPath();c.ellipse(x,y-r*.62,r*1.02,r*.42,0,Math.PI,0);c.fill();c.fillRect(x-r*.98,y-r*.66,r*1.96,r*.2);
+c.fillStyle='#0E1322';c.beginPath();c.ellipse(x+r*.05,y-r*.46,r*1.1,r*.13,0,0,T);c.fill();
+c.fillStyle='#C9A13B';c.beginPath();c.arc(x,y-r*.78,r*.11,0,T);c.fill();
+// snow
+for(let i=0;i<70;i++){const a=Math.sin(i*12.9898)*43758.5453,h=a-Math.floor(a),b=Math.sin(i*78.233)*12345.678,k=b-Math.floor(b);c.fillStyle=`rgba(232,238,248,${.3+.5*k})`;c.beginPath();c.arc(h*W,k*W,3+5*((h*7)%1),0,T);c.fill()}
+document.fonts.load('900 100px D').then(()=>{window.done=1});
+</script>
