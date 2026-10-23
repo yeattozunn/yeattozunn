@@ -1,0 +1,78 @@
+import React, { useEffect, useState } from "react";
+import {
+  AbsoluteFill,
+  Audio,
+  Composition,
+  continueRender,
+  delayRender,
+  Sequence,
+  staticFile,
+  useCurrentFrame,
+} from "remotion";
+import { Caption, Grain } from "./parts";
+import { Chances, Goals, Possession, Reveal, Shots, Simulation, Outro } from "./scenes";
+import { FPS, H, W } from "./theme";
+import { SCENES, TOTAL } from "./timeline";
+import { CAPTIONS, VO } from "./captions";
+
+const useFonts = () => {
+  const [handle] = useState(() => delayRender("fonts"));
+  useEffect(() => {
+    Promise.all([
+      document.fonts.load('800 100px "Archivo Variable"'),
+      document.fonts.load('300 100px "Archivo Variable"'),
+      document.fonts.load('600 40px "Geist Variable"'),
+      document.fonts.load('400 20px "Geist Mono Variable"'),
+    ]).then(() => continueRender(handle));
+  }, [handle]);
+};
+
+const Captions: React.FC = () => {
+  const frame = useCurrentFrame();
+  const t = frame / FPS;
+  const c = CAPTIONS.find((p) => t >= p.words[0].s - 0.12 && t < p.words[p.words.length - 1].e + 0.35);
+  if (!c) return null;
+  const from = c.words[0].s - 0.12;
+  const to = c.words[c.words.length - 1].e + 0.35;
+  return <Caption words={c.words} t={t} local={frame - from * FPS} len={(to - from) * FPS} />;
+};
+
+export const PivotReel: React.FC<{ voice?: string }> = ({ voice }) => {
+  useFonts();
+  return (
+    <AbsoluteFill lang="tr" style={{ background: "#0b0c0e" }}>
+      <Sequence from={SCENES.possession.from} durationInFrames={SCENES.possession.dur}><Possession /></Sequence>
+      <Sequence from={SCENES.shots.from} durationInFrames={SCENES.shots.dur}><Shots /></Sequence>
+      <Sequence from={SCENES.reveal.from} durationInFrames={SCENES.reveal.dur}><Reveal /></Sequence>
+      <Sequence from={SCENES.sim.from} durationInFrames={SCENES.sim.dur}><Simulation /></Sequence>
+      <Sequence from={SCENES.goals.from} durationInFrames={SCENES.goals.dur}><Goals /></Sequence>
+      <Sequence from={SCENES.chances.from} durationInFrames={SCENES.chances.dur}><Chances /></Sequence>
+      <Sequence from={SCENES.outro.from} durationInFrames={SCENES.outro.dur}><Outro /></Sequence>
+      <Captions />
+      <Grain />
+      <Audio src={staticFile("score.wav")} volume={voice ? 0.5 : 1} />
+      {voice ? (
+        <>
+          <Sequence from={Math.round(VO.a * FPS)} durationInFrames={Math.round(VO.split * FPS)}>
+            <Audio src={staticFile(voice)} />
+          </Sequence>
+          <Sequence from={Math.round((VO.split + VO.b) * FPS)}>
+            <Audio src={staticFile(voice)} trimBefore={Math.round(VO.split * FPS)} />
+          </Sequence>
+        </>
+      ) : null}
+    </AbsoluteFill>
+  );
+};
+
+export const MyComposition: React.FC = () => (
+  <Composition
+    id="PivotLilleGS"
+    component={PivotReel}
+    durationInFrames={TOTAL}
+    fps={FPS}
+    width={W}
+    height={H}
+    defaultProps={{ voice: "voice.mp3" as string | undefined }}
+  />
+);
