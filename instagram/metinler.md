@@ -47,3 +47,31 @@ Sen ne diyorsun? Skor tahminini yorumlara yaz 👇
 
 #galatasaray #fenerbahçe #derbi #gsvfb #süperlig #trendyolsüperlig #osimhen #kerem #futbolanaliz #maçtahmini #pivot
 ```
+
+## Gönderi açıklaması · Lille 2–4 Galatasaray
+
+```
+Topa Lille sahip oldu. Maçı Galatasaray aldı. 🦁
+
+Lille her şeyde öndeydi:
+⚽ Topa sahip olma %56'ya %44
+🎯 Şut 15'e 10
+📈 Beklenen gol (xG) 1,88'e 1,64
+
+Maçı bu xG değerleriyle 50.000 kez oynattık:
+Galatasaray'ın kazanma ihtimali %34'tü.
+2–4 skoru ise sadece 767 kez çıktı. Yani %1,5.
+
+Peki fark nerede?
+Galatasaray 4 büyük fırsat buldu, 3'ü gol oldu. 🔥
+
+2' Yunus Akgün · 7' Diaoune · 39' Diaoune · 44' Batrakov · 52' kendi kalesine · 61' Osimhen
+
+Bitiricilik, istatistiği yener.
+
+Sence Galatasaray bu formla nereye kadar gider? Yorumlara yaz 👇
+
+📊 Veri: SofaScore, FotMob · Model: maç xG'sine dayalı Poisson simülasyonu
+
+#galatasaray #lille #şampiyonlarligi #ucl #osimhen #batrakov #yunusakgün #futbolanaliz #xg #pivot
+```
