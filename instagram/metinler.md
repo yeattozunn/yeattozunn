@@ -71,7 +71,8 @@ Bitiricilik, istatistiği yener.
 
 Sence Galatasaray bu formla nereye kadar gider? Yorumlara yaz 👇
 
-📊 Veri: SofaScore, FotMob · Model: maç xG'sine dayalı Poisson simülasyonu
+📊 Veri: SofaScore, FotMob · Model: maç xG'sine dayalı Poisson simülasyonu · Gol çizimleri temsilidir
+📷 Fotoğraflar: Wikimedia Commons · Liondartois, Zafer, Antoloji (CC BY-SA 4.0 / CC BY 4.0), Ottomanor (CC0)
 
 #galatasaray #lille #şampiyonlarligi #ucl #osimhen #batrakov #yunusakgün #futbolanaliz #xg #pivot
 ```

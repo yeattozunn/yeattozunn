@@ -10,3 +10,4 @@
 | kerem.jpg | File:Kerem Aktürkoğlu 9 Fenerbahçe 20260805 (10).JPG | Zafer | CC BY-SA 4.0 |
 | muriqi.jpg | File:Vedat Muriqi 19 Fenerbahçe 20260805 (1).JPG | Zafer | CC BY-SA 4.0 |
 | barisalper.jpg | File:Barış Alper Yılmaz 20251019.jpg | Zafer | CC BY 4.0 |
+| lille-stad.jpg | File:Lille vs PSG 2019 - Stade Pierre Mauroy.jpg | Liondartois | CC BY-SA 4.0 |

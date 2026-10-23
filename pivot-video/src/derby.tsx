@@ -39,7 +39,7 @@ const SIM = { fb: 0.45, draw: 0.23, gs: 0.32, oneOne: 0.101, totals: [0.036, 0.1
 /* ---------- shared pieces ---------- */
 
 // Graded photo with a slow Ken Burns move: desaturated, crushed, cooled toward the PİVOT ice.
-const Photo: React.FC<{
+export const Photo: React.FC<{
   src: string;
   pos?: string;
   zoom?: [number, number];
@@ -75,7 +75,7 @@ const Photo: React.FC<{
 };
 
 // Whip-in: each scene enters with a short sideways smear.
-const Whip: React.FC<{ children: React.ReactNode; dir?: 1 | -1 }> = ({ children, dir = 1 }) => {
+export const Whip: React.FC<{ children: React.ReactNode; dir?: 1 | -1 }> = ({ children, dir = 1 }) => {
   const frame = useCurrentFrame();
   const k = interpolate(frame, [0, 7], [1, 0], { ...clamp, easing: (x) => 1 - Math.pow(1 - x, 3) });
   return (
@@ -85,7 +85,7 @@ const Whip: React.FC<{ children: React.ReactNode; dir?: 1 | -1 }> = ({ children,
   );
 };
 
-const Chip: React.FC<{ children: React.ReactNode; color?: string }> = ({ children, color = C.white }) => (
+export const Chip: React.FC<{ children: React.ReactNode; color?: string }> = ({ children, color = C.white }) => (
   <span
     style={{
       ...mono(24),
@@ -101,7 +101,7 @@ const Chip: React.FC<{ children: React.ReactNode; color?: string }> = ({ childre
   </span>
 );
 
-const Flash: React.FC<{ at: number }> = ({ at }) => {
+export const Flash: React.FC<{ at: number }> = ({ at }) => {
   const frame = useCurrentFrame();
   const o = interpolate(frame, [at, at + 2, at + 9], [0, 0.85, 0], clamp);
   return <AbsoluteFill style={{ background: C.white, opacity: o, pointerEvents: "none" }} />;

@@ -15,6 +15,7 @@ import { FPS, H, W } from "./theme";
 import { SCENES, TOTAL } from "./timeline";
 import { CAPTIONS, VO } from "./captions";
 import { DERBY_TOTAL, DerbyReel } from "./derby";
+import { L2_TOTAL, Lille2Reel } from "./lille2";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -85,4 +86,13 @@ const DerbyWithFonts: React.FC = () => {
 
 export const DerbyComposition: React.FC = () => (
   <Composition id="PivotDerbyGSFB" component={DerbyWithFonts} durationInFrames={DERBY_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const Lille2WithFonts: React.FC = () => {
+  useFonts();
+  return <Lille2Reel />;
+};
+
+export const Lille2Composition: React.FC = () => (
+  <Composition id="PivotLilleGS2" component={Lille2WithFonts} durationInFrames={L2_TOTAL} fps={FPS} width={W} height={H} />
 );

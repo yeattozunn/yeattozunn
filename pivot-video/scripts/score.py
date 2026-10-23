@@ -19,6 +19,7 @@ LOGO = 33.98
 if len(sys.argv) > 2:
     cues = json.load(open(sys.argv[2]))
     DUR, CUTS, REVEAL, LOGO, TICKS = cues["dur"], cues["cuts"], cues["reveal"], cues["logo"], cues.get("ticks")
+HITS = cues.get("hits", []) if len(sys.argv) > 2 else []
 
 N = int(SR * DUR)
 t = np.arange(N) / SR
@@ -92,6 +93,8 @@ def impact(at, big=False):
 for c in CUTS:
     impact(c)
 impact(REVEAL, big=True)
+for h in HITS:  # goal moments
+    impact(h, big=True)
 impact(LOGO, big=True)
 
 # whoosh into each cut
