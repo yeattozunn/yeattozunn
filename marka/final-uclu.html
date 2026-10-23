@@ -1,0 +1,268 @@
+<title>PİVOT, SEZGİ, KADRAJ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;500;700&family=Geist+Mono:wght@400;500&family=Archivo:wdth,wght@62..125,300..900&family=Syne:wght@500;800&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap">
+<style>
+/* Layout: dark-first board; verdict up top, then one band per brand: same 3-scene story + profile grid, then a side-by-side scorecard */
+:root {
+  --bg: #0a0a0b; --fg: #f1efea; --muted: #8d8b86; --line: #232326; --card: #111113; --hi: #f1efea;
+  --f-ui: "Geist", system-ui, sans-serif; --f-mono: "Geist Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  --bg: #ecebe8; --fg: #121213; --muted: #66645f; --line: #d3d1cc; --card: #f7f6f4; --hi: #121213; color-scheme: light } }
+:root[data-theme="light"] { --bg: #ecebe8; --fg: #121213; --muted: #66645f; --line: #d3d1cc; --card: #f7f6f4; --hi: #121213; color-scheme: light }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--f-ui); font-size: 15px; line-height: 1.55; font-weight: 300; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 48px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+.tag { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+header h1 { font-size: clamp(28px, 4.4vw, 44px); line-height: 1.05; margin: 8px 0 12px; letter-spacing: -0.035em; font-weight: 500; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); max-width: 64ch; }
+.verdict { border: 1px solid var(--line); background: var(--card); border-radius: 14px; padding: 22px 24px; display: grid; gap: 8px; }
+.verdict h2 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+.verdict p { margin: 0; max-width: 72ch; }
+
+.band { display: grid; gap: 18px; border-top: 1px solid var(--line); padding-top: 28px; }
+.bhead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.bhead h2 { margin: 0; font-size: 30px; line-height: 1; }
+.bhead p { margin: 0; color: var(--muted); max-width: 56ch; font-size: 14px; }
+.scenes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.05fr); gap: 14px; align-items: start; }
+@media (max-width: 900px) { .scenes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .scenes { grid-template-columns: 1fr; } .reel, .grid { max-width: 300px; justify-self: center; width: 100%; } }
+.cap { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted); margin-top: 8px; text-transform: uppercase; }
+
+/* reel frames: fixed brand colors, identical in both page themes */
+.reel { aspect-ratio: 9 / 16; width: 100%; border-radius: 16px; overflow: hidden; position: relative; padding: 20px 16px; box-sizing: border-box; display: flex; flex-direction: column; color: #f1efea; isolation: isolate; }
+.reel::after { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: .13; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.bg { position: absolute; inset: 0; z-index: -1; }
+.sub { position: absolute; left: 0; right: 0; bottom: 38px; text-align: center; font: 500 11.5px/1.3 "Geist", sans-serif; padding: 0 10px; }
+.hdl { position: absolute; left: 16px; bottom: 14px; font: 400 9px "Geist Mono", monospace; letter-spacing: .14em; opacity: .65; }
+.pitch { width: 100%; margin: auto 0 52px; }
+
+/* PİVOT */
+.p .bg { background: radial-gradient(70% 40% at 50% 0%, rgba(190,215,235,.30) 0%, transparent 70%), linear-gradient(180deg, #16191c 0%, #0b0c0e 100%); }
+.p .meta { font: 400 8.5px "Geist Mono", monospace; letter-spacing: .18em; opacity: .6; margin-bottom: 10px; }
+.p h3 { font-family: "Archivo", sans-serif; font-stretch: 62%; font-weight: 800; font-size: clamp(30px, 3.8vw, 44px); line-height: .86; margin: 0; text-transform: uppercase; }
+.p h3 em { font-style: normal; color: #c9dcea; font-weight: 300; display: block; }
+.p .num { font-family: "Archivo", sans-serif; font-stretch: 62%; font-weight: 800; font-size: clamp(52px, 7vw, 80px); line-height: .9; margin: auto 0 0; }
+.p .bar { height: 2px; background: #c9dcea; margin: 10px 0 64px; }
+.p .pitch { color: #c9dcea; }
+/* SEZGİ */
+.s .bg { background: radial-gradient(60% 35% at 30% 55%, rgba(140,110,255,.55) 0%, transparent 70%), radial-gradient(55% 32% at 75% 62%, rgba(90,215,235,.40) 0%, transparent 70%), #05060d; background-size: 140% 140%, 140% 140%, auto; }
+.s h3 { font-family: "Syne", sans-serif; font-weight: 800; font-size: clamp(22px, 2.6vw, 30px); line-height: 1; margin: 0; letter-spacing: -0.02em; }
+.s h3 em { font-style: normal; font-weight: 500; opacity: .6; display: block; }
+.s .orb { margin: auto auto 56px; width: 64%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; text-align: center;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.24), rgba(255,255,255,.04) 60%); border: 1px solid rgba(255,255,255,.2); }
+.s .orb b { font-family: "Syne", sans-serif; font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; letter-spacing: -0.03em; display: block; line-height: 1; }
+.s .orb small { font: 400 8px "Geist Mono", monospace; letter-spacing: .16em; opacity: .75; }
+.s .pitch { color: #b9a7ff; }
+/* KADRAJ */
+.k .bg { background: radial-gradient(75% 50% at 50% 45%, #2a241c 0%, #0b0a08 75%); }
+.k .corners { position: absolute; inset: 11px; z-index: 1; pointer-events: none; opacity: .75;
+  background: linear-gradient(#f3e9d8,#f3e9d8) 0 0/14px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 0 0/1.5px 14px,
+    linear-gradient(#f3e9d8,#f3e9d8) 100% 0/14px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 100% 0/1.5px 14px,
+    linear-gradient(#f3e9d8,#f3e9d8) 0 100%/14px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 0 100%/1.5px 14px,
+    linear-gradient(#f3e9d8,#f3e9d8) 100% 100%/14px 1.5px, linear-gradient(#f3e9d8,#f3e9d8) 100% 100%/1.5px 14px; background-repeat: no-repeat; }
+.k .rec { font: 400 8.5px "Geist Mono", monospace; letter-spacing: .14em; display: flex; justify-content: space-between; color: #f3e9d8; }
+.k .rec b { color: #ff3b30; font-weight: 500; }
+.k h3 { font-family: "Bricolage Grotesque", sans-serif; font-variation-settings: "wdth" 75; font-weight: 800; font-size: clamp(28px, 3.4vw, 40px); line-height: .9; margin: 14px 0 0; letter-spacing: -0.02em; color: #f3e9d8; }
+.k h3 em { font-style: normal; font-weight: 300; display: block; }
+.k .num { font-family: "Bricolage Grotesque", sans-serif; font-variation-settings: "wdth" 75; font-weight: 800; font-size: clamp(50px, 6.6vw, 76px); color: #f3e9d8; line-height: .9; margin: auto 0 0; letter-spacing: -0.03em; }
+.k .lower { display: flex; gap: 8px; align-items: center; font: 400 9.5px/1.3 "Geist", sans-serif; color: #f3e9d8; margin: 10px 0 60px; }
+.k .lower i { width: 2.5px; height: 22px; background: #ff3b30; display: block; flex: none; }
+.k .pitch { color: #ff3b30; }
+
+/* profile grid mock */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; border-radius: 12px; overflow: hidden; align-self: start; }
+.grid > div { aspect-ratio: 4 / 5; display: grid; place-items: center; text-align: center; padding: 6px; box-sizing: border-box; color: #f1efea; line-height: .95; }
+.gp > div { background: linear-gradient(180deg, #1b1f23, #0b0c0e); font-family: "Archivo", sans-serif; font-stretch: 62%; font-weight: 800; font-size: clamp(14px, 1.6vw, 19px); text-transform: uppercase; }
+.gp > div:nth-child(3n+2) { background: linear-gradient(180deg, #2a3138, #101215); color: #c9dcea; }
+.gs > div { font-family: "Syne", sans-serif; font-weight: 800; font-size: clamp(12px, 1.4vw, 16px); background: radial-gradient(70% 60% at 30% 60%, rgba(140,110,255,.5), transparent 70%), radial-gradient(60% 50% at 75% 40%, rgba(90,215,235,.35), transparent 70%), #05060d; }
+.gs > div:nth-child(2n) { background: radial-gradient(70% 60% at 70% 60%, rgba(90,215,235,.45), transparent 70%), radial-gradient(60% 50% at 25% 30%, rgba(140,110,255,.35), transparent 70%), #05060d; }
+.gk > div { font-family: "Bricolage Grotesque", sans-serif; font-variation-settings: "wdth" 75; font-weight: 800; font-size: clamp(14px, 1.6vw, 19px); color: #f3e9d8; background: radial-gradient(80% 60% at 50% 45%, #2a241c, #0b0a08 80%); position: relative; }
+.gk > div::before { content: "● REC"; position: absolute; top: 6px; left: 7px; font: 400 6.5px "Geist Mono", monospace; letter-spacing: .1em; color: #ff3b30; }
+
+/* motion: every frame rests in its finished state; animation only plays the entrance */
+@media (prefers-reduced-motion: no-preference) {
+  .p h3, .p .num { animation: drop 3.6s cubic-bezier(.2,.9,.1,1) infinite; }
+  .p h3 em { animation: drop 3.6s cubic-bezier(.2,.9,.1,1) .12s infinite backwards; }
+  .p .bg { animation: sweep 3.6s ease-out infinite; }
+  .s .bg { animation: aurora 9s ease-in-out infinite alternate; }
+  .s .orb { animation: breathe 3.2s ease-in-out infinite; }
+  .k .lens { animation: focus 4s ease-out infinite; }
+  .k .rec b { animation: blink 1s steps(2, start) infinite; }
+}
+@keyframes drop { 0% { transform: translateY(-30%); opacity: 0; } 12%, 100% { transform: none; opacity: 1; } }
+@keyframes sweep { 0% { filter: brightness(.6); } 18%, 100% { filter: none; } }
+@keyframes aurora { from { background-position: 0% 40%, 100% 60%, 0 0; } to { background-position: 60% 60%, 30% 30%, 0 0; } }
+@keyframes breathe { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(185,167,255,0); } 50% { transform: scale(1.04); box-shadow: 0 0 40px rgba(185,167,255,.35); } }
+@keyframes focus { 0% { filter: blur(5px); transform: scale(1.04); } 20%, 100% { filter: none; transform: none; } }
+@keyframes blink { to { visibility: hidden; } }
+.lens { display: contents; }
+.k .lensbox { display: flex; flex-direction: column; flex: 1; }
+
+/* scorecard */
+.score { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--f-mono); font-weight: 400; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+td:first-child { color: var(--muted); }
+td b { font-weight: 600; }
+.dots { font-family: var(--f-mono); letter-spacing: .1em; color: var(--hi); white-space: nowrap; }
+footer { color: var(--muted); font-size: 14px; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pitch" viewBox="0 0 200 170">
+    <g fill="none" stroke="#f1efea" stroke-opacity=".22" stroke-width="1"><rect x="2" y="2" width="196" height="166"/><line x1="2" y1="85" x2="198" y2="85"/><circle cx="100" cy="85" r="19"/><rect x="55" y="2" width="90" height="30"/><rect x="55" y="138" width="90" height="30"/></g>
+    <g fill="#f1efea" fill-opacity=".55"><circle cx="40" cy="50" r="3.2"/><circle cx="160" cy="50" r="3.2"/><circle cx="100" cy="34" r="3.2"/><circle cx="30" cy="120" r="3.2"/><circle cx="170" cy="120" r="3.2"/></g>
+    <g stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 3"><line x1="66" y1="110" x2="96" y2="134"/><line x1="134" y1="110" x2="104" y2="134"/><line x1="100" y1="85" x2="100" y2="130"/></g>
+    <g fill="#f1efea"><circle cx="66" cy="110" r="3.6"/><circle cx="134" cy="110" r="3.6"/><circle cx="100" cy="85" r="3.6"/></g>
+    <circle cx="100" cy="136" r="5.5" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="tag">Final · aynı video, üç marka</div>
+    <h1>PİVOT, SEZGİ, KADRAJ: aynı maç, üç farklı kanal.</h1>
+    <p>Karar vermeyi kolaylaştırmak için üç markaya da aynı hikâyeyi giydirdim: Trabzonspor – Hearts maç önü. Her markada videonun üç sahnesi (açılış, skor, taktik) ve Instagram profil ızgarasının nasıl görüneceği var. Kareler hareketli, böylece her markanın ritmini de görebilirsin.</p>
+  </header>
+
+  <div class="verdict">
+    <div class="tag">Benim önerim</div>
+    <h2>PİVOT, ve yapay zekâ sesini SEZGİ'nin küresinden ödünç alalım.</h2>
+    <p>PİVOT her video türüne oturuyor: taktik, skor tahmini, maç önü. İsim de doğrudan futboldan geliyor. Eksiği "yapay zekâ analiz ediyor" hissi. Bunu SEZGİ'deki nefes alan küreyi PİVOT'un projektör mavisiyle, sadece seslendirme anlarında kullanarak çözebiliriz. SEZGİ tek başına çok özgün ama taktik sahnelerinde zayıf kalıyor. KADRAJ'ın fikri güçlü ama isim futbol söylemiyor. Yine de karar senin, aşağıda üçünü yan yana görebilirsin.</p>
+  </div>
+
+  <!-- PİVOT -->
+  <section class="band">
+    <div class="bhead">
+      <h2 style="font-family:Archivo,sans-serif;font-stretch:62%;font-weight:800;font-size:46px;letter-spacing:.01em">PİVOT</h2>
+      <p>Spor fragmanı. Sert kesimler, yukarıdan düşen kelimeler, soğuk projektör ışığı.</p>
+    </div>
+    <div class="scenes">
+      <div><div class="reel p"><div class="bg"></div>
+        <div class="meta">MAÇ ÖNÜ · TS — HRT</div>
+        <h3>Bu akşamki maç<em>50 bin kez oynandı.</em></h3>
+        <div class="num" data-count="50000">50.000</div><div class="bar"></div>
+        <div class="sub">elli bin kez oynattık.</div><div class="hdl">PİVOT</div></div>
+        <div class="cap">1 · Açılış</div></div>
+      <div><div class="reel p"><div class="bg"></div>
+        <div class="meta">SİMÜLASYON 50.000</div>
+        <h3>En olası<em>skor.</em></h3>
+        <div class="num">2–1</div><div class="bar" style="width:17%"></div>
+        <div class="sub">simülasyonların yüzde on yedisi.</div><div class="hdl">PİVOT</div></div>
+        <div class="cap">2 · Skor</div></div>
+      <div><div class="reel p"><div class="bg"></div>
+        <div class="meta">PLAN 02 / 03</div>
+        <h3>Kanté<em>düşer.</em></h3>
+        <svg class="pitch"><use href="#pitch"/></svg>
+        <div class="sub">üç kişiyle bastırıyor.</div><div class="hdl">PİVOT</div></div>
+        <div class="cap">3 · Taktik</div></div>
+      <div><div class="grid gp"><div>%92<br>kart</div><div>2–1</div><div>50.000</div><div>plan<br>üç</div><div>kim<br>kazanır</div><div>derbi</div></div>
+        <div class="cap">Profil ızgarası</div></div>
+    </div>
+  </section>
+
+  <!-- SEZGİ -->
+  <section class="band">
+    <div class="bhead">
+      <h2 style="font-family:Syne,sans-serif;font-weight:800;font-size:40px;background:linear-gradient(100deg,#b9a7ff,#7fe0f0);-webkit-background-clip:text;background-clip:text;color:transparent">sezgi</h2>
+      <p>Yapay zekânın sezgisi. Akan kuzey ışıkları, konuşurken nefes alan küre, sakin ve gizemli.</p>
+    </div>
+    <div class="scenes">
+      <div><div class="reel s"><div class="bg"></div>
+        <h3>Bu akşamki maç<em>50 bin kez oynandı.</em></h3>
+        <div class="orb"><div><b data-count="50000">50.000</b><small>SİMÜLASYON</small></div></div>
+        <div class="sub">elli bin kez oynattık.</div><div class="hdl">SEZGİ</div></div>
+        <div class="cap">1 · Açılış</div></div>
+      <div><div class="reel s"><div class="bg"></div>
+        <h3>En olası<em>skor.</em></h3>
+        <div class="orb"><div><b>2–1</b><small>%17 · 50.000 MAÇ</small></div></div>
+        <div class="sub">simülasyonların yüzde on yedisi.</div><div class="hdl">SEZGİ</div></div>
+        <div class="cap">2 · Skor</div></div>
+      <div><div class="reel s"><div class="bg"></div>
+        <h3>Plan iki:<em>Kanté düşer.</em></h3>
+        <svg class="pitch"><use href="#pitch"/></svg>
+        <div class="sub">üç kişiyle bastırıyor.</div><div class="hdl">SEZGİ</div></div>
+        <div class="cap">3 · Taktik</div></div>
+      <div><div class="grid gs"><div>%92<br>kart</div><div>2–1</div><div>50.000</div><div>plan üç</div><div>kim<br>kazanır?</div><div>derbi</div></div>
+        <div class="cap">Profil ızgarası</div></div>
+    </div>
+  </section>
+
+  <!-- KADRAJ -->
+  <section class="band">
+    <div class="bhead">
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:44px;letter-spacing:-0.02em">KADRAJ</h2>
+      <p>Canlı yayın kamerası. Netleme ile açılan kareler, yanıp sönen REC, TV alt bantları.</p>
+    </div>
+    <div class="scenes">
+      <div><div class="reel k"><div class="bg"></div><div class="corners"></div>
+        <div class="rec"><span><b>●</b> REC</span><span class="tc">00:00:04</span></div>
+        <div class="lens"><h3>Bu akşamki maç<em>50 bin kez oynandı.</em></h3>
+        <div class="num" data-count="50000">50.000</div></div>
+        <div class="lower"><i></i><div><b style="font-weight:600">Trabzonspor – Hearts</b><br><span style="opacity:.65">Konferans Ligi · maç önü</span></div></div>
+        <div class="sub">elli bin kez oynattık.</div><div class="hdl">KADRAJ</div></div>
+        <div class="cap">1 · Açılış</div></div>
+      <div><div class="reel k"><div class="bg"></div><div class="corners"></div>
+        <div class="rec"><span><b>●</b> REC</span><span class="tc">00:00:11</span></div>
+        <div class="lens"><h3>En olası<em>skor.</em></h3>
+        <div class="num">2–1</div></div>
+        <div class="lower"><i></i><div><b style="font-weight:600">%17</b><br><span style="opacity:.65">50.000 maçta en çok çıkan skor</span></div></div>
+        <div class="sub">simülasyonların yüzde on yedisi.</div><div class="hdl">KADRAJ</div></div>
+        <div class="cap">2 · Skor</div></div>
+      <div><div class="reel k"><div class="bg"></div><div class="corners"></div>
+        <div class="rec"><span><b>●</b> REC</span><span class="tc">00:00:19</span></div>
+        <div class="lens"><h3>Plan iki:<em>Kanté düşer.</em></h3>
+        <svg class="pitch"><use href="#pitch"/></svg></div>
+        <div class="sub">üç kişiyle bastırıyor.</div><div class="hdl">KADRAJ</div></div>
+        <div class="cap">3 · Taktik</div></div>
+      <div><div class="grid gk"><div>%92<br>kart</div><div>2–1</div><div>50.000</div><div>plan<br>üç</div><div>kim<br>kazanır?</div><div>derbi</div></div>
+        <div class="cap">Profil ızgarası</div></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="bhead"><h2 style="font-size:26px;font-weight:500;letter-spacing:-0.02em">Yan yana</h2><p>Benim değerlendirmem. ●●● güçlü, ●○○ zayıf.</p></div>
+    <div class="score"><table>
+      <thead><tr><th></th><th>PİVOT</th><th>SEZGİ</th><th>KADRAJ</th></tr></thead>
+      <tbody>
+        <tr><td>Taktik videoları</td><td><span class="dots">●●●</span></td><td><span class="dots">●○○</span> saha çizimleri ışıkta kayboluyor</td><td><span class="dots">●●○</span></td></tr>
+        <tr><td>Skor ve simülasyon</td><td><span class="dots">●●●</span></td><td><span class="dots">●●●</span> küre rakamlara çok yakışıyor</td><td><span class="dots">●●○</span></td></tr>
+        <tr><td>"Yapay zekâ" hissi</td><td><span class="dots">●○○</span></td><td><span class="dots">●●●</span></td><td><span class="dots">●○○</span></td></tr>
+        <tr><td>Akışta fark edilme</td><td><span class="dots">●●○</span></td><td><span class="dots">●●●</span> renkli, öne çıkar</td><td><span class="dots">●●●</span> vizör hemen tanınır</td></tr>
+        <tr><td>İsim futbol söylüyor mu</td><td><span class="dots">●●●</span> mevki adı</td><td><span class="dots">●○○</span></td><td><span class="dots">●○○</span></td></tr>
+        <tr><td>Üretim kolaylığı</td><td><span class="dots">●●●</span> az efekt</td><td><span class="dots">●●○</span> ışık animasyonu ağır</td><td><span class="dots">●●○</span></td></tr>
+        <tr><td>Risk</td><td>Fazla "Nike" görünüp sıradanlaşabilir</td><td>Mor-turkuaz geçiş genel "AI" görüntüsüne kayabilir</td><td>Spor dışı bir kanal gibi algılanabilir</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <footer>Birini seç ya da "PİVOT + SEZGİ küresi" gibi bir karışım söyle. Sonra bu markayla gerçek bir maç için ilk 10 saniyelik videoyu render edeyim.</footer>
+</div>
+
+<script>
+(function () {
+  if (!window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const fmt = n => n.toLocaleString('tr-TR');
+  const els = document.querySelectorAll('[data-count]');
+  function run() {
+    const t0 = performance.now();
+    (function tick(t) {
+      const k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+      els.forEach(el => { el.textContent = fmt(Math.round(+el.dataset.count * e)); });
+      if (k < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+  run(); setInterval(run, 4000);
+  const tcs = document.querySelectorAll('.tc');
+  const base = [...tcs].map(el => { const [h, m, s] = el.textContent.split(':').map(Number); return h * 3600 + m * 60 + s; });
+  let f = 0;
+  setInterval(() => { f++; tcs.forEach((el, i) => { const s = base[i] + Math.floor(f / 25); const fr = String(f % 25).padStart(2, '0');
+    el.textContent = '00:' + String(Math.floor(s / 60) % 60).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0') + ':' + fr; }); }, 40);
+})();
+</script>
