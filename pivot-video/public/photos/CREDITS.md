@@ -18,5 +18,8 @@
 
 | File | Prompt summary |
 |---|---|
-| public/wan/batrakov-tunnel.mp4 | Stand-in player in a Galatasaray kit, arms crossed in a stadium tunnel (not a likeness of Batrakov) |
 | public/wan/rams-flares.mp4 | Packed stadium at night, red-yellow flares and flags |
+
+## Supplied by the account owner
+
+bat-arms.png, bat-shot.png, bat-dribble.png, bat-signing.jpg, bat-close.jpg — Batrakov photos provided by the user for the Batrakov reel.

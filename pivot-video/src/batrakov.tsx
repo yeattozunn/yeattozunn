@@ -1,7 +1,7 @@
 import React from "react";
-import { AbsoluteFill, Audio, interpolate, OffthreadVideo, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { Caption, Count, Crest, Drop, FadeIn, Grain, Meta, PivotMark, Stage } from "./parts";
-import { Chip, Flash, Whip } from "./derby";
+import { AbsoluteFill, Audio, Img, interpolate, OffthreadVideo, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { Caption, Crest, Drop, FadeIn, Grain, Meta, PivotMark, Stage } from "./parts";
+import { Chip, Flash, Photo, Whip } from "./derby";
 import { Dot, Move, NetFlash, Pitch, P, PY, PH } from "./lille2";
 import { C, display, F, mono } from "./theme";
 import { BAT_CAPTIONS } from "./batrakovCaptions";
@@ -15,18 +15,18 @@ const GOLD = "#f2b632";
 
 // Scene boundaries (frames), laid on the phrase slots in batrakovCaptions.ts.
 export const BT = {
-  hook: { from: 0, dur: 270 },
-  name: { from: 270, dur: 69 },
-  origin: { from: 339, dur: 177 },
-  rise: { from: 516, dur: 504 },
-  istanbul: { from: 1020, dur: 309 },
-  profile: { from: 1329, dur: 189 },
-  derby: { from: 1518, dur: 342 },
+  hook: { from: 0, dur: 313 },
+  name: { from: 313, dur: 65 },
+  origin: { from: 378, dur: 165 },
+  rise: { from: 543, dur: 469 },
+  istanbul: { from: 1012, dur: 284 },
+  profile: { from: 1296, dur: 175 },
+  derby: { from: 1471, dur: 317 },
 };
-export const BT_TOTAL = 1860;
+export const BT_TOTAL = 1788;
 
 // Aleksey Batrakov (b. 9 Jun 2005). Sources: Wikipedia, haberler.com, Sofascore, Milliyet.
-// AI-generated b-roll (Wan 3.0 via Higgsfield) is a stand-in player, not Batrakov himself.
+// Player photos supplied by the account owner; the stadium b-roll is AI-generated (Wan 3.0) and shows no real person.
 
 /* ---------- AI b-roll, slowed down for a cinematic feel ---------- */
 const Broll: React.FC<{ src: string; rate: number; dim?: number }> = ({ src, rate, dim = 0.6 }) => (
@@ -36,31 +36,52 @@ const Broll: React.FC<{ src: string; rate: number; dim?: number }> = ({ src, rat
   </AbsoluteFill>
 );
 
-/* ---------- 1 · hook: first Russian, 21, €25m ---------- */
+/* ---------- 1 · hook: magazine-cover cutout, 21 → €25m → a first in 121 years ---------- */
+const Cutout: React.FC<{ src: string; height: number; style?: React.CSSProperties }> = ({ src, height, style }) => (
+  <Img
+    src={staticFile(`photos/${src}`)}
+    style={{ position: "absolute", height, filter: "drop-shadow(0 0 2px rgba(201,220,234,0.9)) drop-shadow(0 40px 60px rgba(0,0,0,0.75)) contrast(1.06)", ...style }}
+  />
+);
+
 const Hook: React.FC = () => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const rise = spring({ frame: frame - 2, fps, config: { damping: 200, mass: 1.2 } });
+  const push = interpolate(frame, [0, 313], [1, 1.08]);
+  const big = frame < 67 ? "21" : "€25M";
+  const bigIn = spring({ frame: frame - (frame < 67 ? 10 : 67), fps, config: { damping: 13, mass: 0.6 } });
+  const glow = 0.5 + 0.5 * Math.sin(frame * 0.12);
   return (
-    <AbsoluteFill>
-      <Broll src="wan/batrakov-tunnel.mp4" rate={0.55} />
-      <div style={{ position: "absolute", left: PAD, right: PAD, top: 230, display: "flex", flexDirection: "column", gap: 24 }}>
-        <Meta left="Galatasaray · 121 yıl" right="Bir ilk" />
-        <Drop size={150} delay={14} lines={[{ text: "İlk Rus" }, { text: "futbolcu.", color: C.ice, weight: 300 }]} />
+    <AbsoluteFill style={{ background: "#08090b", overflow: "hidden" }}>
+      <AbsoluteFill style={{ background: `radial-gradient(60% 45% at 50% 55%, rgba(200,30,40,${0.38 + 0.08 * glow}) 0%, rgba(242,182,50,0.10) 45%, transparent 75%)` }} />
+      <AbsoluteFill style={{ transform: `scale(${push})` }}>
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 420,
+            textAlign: "center",
+            ...display(frame < 67 ? 760 : 470),
+            color: frame < 67 ? C.white : GOLD,
+            opacity: (frame >= 140 ? interpolate(frame, [140, 152], [0.92, 0.16], clamp) : 0.92) * bigIn,
+            transform: `scale(${0.8 + 0.2 * bigIn})`,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          {big}
+        </div>
+        <Cutout src="bat-arms.png" height={1420} style={{ left: 540 - 1420 * (1159 / 1356) / 2, bottom: -80 - (1 - rise) * 300 }} />
+      </AbsoluteFill>
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,9,11,0.85) 0%, transparent 22%, transparent 62%, rgba(8,9,11,0.9) 100%)" }} />
+      <div style={{ position: "absolute", left: PAD, right: PAD, top: 220, display: "flex", flexDirection: "column", gap: 18 }}>
+        <Meta left="Galatasaray · 2026" right={frame < 67 ? "Yaş" : "Bonservis"} />
+        {frame >= 140 && frame < 260 ? <Drop size={120} delay={143} lines={[{ text: "121 yılda" }, { text: "bir ilk.", color: GOLD, weight: 300 }]} /> : null}
+        {frame >= 260 ? <Drop size={140} delay={263} lines={[{ text: "İlk Rus" }, { text: "futbolcu.", color: C.ice }]} /> : null}
       </div>
-      <div style={{ position: "absolute", left: PAD, right: PAD, top: 1000, display: "flex", flexDirection: "column", gap: 10 }}>
-        <FadeIn at={132}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
-            <span style={{ ...display(150), color: C.white }}>21</span>
-            <span style={{ ...mono(26), color: C.dim }}>yaşında</span>
-          </div>
-        </FadeIn>
-        {frame >= 190 ? (
-          <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
-            <Count to={25} start={192} dur={24} prefix="€" style={{ ...display(190), color: GOLD }} />
-            <span style={{ ...display(90, 300), color: GOLD }}>milyon</span>
-          </div>
-        ) : null}
-      </div>
-      <Flash at={198} />
+      <Flash at={67} />
+      <Flash at={263} />
     </AbsoluteFill>
   );
 };
@@ -68,27 +89,28 @@ const Hook: React.FC = () => {
 /* ---------- 2 · the name ---------- */
 const Name: React.FC = () => (
   <Whip>
-    <Stage light={1.1}>
-      <AbsoluteFill style={{ justifyContent: "center", padding: PAD }}>
+    <AbsoluteFill>
+      <Photo src="bat-close.jpg" pos="58% 30%" zoom={[1.15, 1.3]} dim={0.6} />
+      <AbsoluteFill style={{ justifyContent: "flex-end", padding: PAD, paddingBottom: 560 }}>
         <Meta left="Ofansif orta saha" right="9 Haziran 2005" />
-        <div style={{ height: 30 }} />
+        <div style={{ height: 24 }} />
         <Drop size={150} delay={2} stagger={4} lines={[{ text: "Aleksey" }, { text: "Batrakov", color: C.ice }]} />
-        <div style={{ height: 20 }} />
-        <Drop size={120} delay={30} lines={[{ text: "kim?", weight: 300 }]} />
+        <div style={{ height: 10 }} />
+        <Drop size={110} delay={24} lines={[{ text: "kim?", weight: 300 }]} />
       </AbsoluteFill>
-    </Stage>
+    </AbsoluteFill>
   </Whip>
 );
 
 /* ---------- 3 · academy to debut ---------- */
 const Origin: React.FC = () => {
   const frame = useCurrentFrame();
-  const line = interpolate(frame, [10, 110], [0, 1], clamp);
+  const line = interpolate(frame, [8, 100], [0, 1], clamp);
   const x0 = PAD + 30;
   const x1 = 1080 - PAD - 30;
   const nodes = [
     { at: 8, k: 0, year: "2011", age: "6 yaş", what: "Lokomotiv Moskova akademisi" },
-    { at: 96, k: 1, year: "31 Mart 2024", age: "18 yaş", what: "İlk lig maçı · Krasnodar" },
+    { at: 93, k: 1, year: "31 Mart 2024", age: "18 yaş", what: "İlk lig maçı · Krasnodar" },
   ];
   return (
     <Whip dir={-1}>
@@ -146,18 +168,21 @@ const Rise: React.FC = () => {
   return (
     <Whip>
       <Stage light={frame < 60 ? 1.3 : 0.9}>
+        <div style={{ position: "absolute", right: -120, bottom: 260, opacity: interpolate(frame, [20, 50], [0, 0.28], clamp) }}>
+          <Img src={staticFile("photos/bat-shot.png")} style={{ height: 1250, filter: "grayscale(0.6)" }} />
+        </div>
         <div style={{ position: "absolute", left: PAD, right: PAD, top: 230, display: "flex", flexDirection: "column", gap: 24 }}>
           <Meta left="Rusya Premier Ligi" right="2024 – 2026" />
           <Drop size={150} delay={6} lines={[{ text: "Sonra" }, { text: "patlama geldi.", color: C.ice, weight: 300 }]} />
         </div>
         <div style={{ position: "absolute", left: PAD, right: PAD, top: 720, display: "flex", flexDirection: "column", gap: 60 }}>
-          <SeasonBar at={64} season="2024–25" goals={14} note="Lig · gol krallığında 3." max={30} />
-          <SeasonBar at={250} season="2025–26" goals={17} assists={13} note="Tüm kortlar" max={30} />
+          <SeasonBar at={59} season="2024–25" goals={14} note="Lig · gol krallığında 3." max={30} />
+          <SeasonBar at={212} season="2025–26" goals={17} assists={13} note="Tüm kortlar" max={30} />
         </div>
         <div style={{ position: "absolute", left: PAD, right: PAD, top: 1110, display: "flex", flexWrap: "wrap", gap: 14 }}>
-          <FadeIn at={160}><Chip color={C.ice}>Gol krallığında 3.</Chip></FadeIn>
-          <FadeIn at={356}><Chip color={LOKO}>Spartak'a hat-trick</Chip></FadeIn>
-          <FadeIn at={416}><Chip color={GOLD}>2× ligin en iyi genç oyuncusu</Chip></FadeIn>
+          <FadeIn at={147}><Chip color={C.ice}>Gol krallığında 3.</Chip></FadeIn>
+          <FadeIn at={311}><Chip color={LOKO}>Spartak'a hat-trick</Chip></FadeIn>
+          <FadeIn at={366}><Chip color={GOLD}>2× ligin en iyi genç oyuncusu</Chip></FadeIn>
         </div>
         <Flash at={6} />
       </Stage>
@@ -169,36 +194,34 @@ const Rise: React.FC = () => {
 const Istanbul: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const phase = frame < 150 ? 0 : 1;
-  const arc = interpolate(frame, [14, 70], [0, 1], clamp);
-  // abstract map: Moscow top-right, Istanbul lower-left, ~1,750 km apart
-  const mo = { x: 760, y: 700 };
-  const ist = { x: 330, y: 1150 };
-  const ctrl = { x: 760, y: 1050 };
-  const pt = (t: number) => ({
-    x: (1 - t) * (1 - t) * mo.x + 2 * (1 - t) * t * ctrl.x + t * t * ist.x,
-    y: (1 - t) * (1 - t) * mo.y + 2 * (1 - t) * t * ctrl.y + t * t * ist.y,
-  });
-  const pts = Array.from({ length: 41 }, (_, i) => pt((i / 40) * arc));
-  const d = pts.map((p, i) => `${i ? "L" : "M"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
+  const phase = frame < 48 ? 0 : 1;
   const card = (d0: number) => spring({ frame: frame - d0, fps, config: { damping: 14 } });
+  const sign = spring({ frame: frame - 2, fps, config: { damping: 15, mass: 0.7 } });
   return (
     <Whip dir={-1}>
       <Stage>
         {phase === 0 ? (
           <>
             <div style={{ position: "absolute", left: PAD, right: PAD, top: 230, display: "flex", flexDirection: "column", gap: 24 }}>
-              <Meta left="20 Ağustos 2026" right="€25 milyon" />
+              <Meta left="20 Ağustos 2026" right="Moskova → İstanbul" />
               <Drop size={150} delay={4} lines={[{ text: "Ağustosta" }, { text: "İstanbul.", color: C.ice, weight: 300 }]} />
             </div>
-            <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
-              <path d={d} fill="none" stroke={C.ice} strokeWidth={5} strokeDasharray="14 12" />
-              <circle cx={mo.x} cy={mo.y} r={16} fill={LOKO} />
-              <circle cx={ist.x} cy={ist.y} r={16 + 4 * Math.sin(frame * 0.3)} fill={C.ice} opacity={arc} />
-              <text x={mo.x + 30} y={mo.y + 10} style={{ ...display(54) }} fill={C.white}>Moskova</text>
-              <text x={ist.x - 20} y={ist.y + 70} style={{ ...display(54) }} fill={C.white} opacity={arc}>İstanbul</text>
-              <text x={600} y={980} style={{ ...mono(22) }} fill={C.dim} opacity={arc}>1.750 KM</text>
-            </svg>
+            <div
+              style={{
+                position: "absolute",
+                left: 540 - 300,
+                top: 640,
+                width: 600,
+                height: 754,
+                borderRadius: 16,
+                overflow: "hidden",
+                border: `3px solid ${C.white}`,
+                boxShadow: "0 40px 120px rgba(0,0,0,0.8)",
+                transform: `translateY(${(1 - sign) * 400}px) rotate(${(1 - sign) * 8 - 2}deg)`,
+              }}
+            >
+              <Img src={staticFile("photos/bat-signing.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
           </>
         ) : (
           <>
@@ -206,8 +229,8 @@ const Istanbul: React.FC = () => {
               <Meta left="Şampiyonlar Ligi" right="3 maç · 2 gol" />
               <div style={{ display: "flex", gap: 20 }}>
                 {[
-                  { at: 152, vs: "Barcelona", min: "28'", how: "Leão'nun pası" },
-                  { at: 162, vs: "Lille", min: "44'", how: "Sallai'nin ortası · kafa" },
+                  { at: 137, vs: "Barcelona", min: "28'", how: "Leão'nun pası" },
+                  { at: 150, vs: "Lille", min: "44'", how: "Sallai'nin ortası · kafa" },
                 ].map((c) => (
                   <div
                     key={c.vs}
@@ -228,17 +251,17 @@ const Istanbul: React.FC = () => {
                 ))}
               </div>
             </div>
-            <Pitch zoom={1.25} anchor="top" from={220}>
-              <Dot at={[0.4, 0.1]} ring color="#d23b4a" from={210} />
-              <Dot at={[0.6, 0.1]} ring color="#d23b4a" from={212} />
-              <Dot at={[0.5, 0.03]} ring color="#d23b4a" from={214} />
-              <Dot at={[0.9, 0.24]} label="Sallai" color={C.white} from={216} />
-              <Dot at={[0.47, 0.09]} label="Batrakov" color={C.ice} from={218} glow labelBelow={false} />
-              <Move pts={[[0.9, 0.24], [0.75, 0.08], [0.55, 0.06], [0.47, 0.09]]} from={232} dur={24} ball color={C.white} width={5} />
-              <Move pts={[[0.47, 0.09], [0.49, 0.04], [0.5, -0.01]]} from={262} dur={10} ball width={6} />
-              <NetFlash at={272} top />
+            <Pitch zoom={1.25} anchor="top" from={200}>
+              <Dot at={[0.4, 0.1]} ring color="#d23b4a" from={190} />
+              <Dot at={[0.6, 0.1]} ring color="#d23b4a" from={192} />
+              <Dot at={[0.5, 0.03]} ring color="#d23b4a" from={194} />
+              <Dot at={[0.9, 0.24]} label="Sallai" color={C.white} from={196} />
+              <Dot at={[0.47, 0.09]} label="Batrakov" color={C.ice} from={198} glow labelBelow={false} />
+              <Move pts={[[0.9, 0.24], [0.75, 0.08], [0.55, 0.06], [0.47, 0.09]]} from={206} dur={24} ball color={C.white} width={5} />
+              <Move pts={[[0.47, 0.09], [0.49, 0.04], [0.5, -0.01]]} from={236} dur={10} ball width={6} />
+              <NetFlash at={246} top />
             </Pitch>
-            <Flash at={272} />
+            <Flash at={246} />
           </>
         )}
       </Stage>
@@ -266,7 +289,11 @@ const Profile: React.FC = () => {
           <text x={am.x} y={am.y + 12} textAnchor="middle" style={{ ...display(44) }} fill={C.white} opacity={z}>10 NUMARA</text>
           <text x={rw.x} y={rw.y + 12} textAnchor="middle" style={{ ...display(34) }} fill={C.white} opacity={z}>SAĞ KANAT</text>
         </Pitch>
-        <div style={{ position: "absolute", left: PAD, right: PAD, top: PY + PH - 320, display: "flex", alignItems: "center", gap: 24, padding: "20px 24px", background: "rgba(8,9,11,0.75)", borderRadius: 14, border: `1px solid ${C.faint}`, opacity: interpolate(frame, [82, 94], [0, 1], clamp) }}>
+        <Img
+          src={staticFile("photos/bat-dribble.png")}
+          style={{ position: "absolute", right: -40, bottom: 470, height: 680, opacity: interpolate(frame, [4, 20], [0, 1], clamp), filter: "drop-shadow(0 30px 50px rgba(0,0,0,0.7))" }}
+        />
+        <div style={{ position: "absolute", left: PAD, width: 560, top: PY + PH - 320, display: "flex", alignItems: "center", gap: 24, padding: "20px 24px", background: "rgba(8,9,11,0.75)", borderRadius: 14, border: `1px solid ${C.faint}`, opacity: interpolate(frame, [82, 94], [0, 1], clamp) }}>
           <div style={{ display: "flex", flexDirection: "column", width: 70, height: 48, borderRadius: 4, overflow: "hidden" }}>
             <div style={{ flex: 1, background: "#ffffff" }} />
             <div style={{ flex: 1, background: "#1c3f94" }} />
@@ -286,7 +313,7 @@ const Profile: React.FC = () => {
 const Derby: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const lf = frame - 266;
+  const lf = frame - 172;
   const rot = spring({ frame: lf - 4, fps, config: { damping: 11, mass: 0.8 } });
   const word = spring({ frame: lf - 12, fps, config: { damping: 200 } });
   return (
@@ -296,7 +323,7 @@ const Derby: React.FC = () => {
           <Broll src="wan/rams-flares.mp4" rate={0.6} dim={0.55} />
           <div style={{ position: "absolute", left: PAD, right: PAD, top: 230, display: "flex", flexDirection: "column", gap: 24 }}>
             <Meta left="Pazartesi · 21:30" right="RAMS Park" />
-            {frame < 82 ? (
+            {frame < 80 ? (
               <Drop size={200} delay={8} lines={[{ text: "Sırada" }, { text: "derbi.", color: C.ice, weight: 300 }]} />
             ) : (
               <>
@@ -305,6 +332,10 @@ const Derby: React.FC = () => {
               </>
             )}
           </div>
+          <Img
+            src={staticFile("photos/bat-shot.png")}
+            style={{ position: "absolute", right: -90, bottom: 540, height: 820, filter: "drop-shadow(0 0 2px rgba(201,220,234,0.8)) drop-shadow(0 30px 60px rgba(0,0,0,0.8))", transform: `translateX(${interpolate(frame, [0, 18], [300, 0], clamp)}px)` }}
+          />
           <div style={{ position: "absolute", left: PAD, right: PAD, top: 1110, display: "flex", alignItems: "center", gap: 20 }}>
             <FadeIn at={12}>
               <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -326,7 +357,7 @@ const Derby: React.FC = () => {
             </div>
           </AbsoluteFill>
           <div style={{ position: "absolute", left: PAD, right: PAD, bottom: 330, ...mono(17), letterSpacing: "0.06em", lineHeight: 1.6, color: C.dim, textAlign: "center" }}>
-            Video planları yapay zekâ ile üretilmiştir (Wan 3.0) · Temsilidir
+            Tribün planı yapay zekâ ile üretilmiştir (Wan 3.0)
             <br />
             Veri: Wikipedia · Sofascore · Milliyet
           </div>
