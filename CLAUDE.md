@@ -13,9 +13,12 @@ Bu repo, Higgsfield API ile üretilen AI videoları içeriyor. Kullanıcıyla T�
 - API anahtarı repoya asla commit edilmez.
 
 ## Model ve fiyat (Higgsfield API, indirimli fiyatlar değişebilir)
-- Varsayılan: Kling 3.0 Standard image-to-video, sessiz (`kling-video/v3.0/std/image-to-video`, ~0,042 $/s). Multi-shot ve `last_image_url` destekliyor.
+- Kling 4.0 (`kling-video/v4.0/image-to-video` ve `kling-video/v4.0/text-to-video`): 720p ~0,079 $/s, 1080p ~0,118 $/s (24.10.2026, %50 indirimle); ses açık da aynı fiyat.
+- Kling 3.0 Standard (`kling-video/v3.0/std/image-to-video`, `.../text-to-video`): ~0,071 $/s (indirim %15'e düştü). Multi-shot ve `last_image_url` destekliyor.
 - En ucuz: Wan 3.0 Prime 480p (~0,027 $/s), ama kamera hareketi Kling kadar iyi değil.
-- Fiyatı üretmeden önce `POST /estimate/<endpoint>` ile kontrol et.
+- Genjutsu Light hareket aktarımı (`higgsfield/genjutsu-light/motion-transfer/v1.0`): 480p 0,05 $/s, 720p 0,10 $/s; ücret = çıktı süresi + giriş videosu süresi.
+- Fiyatı üretmeden önce `POST /estimate/<endpoint>` ile kontrol et (estimate bilinmeyen parametreleri yok sayar, özellik desteğini göstermez).
+- Görsel modelleri (Nano Banana, Grok) kişi/karakter sahnelerinde çoğu zaman "AI" duruyor; Kling text-to-video (görselsiz) çok daha gerçekçi çıktı (samuray 7-Eleven testi). Önce bunu öner.
 
 ## Görsel tarzı (AI gibi durmasın)
 **Kullanıcıya verdiğin her görsel promptu baştan doğal ve gerçekçi yazılmalı.** Aşağıdaki kuralların hepsi her promptta uygulanır; kullanıcının "AI duruyor" demesini bekleme. Prompt "Candid still from a low-budget 1990s ... TV series" ile başlar ("behind-the-scenes" yazma, kadraja kameraman ve mikrofon giriyor); kimse kameraya bakmaz, ürün doğal kullanılır, karakter işine odaklıdır, her şey odaktadır.
