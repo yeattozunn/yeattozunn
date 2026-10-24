@@ -11,3 +11,5 @@
 | muriqi.jpg | File:Vedat Muriqi 19 Fenerbahçe 20260805 (1).JPG | Zafer | CC BY-SA 4.0 |
 | barisalper.jpg | File:Barış Alper Yılmaz 20251019.jpg | Zafer | CC BY 4.0 |
 | lille-stad.jpg | File:Lille vs PSG 2019 - Stade Pierre Mauroy.jpg | Liondartois | CC BY-SA 4.0 |
+| bjk-stad1.jpg, bjk-stad3.jpg | File:Tüpraş Stadyumu 20231011 1.jpg / 3.jpg | Beşiktaş JK | CC BY 2.0 |
+| mateta.jpg | File:Jean-Philippe Mateta France v Morocco 9 July 2026-196.jpg | Bryan Berlin | CC BY-SA 4.0 (not used in a reel yet) |

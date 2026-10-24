@@ -101,9 +101,10 @@ export const Meta: React.FC<{ left: string; right?: string; delay?: number }> = 
   );
 };
 
-export const Crest: React.FC<{ team: "gs" | "lille"; size: number; style?: React.CSSProperties }> = ({ team, size, style }) => (
+// team = crest file name in public/ (gs, lille, bjk, palace)
+export const Crest: React.FC<{ team: string; size: number; style?: React.CSSProperties }> = ({ team, size, style }) => (
   <Img
-    src={staticFile(team === "gs" ? "gs.svg" : "lille.svg")}
+    src={staticFile(`${team}.svg`)}
     style={{ width: size, height: size, objectFit: "contain", filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.6))", ...style }}
   />
 );

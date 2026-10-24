@@ -29,12 +29,12 @@ export const L2_TOTAL = 1692;
 
 /* ---------- tactics board primitives ---------- */
 // Vertical pitch. Galatasaray attack the top goal (Lille's), Lille attack the bottom goal.
-const PX = 90;
-const PY = 520;
-const PW = 900;
-const PH = 830;
-type Pt = [number, number];
-const P = ([x, y]: Pt) => ({ x: PX + x * PW, y: PY + y * PH });
+export const PX = 90;
+export const PY = 520;
+export const PW = 900;
+export const PH = 830;
+export type Pt = [number, number];
+export const P = ([x, y]: Pt) => ({ x: PX + x * PW, y: PY + y * PH });
 
 // Catmull-Rom through the points, sampled as a polyline (pitch units).
 const spline = (pts: Pt[], n = 48): Pt[] => {
@@ -64,7 +64,7 @@ const spline = (pts: Pt[], n = 48): Pt[] => {
 };
 
 // zoom: camera push toward one goal ("top" = Lille's goal, "bottom" = Galatasaray's), starting at frame `from`.
-const Pitch: React.FC<{ children?: React.ReactNode; zoom?: number; anchor?: "top" | "bottom"; from?: number }> = ({
+export const Pitch: React.FC<{ children?: React.ReactNode; zoom?: number; anchor?: "top" | "bottom"; from?: number }> = ({
   children,
   zoom = 1,
   anchor = "top",
@@ -97,7 +97,7 @@ const Pitch: React.FC<{ children?: React.ReactNode; zoom?: number; anchor?: "top
   );
 };
 
-const Dot: React.FC<{ at: Pt; label?: string; color?: string; ring?: boolean; from?: number; glow?: boolean; labelBelow?: boolean }> = ({
+export const Dot: React.FC<{ at: Pt; label?: string; color?: string; ring?: boolean; from?: number; glow?: boolean; labelBelow?: boolean }> = ({
   at,
   label,
   color = C.white,
@@ -125,7 +125,7 @@ const Dot: React.FC<{ at: Pt; label?: string; color?: string; ring?: boolean; fr
 };
 
 // A move drawn over time: pass, run or shot. Dashed = player run, solid = ball.
-const Move: React.FC<{ pts: Pt[]; from: number; dur: number; color?: string; dashed?: boolean; ball?: boolean; width?: number }> = ({
+export const Move: React.FC<{ pts: Pt[]; from: number; dur: number; color?: string; dashed?: boolean; ball?: boolean; width?: number }> = ({
   pts,
   from,
   dur,
@@ -153,7 +153,7 @@ const Move: React.FC<{ pts: Pt[]; from: number; dur: number; color?: string; das
   );
 };
 
-const NetFlash: React.FC<{ at: number; top: boolean; color?: string }> = ({ at, top, color = C.ice }) => {
+export const NetFlash: React.FC<{ at: number; top: boolean; color?: string }> = ({ at, top, color = C.ice }) => {
   const frame = useCurrentFrame();
   const o = interpolate(frame, [at, at + 3, at + 22], [0, 1, 0], clamp);
   const y = top ? PY - 16 : PY + PH;
@@ -161,7 +161,24 @@ const NetFlash: React.FC<{ at: number; top: boolean; color?: string }> = ({ at, 
 };
 
 // Header for goal scenes: minute + scorer + running score.
-const GoalHead: React.FC<{ minute: string; who: string; how: string; prev: string; score: string; scoreAt: number; team: "gs" | "lille"; delay?: number }> = ({
+export const GoalHead: React.FC<{
+  minute: string;
+  who: string;
+  how: string;
+  prev: string;
+  score: string;
+  scoreAt: number;
+  team: string;
+  delay?: number;
+  home?: string;
+  away?: string;
+  label?: string;
+  colors?: Record<string, string>;
+}> = ({
+  home = "lille",
+  away = "gs",
+  label = "Lille · Galatasaray",
+  colors = { gs: C.ice, lille: LOSC },
   minute,
   who,
   how,
@@ -177,13 +194,13 @@ const GoalHead: React.FC<{ minute: string; who: string; how: string; prev: strin
   return (
     <div style={{ position: "absolute", left: PAD, right: PAD, top: 200, display: "flex", flexDirection: "column", gap: 14 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 18, opacity: 0.95 }}>
-        <Crest team="lille" size={50} />
+        <Crest team={home} size={50} />
         <span style={{ ...display(58), transform: `scale(${bump})`, color: lit ? C.ice : C.white }}>{lit ? score : prev}</span>
-        <Crest team="gs" size={50} />
-        <span style={{ ...mono(22), color: C.dim, marginLeft: "auto" }}>Lille · Galatasaray</span>
+        <Crest team={away} size={50} />
+        <span style={{ ...mono(22), color: C.dim, marginLeft: "auto" }}>{label}</span>
       </div>
       <div style={{ display: "flex", alignItems: "flex-end", gap: 26 }}>
-        <Drop size={190} delay={delay} lines={[{ text: minute, color: team === "gs" ? C.ice : LOSC }]} />
+        <Drop size={190} delay={delay} lines={[{ text: minute, color: colors[team] ?? C.white }]} />
         <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingBottom: 20 }}>
           <Drop size={84} delay={delay + 4} lines={[{ text: who }]} />
           <FadeIn at={delay + 10}>
@@ -207,7 +224,17 @@ const Hook: React.FC = () => (
 );
 
 /* ---------- 2 · Lille ahead on every number ---------- */
-const Row: React.FC<{ at: number; label: string; l: number; g: number; max: number; dec?: number; prefix?: string }> = ({ at, label, l, g, max, dec = 0, prefix = "" }) => {
+export const Row: React.FC<{ at: number; label: string; l: number; g: number; max: number; dec?: number; prefix?: string; lColor?: string; gColor?: string }> = ({
+  at,
+  label,
+  l,
+  g,
+  max,
+  dec = 0,
+  prefix = "",
+  lColor = LOSC,
+  gColor = C.steel,
+}) => {
   const frame = useCurrentFrame();
   const k = interpolate(frame, [at, at + 20], [0, 1], clamp);
   const e = 1 - Math.pow(1 - k, 3);
@@ -217,11 +244,11 @@ const Row: React.FC<{ at: number; label: string; l: number; g: number; max: numb
       <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
         <Count to={l} start={at} dur={20} decimals={dec} prefix={prefix} style={{ ...display(120), color: C.white, width: 220 }} />
         <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
-          <div style={{ height: 14, width: (300 * l * e) / max, background: LOSC }} />
+          <div style={{ height: 14, width: (300 * l * e) / max, background: lColor }} />
         </div>
         <div style={{ width: 2, height: 60, background: C.faint }} />
         <div style={{ flex: 1 }}>
-          <div style={{ height: 14, width: (300 * g * e) / max, background: C.steel }} />
+          <div style={{ height: 14, width: (300 * g * e) / max, background: gColor }} />
         </div>
         <Count to={g} start={at} dur={20} decimals={dec} prefix={prefix} style={{ ...display(120), color: C.dim, width: 220, textAlign: "right" }} />
       </div>
@@ -570,7 +597,7 @@ const Sim: React.FC = () => {
 };
 
 /* ---------- 9 · big chances ---------- */
-const Ring: React.FC<{ at: number; fillAt?: number; size: number }> = ({ at, fillAt, size }) => {
+export const Ring: React.FC<{ at: number; fillAt?: number; size: number }> = ({ at, fillAt, size }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const s = spring({ frame: frame - at, fps, config: { damping: 12, mass: 0.6 } });

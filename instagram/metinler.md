@@ -76,3 +76,30 @@ Sence Galatasaray bu formla nereye kadar gider? Yorumlara yaz 👇
 
 #galatasaray #lille #şampiyonlarligi #ucl #osimhen #batrakov #yunusakgün #futbolanaliz #xg #pivot
 ```
+
+## Gönderi açıklaması · Beşiktaş 2–2 Crystal Palace
+
+```
+4 gol. Toplam beklenen gol: 1,1. 🤯
+
+Tüpraş'ta istatistiğin dinlenmediği bir gece:
+
+⚽ 45+2' Ndidi · Salih Özcan'ın savunma arkasına pası
+⚽ 51' Pino · ofsayt bayrağı, sonra VAR: gol
+⚽ 55' Mateta · savunma hatasının bedeli
+⚽ 73' Olaitan · iki oyuncuyu geçip köşeye. Gol ihtimali sadece %7 (xG 0,07)
+🟥 77' Ümit Akdağ'a direkt kırmızı, Beşiktaş 10 kişi
+
+Maçı xG değerleriyle 50.000 kez oynattık:
+4 ya da daha fazla gol: sadece %3
+2–2 skoru: binde 8
+
+Avrupa'da 3 maçta 7 puan. Sırada Celtic deplasmanı (5 Kasım).
+
+Olaitan'ın golü sezonun en güzellerinden mi? Yorumlara yaz 👇
+
+📊 Veri: ESPN, FotMob · Model: maç xG'sine dayalı Poisson simülasyonu · Gol çizimleri temsilidir
+📷 Fotoğraflar: Wikimedia Commons · Beşiktaş JK (CC BY 2.0)
+
+#beşiktaş #crystalpalace #avrupaligi #uel #olaitan #ndidi #bjk #futbolanaliz #xg #pivot
+```

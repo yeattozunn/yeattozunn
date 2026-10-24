@@ -16,6 +16,7 @@ import { SCENES, TOTAL } from "./timeline";
 import { CAPTIONS, VO } from "./captions";
 import { DERBY_TOTAL, DerbyReel } from "./derby";
 import { L2_TOTAL, Lille2Reel } from "./lille2";
+import { BJ_TOTAL, BjkReel } from "./bjk";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -95,4 +96,13 @@ const Lille2WithFonts: React.FC = () => {
 
 export const Lille2Composition: React.FC = () => (
   <Composition id="PivotLilleGS2" component={Lille2WithFonts} durationInFrames={L2_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const BjkWithFonts: React.FC = () => {
+  useFonts();
+  return <BjkReel />;
+};
+
+export const BjkComposition: React.FC = () => (
+  <Composition id="PivotBjkPalace" component={BjkWithFonts} durationInFrames={BJ_TOTAL} fps={FPS} width={W} height={H} />
 );
