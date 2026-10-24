@@ -13,7 +13,7 @@ Bu repo, Higgsfield API ile üretilen AI videoları içeriyor. Kullanıcıyla T�
 - API anahtarı repoya asla commit edilmez.
 
 ## Model ve fiyat (Higgsfield API, indirimli fiyatlar değişebilir)
-- Kling 4.0 (`kling-video/v4.0/image-to-video` ve `kling-video/v4.0/text-to-video`): 720p ~0,079 $/s, 1080p ~0,118 $/s (24.10.2026, %50 indirimle); ses açık da aynı fiyat.
+- Kling 4.0 (`kling-video/v4.0/image-to-video` ve `kling-video/v4.0/text-to-video`): 720p ~0,079 $/s, 1080p ~0,118 $/s (24.10.2026, %50 indirimle); ses açık da aynı fiyat. İlk testte (text-to-video) `multi_prompt` planlarını yok saydı, zırh yerine kimono, hikâye yok; Kling 3.0'dan kötü çıktı. Multi-shot hikâyeler için Kling 3.0 kullan.
 - Kling 3.0 Standard (`kling-video/v3.0/std/image-to-video`, `.../text-to-video`): ~0,071 $/s (indirim %15'e düştü). Multi-shot ve `last_image_url` destekliyor.
 - En ucuz: Wan 3.0 Prime 480p (~0,027 $/s), ama kamera hareketi Kling kadar iyi değil.
 - Genjutsu Light hareket aktarımı (`higgsfield/genjutsu-light/motion-transfer/v1.0`): 480p 0,05 $/s, 720p 0,10 $/s; ücret = çıktı süresi + giriş videosu süresi.
