@@ -103,3 +103,26 @@ Olaitan'ın golü sezonun en güzellerinden mi? Yorumlara yaz 👇
 
 #beşiktaş #crystalpalace #avrupaligi #uel #olaitan #ndidi #bjk #futbolanaliz #xg #pivot
 ```
+
+## Gönderi açıklaması · Aleksey Batrakov
+
+```
+21 yaşında. €25 milyon. Galatasaray'ın 121 yıllık tarihindeki ilk Rus futbolcu. 🇷🇺🦁
+
+Aleksey Batrakov kim?
+
+📍 6 yaşında Lokomotiv Moskova akademisi
+⚽ 2024-25: 14 lig golü, gol krallığında 3.
+🔥 2025-26: 17 gol, 13 asist · Spartak'a hat-trick
+🏆 Üst üste iki kez ligin en iyi genç oyuncusu
+✈️ Ağustos 2026: İstanbul
+⭐ Şampiyonlar Ligi'nde 3 maçta 2 gol: Barcelona ve Lille
+
+Pazartesi gecesi sırada derbi var.
+
+€25 milyonluk soru: Batrakov, Galatasaray'ın yeni yıldızı mı? Yorumlara yaz 👇
+
+📊 Veri: Wikipedia, Sofascore, Milliyet · Tribün planı yapay zekâ ile üretilmiştir
+
+#galatasaray #batrakov #alekseybatrakov #gs #şampiyonlarligi #süperlig #transfer #futbolanaliz #pivot
+```

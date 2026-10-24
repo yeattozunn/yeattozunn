@@ -121,6 +121,6 @@ export const BatrakovComposition: React.FC = () => (
     fps={FPS}
     width={W}
     height={H}
-    defaultProps={{ voice: undefined as string | undefined }}
+    defaultProps={{ voice: "voice-batrakov-fit.wav" as string | undefined }}
   />
 );
