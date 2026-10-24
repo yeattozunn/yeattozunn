@@ -17,6 +17,7 @@ import { CAPTIONS, VO } from "./captions";
 import { DERBY_TOTAL, DerbyReel } from "./derby";
 import { L2_TOTAL, Lille2Reel } from "./lille2";
 import { BJ_TOTAL, BjkReel } from "./bjk";
+import { BT_TOTAL, BatrakovReel } from "./batrakov";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -105,4 +106,21 @@ const BjkWithFonts: React.FC = () => {
 
 export const BjkComposition: React.FC = () => (
   <Composition id="PivotBjkPalace" component={BjkWithFonts} durationInFrames={BJ_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const BatrakovWithFonts: React.FC<{ voice?: string }> = ({ voice }) => {
+  useFonts();
+  return <BatrakovReel voice={voice} />;
+};
+
+export const BatrakovComposition: React.FC = () => (
+  <Composition
+    id="PivotBatrakov"
+    component={BatrakovWithFonts}
+    durationInFrames={BT_TOTAL}
+    fps={FPS}
+    width={W}
+    height={H}
+    defaultProps={{ voice: undefined as string | undefined }}
+  />
 );
