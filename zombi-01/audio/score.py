@@ -69,7 +69,7 @@ def place(x, at):
 place(load("anlatici_a.mp3"), VO_A)
 ty = lpf(load("teyze.mp3"), 3000)        # through the door
 place(ty, VO_TEYZE)
-if (A / "vo" / "anlatici_b.mp3").exists(): place(load("anlatici_b.mp3"), VO_B)
+if (A / "vo" / "anlatici_b.mp3").exists(): place(load("anlatici_b.mp3"), VO_B + 1.6)
 else: print("no anlatici_b yet", file=sys.stderr)
 sf.write(A / "vo.wav", np.stack([vo, vo], 1).astype(np.float32), SR)
 beats = [float(i) for i in range(int(DUR) + 1)]
