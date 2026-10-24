@@ -126,3 +126,29 @@ Pazartesi gecesi sırada derbi var.
 
 #galatasaray #batrakov #alekseybatrakov #gs #şampiyonlarligi #süperlig #transfer #futbolanaliz #pivot
 ```
+
+## Gönderi açıklaması · Derbi derin analiz (GS – FB)
+
+```
+138 derbi. İlk golü atan takım sadece 10 kez kaybetti. ⚡
+
+Pazartesi 21:30, RAMS Park. Derbinin tüm kilitleri:
+
+📊 Galatasaray lider (19 puan) · Fenerbahçe 3 puan geride
+⚽ Ligin en golcüsü Fenerbahçe: 22 gol, sadece 6 gol yedi
+🎯 Osimhen 6 gol · Muriqi 7 gol · Greenwood 4 gol
+🔒 Ake yok: Skriniar'ın yanında yeni bir partner, Osimhen'in hedefi o boşluk
+⚡ Kerem eski takımına karşı: Sallai'nin arkası
+🧠 Buruk FB'ye karşı 11 maçta 6 galibiyet · Kartal için koltuk maçı
+🏟️ Son lig derbisi: Nisan 2026, GS 3–0 FB
+
+50.000 simülasyon:
+🟡🔵 Fenerbahçe %45 · 🤝 Beraberlik %23 · 🔴🟡 Galatasaray %32
+En emin tahmin: karşılıklı gol (%66). İki takım da 8 maçın 7'sinde gol attı.
+
+İlk golü kim atar? Yorumlara yaz 👇
+
+📊 Model: sezon gol ortalamalarına dayalı Poisson simülasyonu, kesin sonuç değildir · Stadyum planları yapay zekâ ile üretilmiştir
+
+#galatasaray #fenerbahçe #derbi #gsvfb #süperlig #osimhen #muriqi #kerem #futbolanaliz #maçtahmini #pivot
+```

@@ -18,6 +18,7 @@ import { DERBY_TOTAL, DerbyReel } from "./derby";
 import { L2_TOTAL, Lille2Reel } from "./lille2";
 import { BJ_TOTAL, BjkReel } from "./bjk";
 import { BT_TOTAL, BatrakovReel } from "./batrakov";
+import { D2_TOTAL, Derby2Reel } from "./derby2";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -123,4 +124,13 @@ export const BatrakovComposition: React.FC = () => (
     height={H}
     defaultProps={{ voice: "voice-batrakov-fit.wav" as string | undefined }}
   />
+);
+
+const Derby2WithFonts: React.FC = () => {
+  useFonts();
+  return <Derby2Reel />;
+};
+
+export const Derby2Composition: React.FC = () => (
+  <Composition id="PivotDerbyDeep" component={Derby2WithFonts} durationInFrames={D2_TOTAL} fps={FPS} width={W} height={H} />
 );
