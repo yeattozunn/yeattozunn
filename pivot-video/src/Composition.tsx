@@ -19,6 +19,7 @@ import { L2_TOTAL, Lille2Reel } from "./lille2";
 import { BJ_TOTAL, BjkReel } from "./bjk";
 import { BT_TOTAL, BatrakovReel } from "./batrakov";
 import { D2_TOTAL, Derby2Reel } from "./derby2";
+import { TZ_TOTAL, TeaserReel } from "./teaser";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -133,4 +134,13 @@ const Derby2WithFonts: React.FC = () => {
 
 export const Derby2Composition: React.FC = () => (
   <Composition id="PivotDerbyDeep" component={Derby2WithFonts} durationInFrames={D2_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const TeaserWithFonts: React.FC = () => {
+  useFonts();
+  return <TeaserReel />;
+};
+
+export const TeaserComposition: React.FC = () => (
+  <Composition id="PivotDerbyTeaser" component={TeaserWithFonts} durationInFrames={TZ_TOTAL} fps={FPS} width={W} height={H} />
 );
