@@ -533,9 +533,9 @@ export const Derby2Reel: React.FC = () => (
     <Sequence from={D2.outro.from} durationInFrames={D2.outro.dur}><Outro /></Sequence>
     <Captions />
     <Grain />
-    <Audio src={staticFile("score-derby2.wav")} volume={0.42} />
+    <Audio src={staticFile("score-derby2.wav")} volume={0.22} />
     <Sequence from={Math.round(0.4 * FPS)}>
-      <Audio src={staticFile("voice-derby2-fast.wav")} />
+      <Audio src={staticFile("voice-derby2-fast.wav")} volume={1.6} />
     </Sequence>
   </AbsoluteFill>
 );
