@@ -24,3 +24,4 @@
 
 bat-arms.png, bat-shot.png, bat-dribble.png, bat-signing.jpg, bat-close.jpg — Batrakov photos provided by the user for the Batrakov reel.
 - osi-head.jpg, osi-mask.jpg, osi-shh.jpg, skor21.jpg: Galatasaray resmi Instagram (@galatasaray), kullanıcı tarafından sağlandı, kırpıldı
+- crest/*.png: kulüp logoları, ESPN logo CDN (a.espncdn.com/i/teamlogos/soccer/500/)

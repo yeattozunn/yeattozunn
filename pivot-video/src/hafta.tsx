@@ -1,6 +1,6 @@
 import React from "react";
-import { AbsoluteFill, Audio, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { Caption, Crest, Drop, Grain, Meta, PivotMark, Stage } from "./parts";
+import { AbsoluteFill, Audio, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { Caption, Drop, Grain, Meta, PivotMark, Stage } from "./parts";
 import { Chip, Flash, Photo, Whip } from "./derby";
 import { C, display, F, mono } from "./theme";
 import { H_CAPTIONS } from "./haftaCaptions";
@@ -31,9 +31,22 @@ const TEAM: Record<string, string> = {
   Gençlerbirliği: "#d22630",
 };
 
-const Bar: React.FC<{ team: string }> = ({ team }) => (
-  <div style={{ width: 14, height: 96, background: TEAM[team] ?? C.ice, borderRadius: 3 }} />
+// Club crests from ESPN's team logo CDN, saved in public/crest/
+const FILE: Record<string, string> = {
+  Galatasaray: "galatasaray", Fenerbahçe: "fenerbahce", Amedspor: "amedspor", Samsunspor: "samsunspor",
+  Trabzonspor: "trabzonspor", Rizespor: "rizespor", Erzurumspor: "erzurumspor", Gaziantep: "gaziantep",
+  Beşiktaş: "besiktas", Kocaelispor: "kocaelispor", Alanyaspor: "alanyaspor", Kasımpaşa: "kasimpasa",
+  Eyüpspor: "eyupspor", Konyaspor: "konyaspor", Gençlerbirliği: "genclerbirligi",
+};
+
+export const Logo2: React.FC<{ team: string; size: number; style?: React.CSSProperties }> = ({ team, size, style }) => (
+  <Img
+    src={staticFile(`crest/${FILE[team]}.png`)}
+    style={{ width: size, height: size, objectFit: "contain", filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.6))", ...style }}
+  />
 );
+
+const Bar: React.FC<{ team: string }> = ({ team }) => <Logo2 team={team} size={110} />;
 
 // One result: home row, away row, goals counting up, winner in white, loser dimmed.
 const Score: React.FC<{ home: string; away: string; hs: number; as: number; meta: string; tag?: string; delay?: number; steps?: [number, number][] }> = ({
@@ -104,7 +117,7 @@ const Leader: React.FC = () => (
   <AbsoluteFill>
     <Photo src="koreo.jpg" pos="50% 35%" zoom={[1.1, 1.25]} dim={0.5} />
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", gap: 20 }}>
-      <Crest team="gs" size={200} />
+      <Logo2 team="Galatasaray" size={200} />
       <div style={{ ...mono(30), color: C.ice }}>Lider</div>
       <Drop size={260} align="center" delay={4} lines={[{ text: "22", color: GOLD }]} />
       <div style={{ ...display(70), color: C.white }}>puan</div>
@@ -116,6 +129,7 @@ const FbDrop: React.FC = () => (
   <AbsoluteFill>
     <Photo src="kartal.jpg" pos="50% 30%" zoom={[1.0, 1.14]} dim={0.5} />
     <AbsoluteFill style={{ justifyContent: "flex-end", padding: PAD, paddingBottom: 560, gap: 10 }}>
+      <Logo2 team="Fenerbahçe" size={170} />
       <Chip color={TEAM.Fenerbahçe}>Fenerbahçe · 16 puan</Chip>
       <Drop size={200} delay={6} lines={[{ text: "5. sıra", color: TEAM.Fenerbahçe }]} />
     </AbsoluteFill>
@@ -125,6 +139,7 @@ const FbDrop: React.FC = () => (
 const Surprise: React.FC = () => (
   <Stage light={1.1}>
     <AbsoluteFill style={{ justifyContent: "center", padding: PAD, gap: 16 }}>
+      <Logo2 team="Amedspor" size={260} />
       <div style={{ ...mono(30), color: C.ice }}>Haftanın sürprizi</div>
       <Drop size={190} delay={4} lines={[{ text: "Amedspor", color: TEAM.Amedspor }]} />
     </AbsoluteFill>
@@ -224,8 +239,8 @@ const Table: React.FC = () => {
           return (
             <div key={r.name} style={{ display: "flex", flexDirection: "column", gap: 8, opacity: k }}>
               <div style={{ display: "flex", justifyContent: "space-between", ...display(66), color: C.white }}>
-                <span>
-                  {i + 1}. {r.name}
+                <span style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                  {i + 1}. <Logo2 team={r.name} size={72} /> {r.name}
                 </span>
                 <span style={{ fontVariantNumeric: "tabular-nums" }}>{r.pts}</span>
               </div>

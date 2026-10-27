@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, interpolate, OffthreadVideo, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Img, interpolate, OffthreadVideo, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Caption, Crest, Drop, Grain, Meta, PivotMark, Stage } from "./parts";
 import { Chip, Flash, Photo, Whip } from "./derby";
 import { C, display, F, mono } from "./theme";
@@ -118,7 +118,7 @@ const Final: React.FC = () => {
         <div style={{ display: "flex", alignItems: "center", gap: 40, transform: `scale(${s})` }}>
           <Crest team="gs" size={170} />
           <div style={{ ...display(300), color: C.white, fontVariantNumeric: "tabular-nums" }}>2–1</div>
-          <div style={{ ...display(110), color: FB_YEL }}>FB</div>
+          <Img src={staticFile("crest/fenerbahce.png")} style={{ width: 170, height: 170, objectFit: "contain" }} />
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
