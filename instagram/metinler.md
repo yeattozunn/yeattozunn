@@ -152,3 +152,25 @@ En emin tahmin: karşılıklı gol (%66). İki takım da 8 maçın 7'sinde gol a
 
 #galatasaray #fenerbahçe #derbi #gsvfb #süperlig #osimhen #muriqi #kerem #futbolanaliz #maçtahmini #pivot
 ```
+
+## Gönderi açıklaması · Derbi özeti (GS 2–1 FB)
+
+```
+Bir derbi. İki gol. Tek isim: Victor Osimhen. 🦁
+
+RAMS Park'ta lider kaybetmedi:
+
+⚽ 29' Osimhen · 1–0
+⚽ 44' Osimhen · 2–0
+⚽ 62' İrfan Can Kahveci · 2–1
+
+📊 Galatasaray 22 puan · Fenerbahçe 16 · Fark artık 6
+
+Maçtan önce 50.000 simülasyon Fenerbahçe'ye %45 şans veriyordu. Saha başka bir şey söyledi.
+
+Osimhen'in derbideki en iyi performansı bu muydu? Yorumlara yaz 👇
+
+📷 Fotoğraflar: Galatasaray SK resmi hesabı
+
+#galatasaray #fenerbahçe #derbi #gsvfb #süperlig #trendyolsüperlig #osimhen #irfancan #futbol #pivot
+```
