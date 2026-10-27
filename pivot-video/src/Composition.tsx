@@ -20,6 +20,7 @@ import { BJ_TOTAL, BjkReel } from "./bjk";
 import { BT_TOTAL, BatrakovReel } from "./batrakov";
 import { D2_TOTAL, Derby2Reel } from "./derby2";
 import { TZ_TOTAL, TeaserReel } from "./teaser";
+import { OZ_TOTAL, OzetReel } from "./ozet";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -143,4 +144,13 @@ const TeaserWithFonts: React.FC = () => {
 
 export const TeaserComposition: React.FC = () => (
   <Composition id="PivotDerbyTeaser" component={TeaserWithFonts} durationInFrames={TZ_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const OzetWithFonts: React.FC = () => {
+  useFonts();
+  return <OzetReel />;
+};
+
+export const OzetComposition: React.FC = () => (
+  <Composition id="PivotDerbyOzet" component={OzetWithFonts} durationInFrames={OZ_TOTAL} fps={FPS} width={W} height={H} />
 );
