@@ -174,3 +174,27 @@ Osimhen'in derbideki en iyi performansı bu muydu? Yorumlara yaz 👇
 
 #galatasaray #fenerbahçe #derbi #gsvfb #süperlig #trendyolsüperlig #osimhen #irfancan #futbol #pivot
 ```
+
+## Gönderi açıklaması · Süper Lig 9. hafta özeti
+
+```
+Zirvede nefes nefese bir yarış. İlk 5 arasında sadece 6 puan! 🔥
+
+9. haftanın sonuçları:
+
+⚽ Galatasaray 2–1 Fenerbahçe · Osimhen'den 2 gol
+🔄 Trabzonspor 4–3 Rizespor · 2–0 geriden dönüş, haftanın maçı
+😮 Samsunspor 1–2 Amedspor · haftanın sürprizi
+✈️ Gaziantep 1–3 Erzurumspor · sezonun ilk deplasman galibiyeti
+⚽ Alanyaspor 1–2 Kocaelispor
+⚽ Eyüpspor 0–1 Kasımpaşa
+⚽ Konyaspor 2–0 Gençlerbirliği
+
+📊 İlk 5: Galatasaray 22 · Amedspor 20 · Trabzonspor 19 · Beşiktaş 18 · Fenerbahçe 16
+
+Sence şampiyonluk yarışında kim kopacak? Yorumlara yaz 👇
+
+📷 Fotoğraflar: Galatasaray SK, Wikimedia Commons
+
+#süperlig #trendyolsüperlig #galatasaray #fenerbahçe #trabzonspor #amedspor #beşiktaş #puandurumu #futbol #pivot
+```

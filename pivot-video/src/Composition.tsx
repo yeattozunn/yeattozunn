@@ -21,6 +21,7 @@ import { BT_TOTAL, BatrakovReel } from "./batrakov";
 import { D2_TOTAL, Derby2Reel } from "./derby2";
 import { TZ_TOTAL, TeaserReel } from "./teaser";
 import { OZ_TOTAL, OzetReel } from "./ozet";
+import { HF_TOTAL, HaftaReel } from "./hafta";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -153,4 +154,13 @@ const OzetWithFonts: React.FC = () => {
 
 export const OzetComposition: React.FC = () => (
   <Composition id="PivotDerbyOzet" component={OzetWithFonts} durationInFrames={OZ_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const HaftaWithFonts: React.FC = () => {
+  useFonts();
+  return <HaftaReel />;
+};
+
+export const HaftaComposition: React.FC = () => (
+  <Composition id="PivotHafta9" component={HaftaWithFonts} durationInFrames={HF_TOTAL} fps={FPS} width={W} height={H} />
 );
