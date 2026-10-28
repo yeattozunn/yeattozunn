@@ -54,6 +54,7 @@ Kullanıcının "budur" dediği formül. Yeni montaj videolarında bunu uygula:
 ## Üçüncü tarz: kırmızı-siyah silüet edit (`bandit_kirmizi_v2.mp4`, kullanıcı "olmuş" dedi)
 - Wan 3.0 Prime text-to-video 480p, 2 s'lik siyah-beyaz yüksek kontrastlı silüet klipleri (~0,027 $/s, 6 klip ~0,33 $). Renk ve tarz kurguda verilir.
 - Kurgu: düşük çözünürlüğe indir + sert eşik (curves) ile düz grafik şekiller, kırmızıya boya, sadece en parlak yerler (gözler, ay) beyaz; gren, vinyet, film titremesi, vuruşta beyaz flaş. Aynı klipten zoom'la ikinci plan çıkar. Temiz Wan görüntüsü tek başına "AI duruyor"; grafik filtre şart.
+- Asıl istenen "hafif çizgi film" versiyonu (`samuray_kirmizi_anime.mp4`, referans asenavfx "Bandit"): Wan text-to-video'ya doğrudan "2D anime illustration style animation, flat cel shading, solid blood-red background, pure black silhouettes, only the eyes glow bright white" yaz; görsel gerekmez, 7 klip × 2 s = 0,385 $. Kurgu: referansın kesme noktaları (~0,3–1 s), her kesmede zoom-punch (zoompan), sarsıntı, beyaz/siyah tek kare flaş, bir vuruşta renk patlaması, titreme, gren; son planda namlu/kılıç kameraya.
 
 ## Video kuralları (kullanıcının istekleri)
 - İnsan ve hayvan hareketleri doğal olsun: gerçekçi ağırlık, duraksamalar, morph yok.
