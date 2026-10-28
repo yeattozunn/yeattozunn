@@ -58,6 +58,9 @@ Kullanıcının "budur" dediği formül. Yeni montaj videolarında bunu uygula:
 - **Geçişler için en iyi sonuç (`samuray_kirmizi_anime_final.mp4`, ajan puanı 10/10):** kare kare Python kurgu motoru `araclar/kirmizi_anime_kurgu.py` (20 fps, `render(t)` her zaman penceresini tanımlar). Referansın geçiş kataloğu: `planlar/bandit_gecis_katalogu.md`. İmza efektler: tek kare THR (kırmızı/siyah eşik), NEG, DESAT flaşları; yarım ekran siyah panel geçişleri (yatay/dikey); ön plandan geçen bulanık kuşlar; duman+gri ile siyaha iniş; afişte ateş patlaması; kırmızı-siyah palet (`duo`, `duo_lv`); nakarat bloğu tekrarı; sert bitiş.
 - Yöntem: referansı 20 fps zaman damgalı kare tablolarına böl (her saniye 5x4), bir ajan kataloglasın, bizim kareleri aynı formatta çıkarıp eleştirmen ajana 10 üzerinden puanlat, düzelt, tekrar puanlat (6→10, 9 tur).
 
+## Çalışma tarzı
+- Kullanıcı Claude kullanım limitinin bir video için çok harcanmasını istemiyor. Ajanla puanlama döngüsünü en fazla 1-2 turla sınırla; uzun iyileştirme döngüsüne kullanıcı istemeden girme.
+
 ## Video kuralları (kullanıcının istekleri)
 - İnsan ve hayvan hareketleri doğal olsun: gerçekçi ağırlık, duraksamalar, morph yok.
 - Mimikler küçük ve doğal olsun: "kaşını hafifçe kaldırıyor", "gözlerini kısıyor", "iç çekiyor", "hafifçe sırıtıyor". Abartılı ifadeler (çılgınca gülme, avaz avaz bağırma) yazma. Tepki planlarını yakın çek.
