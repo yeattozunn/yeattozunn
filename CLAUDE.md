@@ -51,6 +51,10 @@ Kullanıcının "budur" dediği formül. Yeni montaj videolarında bunu uygula:
 - Kurgu: fadewhite 0.25 s, hblur 0.35 s, zoomin 0.4 s geçişler; gren; sabit tarih damgası ("OCT 26 '03" turuncu mono); sonda kararma. 5 klip ~0,63 $.
 - Görsellerdeki gömülü yazıları üretimden önce sil, kurguda sabit olarak geri ekle.
 
+## Üçüncü tarz: kırmızı-siyah silüet edit (`bandit_kirmizi_v2.mp4`, kullanıcı "olmuş" dedi)
+- Wan 3.0 Prime text-to-video 480p, 2 s'lik siyah-beyaz yüksek kontrastlı silüet klipleri (~0,027 $/s, 6 klip ~0,33 $). Renk ve tarz kurguda verilir.
+- Kurgu: düşük çözünürlüğe indir + sert eşik (curves) ile düz grafik şekiller, kırmızıya boya, sadece en parlak yerler (gözler, ay) beyaz; gren, vinyet, film titremesi, vuruşta beyaz flaş. Aynı klipten zoom'la ikinci plan çıkar. Temiz Wan görüntüsü tek başına "AI duruyor"; grafik filtre şart.
+
 ## Video kuralları (kullanıcının istekleri)
 - İnsan ve hayvan hareketleri doğal olsun: gerçekçi ağırlık, duraksamalar, morph yok.
 - Mimikler küçük ve doğal olsun: "kaşını hafifçe kaldırıyor", "gözlerini kısıyor", "iç çekiyor", "hafifçe sırıtıyor". Abartılı ifadeler (çılgınca gülme, avaz avaz bağırma) yazma. Tepki planlarını yakın çek.
