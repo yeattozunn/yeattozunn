@@ -1,0 +1,11 @@
+# Değerlendirici ajanın raporu (KALDI, 6/10)
+1. KRİTİK — İkinci yarı (8.53–12.37) rastgele tekrar; final 10.37'de harcanıyor, kodeks 12.00'de, merdiven finalden sonra. Düzeltme: kronolojik dolgu: 8.53 merdiven 2. yarı, 9.37 gözler yakın, 9.70 davul, 10.37 güneşin yeniden doğuşu (renk patlaması), 10.53 jaguar, 10.67 gözler, 11.50 güneş zoom-punch, 11.83 davul takılma, 12.00 beyaz flaş, 12.37–13.30 final. Güneş döndükten sonra tutulma görüntüsü kullanılmasın.
+2. KRİTİK — Klip 7'ye üç olay yüklenmiş; macuahuitl "namlu" karşılığı değil. Düzeltme: doruğu ayrı klibe taşı (6b); final: "extreme close-up, obsidian-tipped atlatl dart aimed straight at the camera, behind it eagle warrior's beaked helmet, glowing white eyes inside the open beak, slow push-in".
+3. KRİTİK — Kodeks klibi uygulanamaz (sahte glif, bozuk Quetzalcoatl) ve hikâyeyle ilgisiz. Düzeltme: çıkar; renk patlamasını hikâyeye bağla (6b güneşin yeniden doğuşu).
+4. ORTA — Klip 1 dikeye uymuyor, fazla öğe. Düzeltme: "tall twin-temple stepped pyramid (Templo Mayor) filling the lower half, above it a black eclipsed sun with a thin bright ring, slow push-in", ön plan kılıcı çıkar; 8.53 "tamamen kararıyor" ikinci yarısına güvenme.
+5. ORTA — Klip 4 kararsız (savaşçı mı jaguar mı), rolü yok. Düzeltme: jaguar savaşçısı = davula cevap verip tırmanışa katılan yoldaş; "jaguar warrior sprinting toward the camera, low angle, motion blur".
+6. ORTA — Göz çeşitliliği eksik. Düzeltme: kartal savaşçısı hilal, jaguar savaşçısı çatlak/çekik, final altında beyaz yıldız sırası. Kodeks yerine 6a merdiven korunur + 6b güneşin yeniden doğuşu ("eagle warrior silhouette on pyramid top, arms raised, black sun bursts into huge orange-gold disc"), renk patlaması 10.37'ye kayar.
+7. ORTA — Bütçe sınırda; Wan 2 s / 9:16 / 480p doğrulanmamış. Düzeltme: /estimate ile kontrol; merdiven+güneş birleştirilirse 6 klip = 0,33 $ ve yeniden üretme payı.
+8. KÜÇÜK — Kültürel ayrıntı: huehuetl "upright tall wooden drum"; kartal savaşçısında yüz açık gagalı miğferin içinde; "twin-temple Templo Mayor"; Huitzilopochtli görselde gösterilmesin.
+9. KÜÇÜK — "Only the eyes glow" çelişkisi; güneş kliplerinde "only the eyes and the sun glow".
+Sonuç: 2,3,5,6 ve kronolojik dolgu düzeltilirse geçer.
