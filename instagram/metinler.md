@@ -219,3 +219,25 @@ Senin wonderkid'in kim? Yorumlara yaz 👇
 
 #süperlig #wonderkid #scouting #gençyetenek #samsunspor #beşiktaş #alanyaspor #rizespor #gençlerbirliği #pivot
 ```
+
+## Gönderi açıklaması · 10. hafta tahmin (simülasyon)
+
+```
+Yazı tura. 🪙 Galatasaray'ın hafta sonunu zirvede tek başına bitirme ihtimali: %50.
+
+10. haftayı 50.000 kez oynattık:
+
+🦁 Konyaspor – Galatasaray (Cuma 20:00) · GS %49 · X %32 · Konya %19
+🟢 Amedspor – Eyüpspor (Pazar 13:30) · Amed %96
+🔵 Trabzonspor – Gaziantep (Pazar 16:00) · TS %84
+🟡 Fenerbahçe – Göztepe (Cumartesi 19:00) · FB %78
+⚫ Kasımpaşa – Beşiktaş (Pazar 19:00) · %35 – %30 – %35, haftanın en dengeli maçı
+
+Konya'da bir puan kaybı liderliği sallar.
+
+Sence Galatasaray Konya'dan kaç puanla döner? Yorumlara yaz 👇
+
+📊 Model: sezon gol ortalamalarına dayalı Poisson simülasyonu (ESPN verisi, 9. hafta sonu). Kesin sonuç değildir.
+
+#süperlig #galatasaray #konyaspor #amedspor #trabzonspor #fenerbahçe #beşiktaş #maçtahmini #futbolanaliz #pivot
+```
