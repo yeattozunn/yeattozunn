@@ -22,6 +22,7 @@ import { D2_TOTAL, Derby2Reel } from "./derby2";
 import { TZ_TOTAL, TeaserReel } from "./teaser";
 import { OZ_TOTAL, OzetReel } from "./ozet";
 import { HF_TOTAL, HaftaReel } from "./hafta";
+import { WK_TOTAL, WonderkidReel } from "./wonderkid";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -163,4 +164,13 @@ const HaftaWithFonts: React.FC = () => {
 
 export const HaftaComposition: React.FC = () => (
   <Composition id="PivotHafta9" component={HaftaWithFonts} durationInFrames={HF_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const WonderkidWithFonts: React.FC = () => {
+  useFonts();
+  return <WonderkidReel />;
+};
+
+export const WonderkidComposition: React.FC = () => (
+  <Composition id="PivotWonderkid" component={WonderkidWithFonts} durationInFrames={WK_TOTAL} fps={FPS} width={W} height={H} />
 );

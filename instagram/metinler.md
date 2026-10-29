@@ -198,3 +198,24 @@ Sence şampiyonluk yarışında kim kopacak? Yorumlara yaz 👇
 
 #süperlig #trendyolsüperlig #galatasaray #fenerbahçe #trabzonspor #amedspor #beşiktaş #puandurumu #futbol #pivot
 ```
+
+## Gönderi açıklaması · Wonderkid listesi (Süper Lig U21)
+
+```
+Henüz kimse konuşmuyor. Ama yakında konuşacak. 👀
+
+Süper Lig'in 21 yaş altı wonderkid listesi:
+
+5️⃣ Iustin Doicaru · Rizespor · 19 yaş · 1 gol 1 asist
+4️⃣ Arda Usluoğlu · Alanyaspor · 20 yaş · 2 gol
+3️⃣ Ousmane Diabate · Gençlerbirliği · 19 yaş · 9 maçın 9'unda sahada
+2️⃣ İlhan Fakılı · Beşiktaş · 20 yaş · 1 gol 1 asist
+1️⃣ Saikuba Jarju · Samsunspor · 18 yaş · listenin en genci, 2 asist
+
+Bir sonraki Batrakov bu listede mi?
+Senin wonderkid'in kim? Yorumlara yaz 👇
+
+📊 Veri: ESPN, 9. hafta sonu · 📷 FotMob
+
+#süperlig #wonderkid #scouting #gençyetenek #samsunspor #beşiktaş #alanyaspor #rizespor #gençlerbirliği #pivot
+```
