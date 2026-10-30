@@ -267,3 +267,25 @@ Skor tahminini yorumlara yaz 👇
 
 #galatasaray #konyaspor #süperlig #osimhen #maçtahmini #maçgünü #futbolanaliz #pivot
 ```
+
+## Gönderi açıklaması · Konyaspor – Galatasaray ilk 11 analizi
+
+```
+İlk 11'ler açıklandı. Okan Buruk tam gaz geliyor. 🔥
+
+🦁 Galatasaray: Uğurcan · Sallai, Singo, Sanchez, Eren · Torreira, Sara · Yunus, Batrakov, Leao · Osimhen
+🟢 Konyaspor: Bahadır · Andzouana, Baniya, Awaziem, Masuaku · Melih, Jevtovic, Deniz · Toth, Dompe · Muleka
+
+⚡ 4 hücumcu aynı anda sahada: Osimhen, Leao, Yunus, Batrakov
+🧱 Konya'nın planı: geride kal, kontra at. 9 maçta sadece 9 gol yedi
+🔑 Anahtar: Leao ve Yunus'un kanatları. Bekler çıkarsa Osimhen'e alan açılır
+⚠️ Risk: 4 hücumcunun arkasında sadece 2 orta saha, Muleka'nın kontrası
+
+50.000 simülasyon: Galatasaray %49 · En olası skor 0–1
+
+Bu kadro sence yeterli mi? Yorumlara yaz 👇
+
+📋 Kadro: resmi ilk 11 · Tahtadaki diziliş PİVOT yorumudur
+
+#galatasaray #konyaspor #ilk11 #süperlig #osimhen #leao #taktik #futbolanaliz #pivot
+```

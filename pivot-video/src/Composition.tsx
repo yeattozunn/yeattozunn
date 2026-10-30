@@ -25,6 +25,7 @@ import { HF_TOTAL, HaftaReel } from "./hafta";
 import { WK_TOTAL, WonderkidReel } from "./wonderkid";
 import { H10_TOTAL, H10Reel } from "./h10";
 import { KG_TOTAL, KgReel } from "./kg";
+import { KI_TOTAL, KadroReel } from "./kadro";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -193,4 +194,13 @@ const KgWithFonts: React.FC = () => {
 
 export const KgComposition: React.FC = () => (
   <Composition id="PivotKonyaGS" component={KgWithFonts} durationInFrames={KG_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const KadroWithFonts: React.FC = () => {
+  useFonts();
+  return <KadroReel />;
+};
+
+export const KadroComposition: React.FC = () => (
+  <Composition id="PivotKonyaGSKadro" component={KadroWithFonts} durationInFrames={KI_TOTAL} fps={FPS} width={W} height={H} />
 );
