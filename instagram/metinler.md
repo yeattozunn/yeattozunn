@@ -241,3 +241,29 @@ Sence Galatasaray Konya'dan kaç puanla döner? Yorumlara yaz 👇
 
 #süperlig #galatasaray #konyaspor #amedspor #trabzonspor #fenerbahçe #beşiktaş #maçtahmini #futbolanaliz #pivot
 ```
+
+## Gönderi açıklaması · Konyaspor – Galatasaray (maç günü)
+
+```
+Bu akşam 20:00, Konya. Lider, derbiden sonra ilk sınavında. 🦁
+
+Kâğıt üstünde kolay maç:
+⚽ Konyaspor 9 maçta sadece 6 gol attı
+
+Ama dikkat:
+🧱 Sadece 9 gol yedi, ligin en sıkı savunmalarından biri
+🎯 Osimhen derbide 2 gol attı. Duvarı yıkabilir mi?
+
+50.000 simülasyon:
+🔴🟡 Galatasaray %49 · 🤝 Beraberlik %32 · 🟢 Konyaspor %19
+En olası skor: 0–1 (%21)
+Maçların %76'sında 3'ten az gol
+
+Tek bir gol liderliği belirleyebilir.
+
+Skor tahminini yorumlara yaz 👇
+
+📊 Model: sezon gol ortalamalarına dayalı Poisson simülasyonu (ESPN verisi). Kesin sonuç değildir.
+
+#galatasaray #konyaspor #süperlig #osimhen #maçtahmini #maçgünü #futbolanaliz #pivot
+```

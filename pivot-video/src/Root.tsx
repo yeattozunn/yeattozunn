@@ -1,4 +1,4 @@
-import { BatrakovComposition, BjkComposition, Derby2Composition, DerbyComposition, TeaserComposition, OzetComposition, HaftaComposition, WonderkidComposition, H10Composition, Lille2Composition, MyComposition } from "./Composition";
+import { BatrakovComposition, BjkComposition, Derby2Composition, DerbyComposition, TeaserComposition, OzetComposition, HaftaComposition, WonderkidComposition, H10Composition, KgComposition, Lille2Composition, MyComposition } from "./Composition";
 import { ProfileCompositions } from "./profile";
 
 export const RemotionRoot: React.FC = () => {
@@ -15,6 +15,7 @@ export const RemotionRoot: React.FC = () => {
       <HaftaComposition />
       <WonderkidComposition />
       <H10Composition />
+      <KgComposition />
       <ProfileCompositions />
     </>
   );
