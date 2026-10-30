@@ -26,6 +26,7 @@ import { WK_TOTAL, WonderkidReel } from "./wonderkid";
 import { H10_TOTAL, H10Reel } from "./h10";
 import { KG_TOTAL, KgReel } from "./kg";
 import { KI_TOTAL, KadroReel } from "./kadro";
+import { C1_TOTAL, C2_TOTAL, C3_TOTAL, NostaljiReel, QuizReel, SalaryReel } from "./concepts";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -203,4 +204,20 @@ const KadroWithFonts: React.FC = () => {
 
 export const KadroComposition: React.FC = () => (
   <Composition id="PivotKonyaGSKadro" component={KadroWithFonts} durationInFrames={KI_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const withFonts = (R: React.FC): React.FC => () => {
+  useFonts();
+  return <R />;
+};
+const SalaryF = withFonts(SalaryReel);
+const QuizF = withFonts(QuizReel);
+const NostaljiF = withFonts(NostaljiReel);
+
+export const ConceptCompositions: React.FC = () => (
+  <>
+    <Composition id="PivotMaas" component={SalaryF} durationInFrames={C1_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="PivotQuiz" component={QuizF} durationInFrames={C2_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="PivotNostalji" component={NostaljiF} durationInFrames={C3_TOTAL} fps={FPS} width={W} height={H} />
+  </>
 );
