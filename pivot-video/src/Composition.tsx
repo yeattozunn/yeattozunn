@@ -27,6 +27,7 @@ import { H10_TOTAL, H10Reel } from "./h10";
 import { KG_TOTAL, KgReel } from "./kg";
 import { KI_TOTAL, KadroReel } from "./kadro";
 import { C1_TOTAL, C2_TOTAL, C3_TOTAL, NostaljiReel, QuizReel, SalaryReel } from "./concepts";
+import { E1_TOTAL, E2_TOTAL, E3_TOTAL, KararReel, PenaltiReel, TabelaReel } from "./euro";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -219,5 +220,17 @@ export const ConceptCompositions: React.FC = () => (
     <Composition id="PivotMaas" component={SalaryF} durationInFrames={C1_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="PivotQuiz" component={QuizF} durationInFrames={C2_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="PivotNostalji" component={NostaljiF} durationInFrames={C3_TOTAL} fps={FPS} width={W} height={H} />
+  </>
+);
+
+const PenaltiF = withFonts(PenaltiReel);
+const KararF = withFonts(KararReel);
+const TabelaF = withFonts(TabelaReel);
+
+export const EuroCompositions: React.FC = () => (
+  <>
+    <Composition id="PivotPenalti" component={PenaltiF} durationInFrames={E1_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="PivotKarar" component={KararF} durationInFrames={E2_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="PivotTabela" component={TabelaF} durationInFrames={E3_TOTAL} fps={FPS} width={W} height={H} />
   </>
 );
