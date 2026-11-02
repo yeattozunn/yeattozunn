@@ -289,3 +289,27 @@ Bu kadro sence yeterli mi? Yorumlara yaz 👇
 
 #galatasaray #konyaspor #ilk11 #süperlig #osimhen #leao #taktik #futbolanaliz #pivot
 ```
+
+## Gönderi açıklaması · Galatasaray – Stuttgart (Şampiyonlar Ligi)
+
+```
+Konya'da 4–0. Yarın gece başka bir sınav. ⭐
+
+Salı 20:45, RAMS Park: Galatasaray – Stuttgart
+
+Avrupa'da iki farklı dünya (3 maç):
+🦁 Galatasaray · 3 puan · 23. sıra · 9 gol yedi
+⚪🔴 Stuttgart · 7 puan · 6. sıra · yenilgisiz · sadece 2 gol yedi
+
+50.000 simülasyon acımasız:
+Stuttgart %62 · Beraberlik %18 · Galatasaray %20
+
+Ama model RAMS Park'ı bilmiyor.
+Lille'de de %34 demişti, Galatasaray 4 gol attı.
+
+Sence Aslan modeli yine yanıltır mı? Skor tahminini yorumlara yaz 👇
+
+📊 Model: Şampiyonlar Ligi'ndeki 3 maçın gol ortalamalarına dayalı Poisson simülasyonu (ESPN). Kesin sonuç değildir.
+
+#galatasaray #stuttgart #şampiyonlarligi #ucl #osimhen #ramspark #maçtahmini #futbolanaliz #pivot
+```

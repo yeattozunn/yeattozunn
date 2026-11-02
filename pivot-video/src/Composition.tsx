@@ -28,6 +28,7 @@ import { KG_TOTAL, KgReel } from "./kg";
 import { KI_TOTAL, KadroReel } from "./kadro";
 import { C1_TOTAL, C2_TOTAL, C3_TOTAL, NostaljiReel, QuizReel, SalaryReel } from "./concepts";
 import { E1_TOTAL, E2_TOTAL, E3_TOTAL, KararReel, PenaltiReel, TabelaReel } from "./euro";
+import { ST_TOTAL, StuttgartReel } from "./stuttgart";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -233,4 +234,10 @@ export const EuroCompositions: React.FC = () => (
     <Composition id="PivotKarar" component={KararF} durationInFrames={E2_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="PivotTabela" component={TabelaF} durationInFrames={E3_TOTAL} fps={FPS} width={W} height={H} />
   </>
+);
+
+const StuttgartF = withFonts(StuttgartReel);
+
+export const StuttgartComposition: React.FC = () => (
+  <Composition id="PivotStuttgart" component={StuttgartF} durationInFrames={ST_TOTAL} fps={FPS} width={W} height={H} />
 );
