@@ -30,6 +30,7 @@ import { C1_TOTAL, C2_TOTAL, C3_TOTAL, NostaljiReel, QuizReel, SalaryReel } from
 import { E1_TOTAL, E2_TOTAL, E3_TOTAL, KararReel, PenaltiReel, TabelaReel } from "./euro";
 import { ST_TOTAL, StuttgartReel } from "./stuttgart";
 import { BH_TOTAL, BatHtReel } from "./batht";
+import { FT_TOTAL, FtReel } from "./ft";
 
 export const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -247,4 +248,10 @@ const BatHtF = withFonts(BatHtReel);
 
 export const BatHtComposition: React.FC = () => (
   <Composition id="PivotBatrakovHT" component={BatHtF} durationInFrames={BH_TOTAL} fps={FPS} width={W} height={H} />
+);
+
+const FtF = withFonts(FtReel);
+
+export const FtComposition: React.FC = () => (
+  <Composition id="PivotStuttgartFT" component={FtF} durationInFrames={FT_TOTAL} fps={FPS} width={W} height={H} />
 );
